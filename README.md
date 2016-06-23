@@ -5,14 +5,11 @@ A project aimed to help CDK Global employees with their daily tasks.
 ## Dependencies:
 * `npm ~2.15.5`
 * `bower ~1.7.9`
-* `python ~3.5.1`
 <br>
 
 ## To build and run the test server
 ```
-npm install
-cd app
-python -m http.server
+npm start
 ```
 <br>
 Now you can visit <a target="_blank" href="http://localhost:8000/">http://localhost:8000/</a>
@@ -28,8 +25,6 @@ Bower: `npm install -g bower`<br>
 ```
 git clone ssh://git@stash.cdk.com/~sabod/war-room.git
 cd war-room
-npm install
-cd app
-python -m http.server
+npm start
 ```
 Go to <a target="_blank" href="http://localhost:8000/">http://localhost:8000/</a> to view the app!
