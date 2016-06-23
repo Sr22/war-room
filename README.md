@@ -15,7 +15,7 @@ cd app
 python -m http.server
 ```
 <br>
-Now you can visit [http://localhost:8000/](http://localhost:8000/)!
+Now you can visit http://localhost:8000/
 
 ## Entire installation guide
 
@@ -32,4 +32,4 @@ npm install
 cd app
 python -m http.server
 ```
-Go to [http://localhost:8000/](http://localhost:8000/) to view the app!
+Go to http://localhost:8000/ to view the app!
