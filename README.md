@@ -1,16 +1,19 @@
 # War Room Project
 A project aimed to help CDK Global employees with their daily tasks.
 
+
 ## Dependencies:
 * `npm ~2.15.5`
 * `bower ~1.7.9`
 * `python ~3.5.1`
+
 
 ## To build and run
 ```bower install
 cd app
 python -m http.server
 ```
+
 
 ## Entire installation guide
 
