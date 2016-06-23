@@ -1,8 +1,23 @@
+
 .widget-wrapper li {
   list-style-type: none;
   background-color: white;
+  margin: 8px;
 }
 
 .widget-wrapper p {
   margin: 8px;
+}
+
+.edit-button {
+  margin-top: 17px;
+  margin-right: 15px;
+  padding-right: 6px;
+  padding-left: 6px;
+  float: right;
+  text-decoration: none;
+}
+
+.header-container {
+  float: left;
 }

@@ -1,0 +1,12 @@
+.gs-remove-handle {
+  opacity: 0;
+}
+
+.gs-remove-handle-all {
+  width: 20px;
+  height: 20px;
+  bottom: 8px;
+  left: 8px;
+  z-index: 20;
+  position: absolute;
+}

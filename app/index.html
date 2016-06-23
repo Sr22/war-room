@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   
   <!-- CUSTOM -->
+  <link rel="stylesheet" type="text/css" href="css/backend.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   
   <!-- DEPENDENCIES -->
@@ -23,8 +24,7 @@
   <!-- CUSTOM -->
   <script src="module.js" type="text/javascript" charset="utf-8"></script>
   <script src="config.js" type="text/javascript" charset="utf-8"></script>
-  <script src="routes.js" type="text/javascript" charset="utf-8"></script>
-  <script src="directives/widget.js" type="text/javascript" charset="utf-8"></script>
+  <script src="directives/include-executable-file.js" type="text/javascript" charset="utf-8"></script>
   <script src="directives/widgets.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
@@ -35,20 +35,23 @@
       <div class="row header">
         <div class="col-xs-12">
           <div class="meta">
-            <div class="page">
-              War Room
+            <div class="header-container">
+              <div class="page">
+                War Room
+              </div>
+              <div class="breadcrumb-links">
+                For your utility.
+              </div>
             </div>
-            <div class="breadcrumb-links">
-              For your utility.
-            </div>
+            <div class="edit-button"><button>Edit</button></div>
           </div>
         </div>
       </div>
       <!-- End Header Bar -->
 
       <!-- Main Content -->
-      <ww-widgets class="widget-wrapper"></ww-widgets>
-
+      <center><ww-widgets class="widget-wrapper"></ww-widgets><center>
+      
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
 </body>
