@@ -6,14 +6,14 @@ A project aimed to help CDK Global employees with their daily tasks.
 * `npm ~2.15.5`
 * `bower ~1.7.9`
 * `python ~3.5.1`
-
+<br>
 
 ## To build and run
 ```bower install
 cd app
 python -m http.server
 ```
-
+<br>
 
 ## Entire installation guide
 
