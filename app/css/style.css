@@ -1,0 +1,8 @@
+.widget-wrapper li {
+  list-style-type: none;
+  background-color: white;
+}
+
+.widget-wrapper p {
+  margin: 8px;
+}

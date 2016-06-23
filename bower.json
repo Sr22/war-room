@@ -1,15 +1,19 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "name": "war-room",
+  "description": "A CDK Global chrome extension to view important on the homescreen.",
+  "version": "0.0.1",
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "jquery": "~2.1.4",
     "angular": "~1.5.0",
     "angular-route": "~1.5.0",
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",
-    "html5-boilerplate": "^5.3.0"
+    "html5-boilerplate": "^5.3.0",
+    "rdash-ui": "~1.0.0",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "jquery.gridster": "git://github.com/ducksboard/gridster.js.git"
   }
 }
