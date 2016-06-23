@@ -17,7 +17,6 @@ Now you can visit <a target="_blank" href="http://localhost:8000/">http://localh
 ## Entire installation guide
 
 ### Grab dependencies
-[Python (direct download)](https://www.python.org/ftp/python/3.5.1/python-3.5.1-amd64.exe)<br>
 [Node.js (direct download)](https://nodejs.org/dist/v4.4.5/node-v4.4.5-x64.msi)<br>
 Bower: `npm install -g bower`<br>
 
