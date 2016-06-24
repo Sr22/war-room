@@ -7,9 +7,9 @@ angular
 function wwWidgets(widgetList, $window) {
   var body = '<div class="gridster widgets" ng-transclude><ul>' + widgetList.map(function (elem) {
     if (elem instanceof Array) {
-      return '<li data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem[0] + '"></include-executable-file></li><span class="gs-remove-handle gs-remove-handle-all"></span>';
+      return '<ww-widget data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem[0] + '"></include-executable-file></ww-widget><span class="gs-remove-handle gs-remove-handle-all"></span>';
     } else {
-      return '<li data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem + '"></include-executable-file></li><span class="gs-remove-handle gs-remove-handle-all"></span>';
+      return '<ww-widget data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem + '"></include-executable-file></ww-widget><span class="gs-remove-handle gs-remove-handle-all"></span>';
     }
   }).reduce(function (cumu, elem){
     return cumu + elem;
@@ -28,6 +28,7 @@ function wwWidgets(widgetList, $window) {
           
           elem.ready(function() {
             gridster = $(elem).find('ul').gridster({
+              widget_selector: 'ww-widget',
               widget_margins: [2, 2],
               widget_base_dimensions: [widgetsSize/cols, 340/2],
               min_cols: cols,
