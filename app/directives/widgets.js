@@ -3,18 +3,11 @@
 angular
   .module("warRoom")
   .directive("wwWidgets", ['widgetList', '$window', wwWidgets]);
-  
+
 function wwWidgets(widgetList, $window) {
   var body = '<div class="gridster widgets" ng-transclude><ul>' + widgetList.map(function (elem) {
     if (elem instanceof Array) {
-      var file = elem[0];
-      if (elem.length > 1) {
-        var deps = elem.slice(1);
-        deps.forEach(function (entry) {
-          loadScript(entry, "text/javascript", "UTF-8");
-        });
-      }
-      return '<li data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + file + '"></include-executable-file></li><span class="gs-remove-handle gs-remove-handle-all"></span>';
+      return '<li data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem[0] + '"></include-executable-file></li><span class="gs-remove-handle gs-remove-handle-all"></span>';
     } else {
       return '<li data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + elem + '"></include-executable-file></li><span class="gs-remove-handle gs-remove-handle-all"></span>';
     }
