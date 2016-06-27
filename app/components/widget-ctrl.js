@@ -5,16 +5,19 @@ var loadScriptCallback = function(src, callback) {
     $.ajax({
       url : src,
       success : function (data) {
-        eval.call(window, data);
-        callback();
+        (function (data) {
+          eval.call(window, data);
+          callback();
+        })(data);
       }
     });
   })(src, callback);
 }
 
 angular.module("warRoom")
-    .factory('addWidget', ['$compile', function($compile) {
+    .factory('widgetCtrl', ['$compile', function($compile) {
       var service = {};
+      
       service.addWidget = function(widget, scope, callback) {
         return (function (widget, scope, callback) {
           if (widget instanceof Array) {

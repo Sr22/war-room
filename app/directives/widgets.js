@@ -2,7 +2,7 @@
 
 angular
   .module("warRoom")
-  .directive("wwWidgets", ['$window', 'widgetList', 'addWidget', wwWidgets]);
+  .directive("wwWidgets", ['$window', 'widgetList', 'widgetCtrl', wwWidgets]);
 
 function createGridster(elem, widgetsSize, cols) {
   return $(elem).find('ul').gridster({
@@ -17,7 +17,7 @@ function createGridster(elem, widgetsSize, cols) {
   }).data('gridster');
 }
   
-function wwWidgets($window, widgetList, addWidget) {
+function wwWidgets($window, widgetList, widgetCtrl) {
   gridster = null;
   var directive = {
     transclude: true,
@@ -31,7 +31,7 @@ function wwWidgets($window, widgetList, addWidget) {
       elem.ready(function() {
         var numElements = widgetList.length;
         widgetList.forEach(function (el) {
-          addWidget.addWidget(el, $scope, function () {
+          widgetCtrl.addWidget(el, $scope, function () {
             numElements -= 1;
             if (numElements == 0) {
               gridster = createGridster(elem, widgetsSize, cols);

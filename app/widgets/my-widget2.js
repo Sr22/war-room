@@ -1,5 +1,5 @@
 angular.module("warRoom")
-    .controller("myAngularController", ["$scope", function($scope) {
+    .controller("myAngularController2", ["$scope", function($scope) {
       $scope.message = "Angular put me here as well!";
     }]);
 
