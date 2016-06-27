@@ -1,5 +1,5 @@
 
-.widget-wrapper li {
+.widget-wrapper ww-widget {
   list-style-type: none;
   background-color: white;
   margin: 8px;

@@ -24,10 +24,13 @@
   <script src="bower_components/jquery.gridster/dist/jquery.gridster.js"></script>
   
   <!-- CUSTOM -->
-  <script src="module.js" type="text/javascript" charset="utf-8"></script>
-  <script src="config.js" type="text/javascript" charset="utf-8"></script>
-  <script src="directives/include-executable-file.js" type="text/javascript" charset="utf-8"></script>
-  <script src="directives/widgets.js" type="text/javascript" charset="utf-8"></script>
+  <script src="module.js"></script>
+  <script src="config.js"></script>
+  <script src="components/add-widget.js"></script>
+  <script src="directives/include-executable-file.js"></script>
+  <script src="directives/widgets.js"></script>
+  
+  <!-- DYNAMIC DEPENDENCIES -->
 </head>
 <body>
   <div id="content-wrapper">
@@ -45,14 +48,14 @@
                 For your utility.
               </div>
             </div>
-            <div class="edit-button"><button>Edit</button></div>
+            <!--<div class="edit-button"><button>Edit</button></div>-->
           </div>
         </div>
       </div>
       <!-- End Header Bar -->
 
       <!-- Main Content -->
-      <center><ww-widgets class="widget-wrapper"></ww-widgets><center>
+      <ww-widgets class="widget-wrapper gridster"></ww-widgets>
       
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
