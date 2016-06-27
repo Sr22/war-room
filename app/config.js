@@ -2,7 +2,7 @@
 
 angular
   .module("warRoom")
-  .value("widgetList", [
+  .constant("widgetList", [
     "widgets/example-widget.html",
     "widgets/example2-widget.html",
     ["widgets/my-widget.html", "widgets/my-widget.js"]

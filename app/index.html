@@ -26,11 +26,11 @@
   <!-- CUSTOM -->
   <script src="module.js"></script>
   <script src="config.js"></script>
-  <script src="controllers/widget-dependencies.js"></script>
+  <script src="components/add-widget.js"></script>
   <script src="directives/include-executable-file.js"></script>
   <script src="directives/widgets.js"></script>
   
-  <span ng-controller="widgetDependencies"></span>
+  <!-- DYNAMIC DEPENDENCIES -->
 </head>
 <body>
   <div id="content-wrapper">
@@ -55,7 +55,7 @@
       <!-- End Header Bar -->
 
       <!-- Main Content -->
-      <ww-widgets class="widget-wrapper"></ww-widgets>
+      <ww-widgets class="widget-wrapper gridster"></ww-widgets>
       
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
