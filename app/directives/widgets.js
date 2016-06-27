@@ -6,10 +6,12 @@ angular
 
 function createGridstack(elem) {
   return $(elem).gridstack({
-/*     cellHeight: 80,
-    virtualMargin: 10,
-    horizontalMargin: 10 */
-    float: true
+    virtualMargin: 4,
+    horizontalMargin: 4,
+    float: false,
+    auto: true,
+    width: 12,
+    //height: 8
   }).data('gridstack');
 }
   

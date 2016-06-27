@@ -35,7 +35,7 @@ angular.module("warRoom")
                   loadScriptCallback(elem, function() {
                     var el = angular.element(body);
                     var compiled = $compile(el);
-                    grid.addWidget(el, 1, 1, 1, 1);
+                    grid.addWidget(el, 0, 0, 2, 4);
                     compiled(scope);
                     callback();
                   });
@@ -43,7 +43,7 @@ angular.module("warRoom")
             if (jsFiles.length == 0) {
               var el = angular.element(body);
               var compiled = $compile(el);
-              grid.addWidget(el, 1, 1, 1, 1);
+              grid.addWidget(el, 0, 0, 2, 4);
               compiled(scope);
               callback();
             }
@@ -51,7 +51,7 @@ angular.module("warRoom")
             var body = '<div><div class="grid-stack-item-content"><include-executable-file src="' + widget + '"></include-executable-file></div></div>';
             var el = angular.element(body);
             var compiled = $compile(el);
-            grid.addWidget(el, 1, 1, 1, 1);
+            grid.addWidget(el, 0, 0, 2, 4, true);
             compiled(scope);
             callback();
           }

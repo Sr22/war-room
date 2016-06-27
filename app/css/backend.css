@@ -13,4 +13,5 @@
 
 .grid-stack-item-content {
   background-color: white;
+  transition: all 2s ease-in-out;
 }
