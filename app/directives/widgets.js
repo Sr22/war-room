@@ -19,7 +19,6 @@ function createGridster(elem, widgetsSize, cols) {
   
 function wwWidgets($window, widgetList, addWidget) {
   var gridster = null;
-  
   var directive = {
     transclude: true,
     template: '<ul class="ww-widgets-ul"></ul>',
@@ -42,5 +41,5 @@ function wwWidgets($window, widgetList, addWidget) {
       });
     }
   };
-return directive;
+  return directive;
 }
