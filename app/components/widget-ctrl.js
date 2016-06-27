@@ -18,10 +18,10 @@ angular.module("warRoom")
     .factory('widgetCtrl', ['$compile', function($compile) {
       var service = {};
       
-      service.addWidget = function(widget, scope, callback) {
-        return (function (widget, scope, callback) {
+      service.addWidget = function(widget, scope, callback, grid) {
+        return (function (widget, scope, callback, grid) {
           if (widget instanceof Array) {
-            var body = '<ww-widget data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + widget[0] + '"></include-executable-file></ww-widget><span class="gs-remove-handle gs-remove-handle-all"></span>';
+            var body = '<div><div class="grid-stack-item-content"><include-executable-file src="' + widget[0] + '"></include-executable-file></div></div>';
             widget.filter(function (elem) { return elem.endsWith(".css"); })
                 .forEach(function (elem) {
                   var link = document.createElement('link');
@@ -35,7 +35,7 @@ angular.module("warRoom")
                   loadScriptCallback(elem, function() {
                     var el = angular.element(body);
                     var compiled = $compile(el);
-                    $('.ww-widgets-ul').append(el);
+                    grid.addWidget(el, 1, 1, 1, 1);
                     compiled(scope);
                     callback();
                   });
@@ -43,19 +43,19 @@ angular.module("warRoom")
             if (jsFiles.length == 0) {
               var el = angular.element(body);
               var compiled = $compile(el);
-              $('.ww-widgets-ul').append(el);
+              grid.addWidget(el, 1, 1, 1, 1);
               compiled(scope);
               callback();
             }
           } else {
-            var body = '<ww-widget data-row=1 data-col=1 data-sizex=1 data-sizey=2><include-executable-file src="' + widget + '"></include-executable-file></ww-widget><span class="gs-remove-handle gs-remove-handle-all"></span>';
+            var body = '<div><div class="grid-stack-item-content"><include-executable-file src="' + widget + '"></include-executable-file></div></div>';
             var el = angular.element(body);
             var compiled = $compile(el);
-            $('.ww-widgets-ul').append(el);
+            grid.addWidget(el, 1, 1, 1, 1);
             compiled(scope);
             callback();
           }
-        })(widget, scope, callback);
+        })(widget, scope, callback, grid);
       }
       
       return service;
