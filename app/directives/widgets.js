@@ -31,15 +31,7 @@ function wwWidgets($window, widgetList, widgetCtrl) {
 
         var numElements = widgetList.length;
         widgetList.forEach(function (el) {
-          //gridstack.addWidget($('<div><div class="grid-stack-item-content"></div><div/>'), 1, 1, 1, 1);
           widgetCtrl.addWidget(el, $scope, function () {}, gridstack);
-          
-          /* widgetCtrl.addWidget(el, $scope, function () {
-            numElements -= 1;
-            if (numElements == 0) {
-              //gridstack = createGridstack($(".grid-stack"), widgetsSize, cols);
-            }
-          }); */
         });
       });
     }
