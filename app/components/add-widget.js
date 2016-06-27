@@ -33,7 +33,6 @@ angular.module("warRoom")
             widget.filter(function (elem) { return elem.endsWith(".js"); })
                 .forEach(function (elem) {
                   loadScriptCallback(elem, function() {
-                    alert(body);
                     var el = angular.element(body);
                     var compiled = $compile(el);
                     $('.ww-widgets-ul').append(el);
