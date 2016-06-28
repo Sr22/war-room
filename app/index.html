@@ -31,6 +31,7 @@
   <script src="components/widget-ctrl.js"></script>
   <script src="directives/include-executable-file.js"></script>
   <script src="directives/widgets.js"></script>
+  <script src="controllers/header-controller.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -39,7 +40,7 @@
     <div class="page-content">
 
       <!-- Header Bar -->
-      <div class="row header">
+      <div class="row header" ng-controller="headerController">
         <div class="col-xs-12">
           <div class="meta">
             <div class="header-container">
@@ -50,7 +51,9 @@
                 For your utility.
               </div>
             </div>
-            <!--<div class="edit-button"><button>Edit</button></div>-->
+            <div class="edit-button"><button>Edit</button></div>
+            <!--<div class="load-button" ng-click="loadWidgets()"><button>Load</button></div>-->
+            <div class="save-button" ng-click="saveWidgets()"><button>Save</button></div>
           </div>
         </div>
       </div>

@@ -11,7 +11,9 @@ function createGridstack(elem) {
     float: false,
     auto: true,
     width: 12,
-    //height: 8
+    //height: 8,
+    removable: true,
+    animate: true,
   }).data('gridstack');
 }
   
@@ -30,9 +32,11 @@ function wwWidgets($window, widgetList, widgetCtrl) {
         gridstack = createGridstack($(".grid-stack"), 0, 0);
 
         var numElements = widgetList.length;
-        widgetList.forEach(function (el) {
-          widgetCtrl.addWidget(el, $scope, function () {}, gridstack);
-        });
+        if (!widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid')) {
+          widgetList.forEach(function (el) {
+            widgetCtrl.addWidget(el, $scope, null, gridstack);
+          });
+        }
       });
     }
   };

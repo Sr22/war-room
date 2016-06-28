@@ -13,17 +13,4 @@
 
 .grid-stack-item-content {
   background-color: white;
-  transition: top .4s, left .4s;
-}
-
-.grid-stack-item {
-  transition: top .4s, left .4s;
-}
-
-.ui-draggable-dragging {
-  transition: top 0s, left 0s;
-}
-
-.grid-stack-placeholder {
-  transition: top 0s, left 0s;
 }
