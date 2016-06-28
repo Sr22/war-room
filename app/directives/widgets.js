@@ -16,7 +16,7 @@ function createGridstack(elem) {
     animate: true,
   }).data('gridstack');
 }
-  
+
 function wwWidgets($window, widgetList, widgetCtrl) {
   gridstack = null;
   var directive = {
@@ -32,7 +32,7 @@ function wwWidgets($window, widgetList, widgetCtrl) {
         gridstack = createGridstack($(".grid-stack"), 0, 0);
 
         var numElements = widgetList.length;
-        if (!widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid')) {
+        if (true || !widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid')) {
           widgetList.forEach(function (el) {
             widgetCtrl.addWidget(el, $scope, null, gridstack);
           });
