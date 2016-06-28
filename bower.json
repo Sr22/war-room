@@ -17,7 +17,7 @@
     "rdash-ui": "~1.0.0",
     "bootstrap": "~3.3.6",
     "font-awesome": "~4.5.0",
-    "jquery.gridster": "git://github.com/ducksboard/gridster.js.git",
-    "oclazyload": "~1.0.0"
+    "gridstack": "^0.2.5",
+    "lodash": "^4.13.1"
   }
 }

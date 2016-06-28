@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.min.css">
-  <link rel="stylesheet" href="bower_components/jquery.gridster/dist/jquery.gridster.css">
+  <link rel="stylesheet" href="bower_components/gridstack/dist/gridstack.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   
@@ -21,14 +21,17 @@
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/jquery.gridster/dist/jquery.gridster.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/lodash/dist/lodash.js"></script>
+  <script src="bower_components/gridstack/dist/gridstack.js"></script>
   
   <!-- CUSTOM -->
   <script src="module.js"></script>
   <script src="config.js"></script>
-  <script src="components/add-widget.js"></script>
+  <script src="components/widget-ctrl.js"></script>
   <script src="directives/include-executable-file.js"></script>
   <script src="directives/widgets.js"></script>
+  <script src="controllers/header-controller.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -37,7 +40,7 @@
     <div class="page-content">
 
       <!-- Header Bar -->
-      <div class="row header">
+      <div class="row header" ng-controller="headerController">
         <div class="col-xs-12">
           <div class="meta">
             <div class="header-container">
@@ -48,14 +51,16 @@
                 For your utility.
               </div>
             </div>
-            <!--<div class="edit-button"><button>Edit</button></div>-->
+            <div class="edit-button"><button>Edit</button></div>
+            <div class="load-button" ng-click="loadWidgets()"><button>Load</button></div>
+            <div class="save-button" ng-click="saveWidgets()"><button>Save</button></div>
           </div>
         </div>
       </div>
       <!-- End Header Bar -->
 
       <!-- Main Content -->
-      <ww-widgets class="widget-wrapper gridster"></ww-widgets>
+      <ww-widgets class="widget-wrapper"></ww-widgets>
       
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
