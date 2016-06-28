@@ -1,0 +1,203 @@
+<script>
+
+    //creating tabs - haven't implemented functions to add and save new tabs
+    //need to use "hide" functionality to tabs to "add" new tabs
+    openCity = function(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+<style>
+    body {font-family: "Lato", sans-serif;}
+
+    ul.tab {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+    }
+
+    /* Float the list items side by side */
+    ul.tab li {float: left;}
+
+    /* Style the links inside the list items */
+    ul.tab li a {
+        display: inline-block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+
+    /* Change background color of links on hover */
+    ul.tab li a:hover {
+        background-color: limegreen;
+    }
+
+    /* Create an active/current tablink class */
+    ul.tab li a:focus, .active {
+        background-color: #cccccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
+
+<h1 style="text-align: center">Time</h1>
+
+<ul class="tab">
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Portland')">Portland</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'New York')">New York</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Chicago')">Chicago</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Detroit')">Detroit</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'add')">+</a></li>
+</ul>
+
+<!--Example tabs below-->
+<div id="Portland" class="tabcontent">
+    <!--time styling content here-->
+</div>
+
+<div id="New York" class="tabcontent">
+    <!--time styling content here-->
+
+</div>
+
+<div id="London" class="tabcontent">
+    <!--time styling content here-->
+
+</div>
+
+<div id="Chicago" class="tabcontent">
+    <!--time styling content here-->
+</div>
+
+<div id="Detroit" class="tabcontent">
+    <!--time styling content here-->
+
+</div>
+
+
+<div id="add" class="tabcontent">
+<!--gives the user the ability to search for a city's time-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <div class="container">
+        <header>
+            <h1>City Search</h1>
+        </header>
+        <section id="fetch">
+            <input type="text" id="term" />
+            <button id="search">Enter</button>
+        </section>
+        <section id="city">
+            <p id="des"></p>
+            <p id="timestamp"></p>
+            <p id="date"></p>
+        </section>
+    </div>
+
+
+    <script>
+        var placeId='';
+        var latitude ='';
+        var longitude = '';
+        var time;
+        var arr = [];
+        var key1 = 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4';
+        $("#term").keypress(function() { //as user types out city, the autocomplete list will refresh
+                    var city = $("#term").val();
+                    var url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&language=en&key=' + key1;
+
+                    $('#term').on('keydown' , function(event) { //the autocomplete list will clear if user deletes characters
+                       if(event.which == 8| event.which==46) {
+                            if(city.length == 0) //could fix for more sophisticated clearing system
+                            {
+                                $('#des').html('');
+                            }
+
+
+                        }
+                    });
+                    $('#des').html(''); //clears between keypress so it doesn't display the entire history
+                    $.ajax({
+                        url: url,
+                        success: function (data) {
+                            var obj = JSON.stringify(data);
+                            $.each(data.predictions, function (i, val) { //to list autocomplete predictions
+                                arr[i]=val.description;
+                                placeId = val.place_id;
+                                $('#des').html( $('#des').html() + '<br>' + arr[i] );//adds the description to the current list
+                                i++;
+
+                            });
+
+                        }
+                    })
+                }
+        );
+        $("#search").click(function(){ //uses place id from user's input through enter button
+            var url2 = 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+placeId+'&key='+key1;
+            $.ajax({ //uses place id to find latitude and longitute
+                url:url2,
+                success: function(data1){
+                    latitude = data1.results[0].geometry.location.lat;
+                    longitude = data1.results[0].geometry.location.lng;
+
+                }
+            });
+            var url3 = 'http://api.timezonedb.com/v2/get-time-zone?key=WKXE0BXV0YGO&format=json&by=position&lat='+latitude+'&lng='+longitude;
+            //inputs latitude and longitude to timezone api
+            $.ajax({
+                url:url3,
+                success: function(data2) {
+                    time = data2['timestamp']; //calculates time based off of timestamp
+                    var gmt = data2['gmtOffset'];
+                    var utc = time*1000;//converts to milliseconds, which is what js uses to make the date object
+                    var am = false;
+                    var date = new Date(utc);
+                    var hours = date.getHours()-5;
+                  if(hours <= 0 ){
+                     am = true;
+                     hours += 12;
+                    }
+
+                    var min =date.getMinutes();
+                    if(min<10){
+                        min = '0' + min;
+                    }
+
+                    var timeDisplay;
+                    if(am == true){
+                        timeDisplay = hours+ ':' + min+' am';
+                    }else{
+                        timeDisplay = hours+ ':' + min+' pm';
+                    }
+                    document.getElementById('date').innerHTML = timeDisplay; //displays time
+                }
+            });
+        })
+
+
+    </script>
+</div>
