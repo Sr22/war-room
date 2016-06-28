@@ -11,6 +11,20 @@ function includeExecutableFile() {
     },
     link: function($scope, elem, attrs) {
       $(elem).find('script').each(function(index, value) {
+        var srcToInclude = $(value).attr('src');
+        if (srcToInclude) {
+          (function (src) {
+            $.ajax({
+              url : srcToInclude,
+              dataType: 'text',
+              success : function (data) {
+                (function (data) {
+                  eval.call(window, data);
+                })(data);
+              }
+            });
+          })(src);
+        }
         eval($(value).text());
       });
     },
