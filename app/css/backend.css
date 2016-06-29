@@ -10,3 +10,7 @@
   z-index: 20;
   position: absolute;
 }
+
+.grid-stack-item-content {
+  background-color: white;
+}

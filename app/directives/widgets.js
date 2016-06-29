@@ -2,42 +2,37 @@
 
 angular
   .module("warRoom")
-  .directive("wwWidgets", ['$window', 'widgetList', 'addWidget', wwWidgets]);
+  .directive("wwWidgets", ['$window', 'widgetList', 'widgetCtrl', wwWidgets]);
 
-function createGridster(elem, widgetsSize, cols) {
-  return $(elem).find('ul').gridster({
-    widget_selector: 'ww-widget',
-    widget_margins: [2, 2],
-    widget_base_dimensions: [widgetsSize/cols, 340/2],
-    min_cols: cols,
-    max_cols: cols,
-    resize: {
-      enabled: true
-    }
-  }).data('gridster');
+function createGridstack(elem) {
+  return $(elem).gridstack({
+    virtualMargin: 4,
+    horizontalMargin: 4,
+    float: false,
+    auto: true,
+    width: 12,
+    //height: 8,
+    removable: true,
+    animate: true,
+  }).data('gridstack');
 }
-  
-function wwWidgets($window, widgetList, addWidget) {
-  var gridster = null;
+
+function wwWidgets($window, widgetList, widgetCtrl) {
+  gridstack = null;
   var directive = {
     transclude: true,
-    template: '<ul class="ww-widgets-ul"></ul>',
+    template: '<div class="grid-stack"></div>',
     restrict: 'EA',
     link: function($scope, elem, attrs) {
-      var windowSizeCurrent = $window.innerWidth;
-      var widgetsSize = windowSizeCurrent - 100;
-      var cols = Math.max(Math.floor(widgetsSize/340), 1);
-      
       elem.ready(function() {
+        gridstack = createGridstack($(".grid-stack"));
+
         var numElements = widgetList.length;
-        widgetList.forEach(function (el) {
-          addWidget.addWidget(el, $scope, function () {
-            numElements -= 1;
-            if (numElements == 0) {
-              gridster = createGridster(elem, widgetsSize, cols);
-            }
+        if (true || !widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid')) {
+          widgetList.forEach(function (el) {
+            widgetCtrl.addWidget(el, $scope, null, gridstack);
           });
-        });
+        }
       });
     }
   };
