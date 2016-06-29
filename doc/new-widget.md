@@ -5,14 +5,16 @@ There are three main components that go into a widget:
 2. The AngularJS controller that controls the generated HTML.
 3. The template that represents the structure and static content in the widget.
 
-First, create a template in the `app/widgets/my-new-widget` folder. For this tutorial, we will call it `template.html`. Eventually, edit this file to contain the Angular template for your widget; for now, use: ```
+First, create a template in the `app/widgets/my-new-widget` folder. For this tutorial, we will call it `template.html`. Eventually, edit this file to contain the Angular template for your widget; for now, use: 
+```
 <html>
   <body ng-controller="myNewWidgetController">
     <p>{{ message }}</p>
   </body>
 </html>
 ```
-Second, make a directive and place it in the `app/widgets/my-new-widget` folder. We will call it `directive.js`. To learn more about how to use directives in AngularJS, see a tutorial; for now, use: ```
+Second, make a directive and place it in the `app/widgets/my-new-widget` folder. We will call it `directive.js`. To learn more about how to use directives in AngularJS, see a tutorial; for now, use: 
+```
 angular.module('warRoom').directive("myNewWidgetDirective", function() {
   return {
     templateUrl: "widgets/my-new-widget/template.html"
@@ -20,7 +22,8 @@ angular.module('warRoom').directive("myNewWidgetDirective", function() {
 });
 ```
 
-Finally, make a controller in `app/widgets/my-new-widget/controller.js`: ```
+Finally, make a controller in `app/widgets/my-new-widget/controller.js`: 
+```
 angular.module('warRoom').controller("myNewWidgetController", ['$scope', function($scope) {
   $scope.message = "Hello world!";
 }]);
