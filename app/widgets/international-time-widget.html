@@ -1,4 +1,8 @@
-<script>
+
+<link rel="stylesheet" type="text/css" href="time-widget.css">
+
+<script> //make this an angular object - be a directive to be consumed by the generic widget
+//use angular instead of jquery - angular wrapper
 
     //creating tabs - haven't implemented functions to add and save new tabs
     //need to use "hide" functionality to tabs to "add" new tabs
@@ -15,84 +19,47 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
-</script>
 
-<style>
-    body {font-family: "Lato", sans-serif;}
+    </script>
 
-    ul.tab {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
+<h3 style="text-align: center">Time</h3>
+<div id="container">
 
-    /* Float the list items side by side */
-    ul.tab li {float: left;}
-
-    /* Style the links inside the list items */
-    ul.tab li a {
-        display: inline-block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        transition: 0.3s;
-        font-size: 17px;
-    }
-
-    /* Change background color of links on hover */
-    ul.tab li a:hover {
-        background-color: limegreen;
-    }
-
-    /* Create an active/current tablink class */
-    ul.tab li a:focus, .active {
-        background-color: #cccccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-</style>
-
-<h1 style="text-align: center">Time</h1>
-
-<ul class="tab">
+<ul class="tab" id="tabs">
     <li><a href="#" class="tablinks" onclick="openCity(event, 'Portland')">Portland</a></li>
-    <li><a href="#" class="tablinks" onclick="openCity(event, 'New York')">New York</a></li>
-    <li><a href="#" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
-    <li><a href="#" class="tablinks" onclick="openCity(event, 'Chicago')">Chicago</a></li>
-    <li><a href="#" class="tablinks" onclick="openCity(event, 'Detroit')">Detroit</a></li>
-    <li><a href="#" class="tablinks" onclick="openCity(event, 'add')">+</a></li>
+    <li style="visibility: hidden;"><a href="#" id="chooseName" class="tablinks" onclick="openCity(event, 'Tab 2')">City
+    </a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Tab 3')">London</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Tab 4')">Chicago</a></li>
+    <li><a href="#" class="tablinks" onclick="openCity(event, 'Tab 5')">Detroit</a></li>
+    <li><a href="#" id="plus" class="tablinks" onclick="openCity(event, 'add')">
+        <input type="text" id="term">
+        <button id="search">Enter</button>
+
+
+    </a></li>
 </ul>
 
 <!--Example tabs below-->
 <div id="Portland" class="tabcontent">
-    <!--time styling content here-->
-</div>
-
-<div id="New York" class="tabcontent">
-    <!--time styling content here-->
 
 </div>
 
-<div id="London" class="tabcontent">
+<div id="Tab 2" class="tabcontent">
     <!--time styling content here-->
 
 </div>
 
-<div id="Chicago" class="tabcontent">
+<div id="Tab 3" class="tabcontent">
+    <!--time styling content here-->
+
+</div>
+
+<div id="Tab 4" class="tabcontent">
     <!--time styling content here-->
 </div>
 
-<div id="Detroit" class="tabcontent">
+<div id="Tab 5" class="tabcontent">
     <!--time styling content here-->
 
 </div>
@@ -101,15 +68,16 @@
 <div id="add" class="tabcontent">
 <!--gives the user the ability to search for a city's time-->
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <div class="container">
         <header>
-            <h1>City Search</h1>
+            <h3>City Search</h3>
         </header>
-        <section id="fetch">
-            <input type="text" id="term" />
-            <button id="search">Enter</button>
-        </section>
+        <!--<section id="fetch">-->
+            <!--<input type="text" id="term" />-->
+            <!--<button id="search">Enter</button>-->
+        <!--</section>-->
         <section id="city">
             <p id="des"></p>
             <p id="timestamp"></p>
@@ -125,40 +93,82 @@
         var time;
         var arr = [];
         var key1 = 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4';
+        var key2 = 'WKXE0BXV0YGO';
+        var hours;
+        var min;
+        var am = false;
+        var date;
+        var city;
+        var OfficialCityName
+
+        function clearAll(event){ //the autocomplete list will clear if user deletes characters
+            if(event.which == 8| event.which==46) {
+                if(city.length == 0) //could fix for more sophisticated clearing system
+                {
+                    $('#des').html('');
+                }
+            }
+
+        }
+
         $("#term").keypress(function() { //as user types out city, the autocomplete list will refresh
-                    var city = $("#term").val();
+                    city = $("#term").val();
                     var url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&language=en&key=' + key1;
 
-                    $('#term').on('keydown' , function(event) { //the autocomplete list will clear if user deletes characters
-                       if(event.which == 8| event.which==46) {
-                            if(city.length == 0) //could fix for more sophisticated clearing system
-                            {
-                                $('#des').html('');
-                            }
-
-
-                        }
-                    });
+                    $('#term').on('keydown' , clearAll(event));
                     $('#des').html(''); //clears between keypress so it doesn't display the entire history
                     $.ajax({
                         url: url,
-                        success: function (data) {
+                        success: function(data){
                             var obj = JSON.stringify(data);
                             $.each(data.predictions, function (i, val) { //to list autocomplete predictions
                                 arr[i]=val.description;
+                                OfficialCityName = val.description;
                                 placeId = val.place_id;
                                 $('#des').html( $('#des').html() + '<br>' + arr[i] );//adds the description to the current list
                                 i++;
 
                             });
-
                         }
                     })
                 }
         );
+        function ampm(){
+            hours = date.getHours()-5;
+            if(hours < 0 ){
+                am = true;
+                hours += 12;
+            }if(hours ==0){
+                hours +=12;
+            }
+
+            min =date.getMinutes();
+            if(min<10){
+                min = '0' + min;
+            }
+
+        }
+
+        function timeDisplay(){
+            var timeDisplay;
+            if(am == true){
+                timeDisplay = hours+ ':' + min+' am';
+            }else{
+                timeDisplay = hours+ ':' + min+' pm';
+            }
+            document.getElementById('date').innerHTML = timeDisplay;
+
+
+        }
+
         $("#search").click(function(){ //uses place id from user's input through enter button
             var url2 = 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+placeId+'&key='+key1;
-            $.ajax({ //uses place id to find latitude and longitute
+
+            //$("chooseName").show();
+
+            document.getElementById('chooseName').style.visibility='visible';
+            document.getElementById('chooseName').innerHTML = OfficialCityName;
+            $.ajax({ //uses place id to find latitude and longitude
                 url:url2,
                 success: function(data1){
                     latitude = data1.results[0].geometry.location.lat;
@@ -166,38 +176,27 @@
 
                 }
             });
-            var url3 = 'http://api.timezonedb.com/v2/get-time-zone?key=WKXE0BXV0YGO&format=json&by=position&lat='+latitude+'&lng='+longitude;
+
+            var url3 = 'http://api.timezonedb.com/v2/get-time-zone?key='+key2+'&format=json&by=position&lat='+latitude+'&lng='+longitude;
             //inputs latitude and longitude to timezone api
             $.ajax({
                 url:url3,
-                success: function(data2) {
+                success: function(data2) { //give function names
                     time = data2['timestamp']; //calculates time based off of timestamp
-                    var gmt = data2['gmtOffset'];
                     var utc = time*1000;//converts to milliseconds, which is what js uses to make the date object
-                    var am = false;
-                    var date = new Date(utc);
-                    var hours = date.getHours()-5;
-                  if(hours <= 0 ){
-                     am = true;
-                     hours += 12;
-                    }
+                    date = new Date(utc);
+                    ampm();
+                    timeDisplay()
 
-                    var min =date.getMinutes();
-                    if(min<10){
-                        min = '0' + min;
-                    }
 
-                    var timeDisplay;
-                    if(am == true){
-                        timeDisplay = hours+ ':' + min+' am';
-                    }else{
-                        timeDisplay = hours+ ':' + min+' pm';
-                    }
-                    document.getElementById('date').innerHTML = timeDisplay; //displays time
                 }
             });
+            setTimeout(timeDisplay(), 1000); //wait one second to run function
+
         })
 
 
     </script>
+
+    </div>
 </div>

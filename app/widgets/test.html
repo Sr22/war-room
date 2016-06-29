@@ -1,0 +1,207 @@
+
+
+<link rel="stylesheet" type="text/css" href="time-widget.css">
+
+<script> //make this an angular object - be a directive to be consumed by the generic widget
+//use angular instead of jquery - angular wrapper
+
+//creating tabs - haven't implemented functions to add and save new tabs
+//need to use "hide" functionality to tabs to "add" new tabs
+openCity = function(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+<h3 style="text-align: center">Time</h3>
+<div id="container">
+
+    <ul class="tab" id="tabs">
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'Portland')">Portland</a></li>
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'New York')">New York</a></li>
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'London')">London</a></li>
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'Chicago')">Chicago</a></li>
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'Detroit')">Detroit</a></li>
+        <li><a href="#" class="tablinks" onclick="openCity(event, 'add')">+</a></li>
+    </ul>
+
+    <!--Example tabs below-->
+    <div id="Portland" class="tabcontent">
+        <!--time styling content here-->
+    </div>
+
+    <div id="New York" class="tabcontent">
+        <!--time styling content here-->
+
+    </div>
+
+    <div id="London" class="tabcontent">
+        <!--time styling content here-->
+
+    </div>
+
+    <div id="Chicago" class="tabcontent">
+        <!--time styling content here-->
+    </div>
+
+    <div id="Detroit" class="tabcontent">
+        <!--time styling content here-->
+
+    </div>
+
+
+    <div id="add" class="tabcontent">
+        <!--gives the user the ability to search for a city's time-->
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <div class="container">
+            <header>
+                <h3>City Search</h3>
+            </header>
+            <section id="fetch">
+                <input type="text" id="term" />
+                <button id="search">Enter</button>
+            </section>
+            <section id="city">
+                <p id="des"></p>
+                <p id="timestamp"></p>
+                <p id="date"></p>
+            </section>
+        </div>
+
+
+        <script>
+            var placeId='';
+            var latitude ='';
+            var longitude = '';
+            var time;
+            var arr = [];
+            var key1 = 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4';
+            var key2 = 'WKXE0BXV0YGO';
+            var hours;
+            var min;
+            var am = false;
+            var date;
+
+            function clearAll(event){ //the autocomplete list will clear if user deletes characters
+                if(event.which == 8| event.which==46) {
+                    if(city.length == 0) //could fix for more sophisticated clearing system
+                    {
+                        $('#des').html('');
+                    }
+                }
+
+            }
+
+            $("#term").keypress(function() { //as user types out city, the autocomplete list will refresh
+                        var city = $("#term").val();
+                        var url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + city + '&types=(cities)&language=en&key=' + key1;
+
+                        $('#term').on('keydown' , clearAll(event));
+                        $('#des').html(''); //clears between keypress so it doesn't display the entire history
+                        $.ajax({
+                            url: url,
+                            success: function(data){
+                                var obj = JSON.stringify(data);
+                                $.each(data.predictions, function (i, val) {
+                                    //document.getElementById('des').innerHTML = val.description;
+                                    arr[i]=val.description;
+                                    placeId = val.place_id;
+                                    $('#des').html( $('#des').html() + '<br>' +'<div id=r'+i+'>' + arr[i] + '</div>' );
+                                    alert($('#r'+i).val());
+                                    $('#r'+i).click(clickCity());
+                                    if($('#r'+i).data('clicked'))
+                                    {
+                                        return false;
+                                    }
+                                    i++;
+
+                                });
+                            }
+                        })
+                    }
+            );
+//            function ampm(){
+//                hours = date.getHours()-5;
+//                if(hours < 0 ){
+//                    am = true;
+//                    hours += 12;
+//                }if(hours ==0){
+//                    hours +=12;
+//                }
+//
+//                min =date.getMinutes();
+//                if(min<10){
+//                    min = '0' + min;
+//                }
+//
+//            }
+//
+//            function timeDisplay(){
+//                var timeDisplay;
+//                if(am == true){
+//                    timeDisplay = hours+ ':' + min+' am';
+//                }else{
+//                    timeDisplay = hours+ ':' + min+' pm';
+//                }
+//                document.getElementById('date').innerHTML = timeDisplay;
+//            }
+
+            $("#search").click(getLongLat());
+            var url3 = 'http://api.timezonedb.com/v2/get-time-zone?key=WKXE0BXV0YGO&format=json&by=position&lat='+latitude+'&lng='+longitude;
+
+            $.ajax({
+                url:url3,
+                success: findTime(data2)
+
+            });
+            function getLongLat()
+            {
+                var url2 = 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+placeId+'&key='+key1;
+                $.ajax({
+                    url:url2,
+                    success: function(data1)
+                    {
+                        latitude = data1.results[0].geometry.location.lat;
+                        longitude = data1.results[0].geometry.location.lng;
+
+                    }
+                })
+            }
+
+            function findTime(data2)
+            {
+
+                time = data2['timestamp'];// takes the value we want from the json object, ignoring the extra fluff
+                var gmt = data2['gmtOffset'];
+                var daylight = data2['dst'];
+                var timeSet = time-(3600*daylight)+gmt;
+
+                var date = new Date(timeSet*1000);
+                var hours = date.getHours();
+                var min = '0'+ date.getMinutes();
+                document.getElementById('date').innerHTML = date;
+            }
+
+            function clickCity()
+            {
+                $(this).data('clicked', true);
+                getLongLat();
+                findTime(data2);
+
+            }
+
+        </script>
+        <!--<META HTTP-EQUIV="Refresh" CONTENT=15>-->
+    </div>
+</div>
