@@ -50,7 +50,7 @@ angular.module("warRoom")
           // JavaScript scoping problems fixed by calling anonymous function
           return (function (widget, scope, callback, grid) {
             if (widget instanceof Array) {
-              var body = '<div><div class="grid-stack-item-content"><include-executable-file src="' + widget[0] + '"></include-executable-file></div></div>';
+              widgetDirective = camelToDash(dashToCamel(widget[widget.length-1]));
               widget.filter(function (elem) { return elem.endsWith(".css"); })
                   .forEach(function (elem) {
                     var link = document.createElement('link');
@@ -60,33 +60,26 @@ angular.module("warRoom")
                     document.getElementsByTagName('head')[0].appendChild(link);
                   });
               var jsFiles = widget.filter(function (elem) { return elem.endsWith(".js") && $.inArray(elem, service.executedJavaScript) == -1; });
-              jsFiles.forEach(function (elem) {
-                    loadScriptCallback(elem, function() {
-                      service.executedJavaScript.push(elem);
-                      var el = angular.element(body);
-                      var compiled = $compile(el);
-                      $(el).data('widget', widget);
-                      grid.addWidget(el, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
-                      compiled(scope);
-                      callback && callback();
+              if (jsFiles.length > 0) {
+                var len = jsFiles.length;
+                jsFiles.forEach(function (elem) {
+                      loadScriptCallback(elem, function() {
+                        service.executedJavaScript.push(elem);
+                        len -= 1;
+                        if (len == 0) {
+                          var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
+                          elementToAdd = $compile(body)(scope);
+                          grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
+                          callback && callback();
+                        }
+                      });
                     });
-                  });
-              if (jsFiles.length == 0) {
-                var el = angular.element(body);
-                var compiled = $compile(el);
-                $(el).data('widget', widget);
-                grid.addWidget(el, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
-                compiled(scope);
+              } else {
+                var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
+                elementToAdd = $compile(body)(scope);
+                grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
                 callback && callback();
               }
-            } else {
-              var body = '<div><div class="grid-stack-item-content"><include-executable-file src="' + widget + '"></include-executable-file></div></div>';
-              var el = angular.element(body);
-              var compiled = $compile(el);
-              $(el).data('widget', widget);
-              grid.addWidget(el, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
-              compiled(scope);
-              callback && callback();
             }
           })(widget, scope, callback, grid);
         }
