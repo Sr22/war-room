@@ -70,6 +70,7 @@ angular.module("warRoom")
                           var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
                           elementToAdd = $compile(body)(scope);
                           grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
+                          $(elementToAdd).data('widget', widget);
                           callback && callback();
                         }
                       });
@@ -78,6 +79,7 @@ angular.module("warRoom")
                 var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
                 elementToAdd = $compile(body)(scope);
                 grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
+                $(elementToAdd).data('widget', widget);
                 callback && callback();
               }
             }
