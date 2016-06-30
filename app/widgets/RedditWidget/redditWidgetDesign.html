@@ -1,0 +1,36 @@
+<style>
+    div.panel-group {
+        padding: 10px;
+        margin: 0 auto;
+    }
+</style>
+<center>
+    <div class="main" ng-controller="rController as r">
+        <h1>Reddit Widget</h1>
+        <div class="form">
+            <form name="searchForm" ng-submit="r.submit()">
+                <input type="text" ng-model="r.search.title" style="width:75%" placeholder="Search Reddit...">
+                <input type="submit" value="GO" style="width:15%">
+            </form>
+        </div>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                            Item 1
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse out">
+                    <div class="panel-body">
+                        <p> // BODY \\ </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="posts" ng-repeat="post in posts">
+            <a href="{{ post.postURL }}">{{ post.title }}</a>
+        </div>
+    </div>
+</center>
