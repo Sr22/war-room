@@ -30,7 +30,7 @@
   <script src="module.js"></script>
   <script src="config.js"></script>
   <script src="components/widget-ctrl.js"></script>
-  <script src="directives/include-executable-file.js"></script>
+  <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
   
@@ -55,6 +55,7 @@
             <div class="edit-button"><button>Edit</button></div>
             <div class="load-button" ng-click="loadWidgets()"><button>Load</button></div>
             <div class="save-button" ng-click="saveWidgets()"><button>Save</button></div>
+            <div class="remove-button" ng-click="removeWidget('MyWidgetTwo')"><button>Remove Widget Two</button></div>
           </div>
         </div>
       </div>
