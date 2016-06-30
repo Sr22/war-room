@@ -3,5 +3,5 @@
 angular
   .module("warRoom")
   .constant("widgetList", [
-    ["RedditWidget", "widgets/redditwidget/redditController.js", "redditWidget"]
-  ]);
+    ["MyWidgetTwo", "widgets/my-widget2.js", "myWidgetTwo"]
+]);

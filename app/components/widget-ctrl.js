@@ -63,17 +63,19 @@ angular.module("warRoom")
               if (jsFiles.length > 0) {
                 var len = jsFiles.length;
                 jsFiles.forEach(function (elem) {
-                      loadScriptCallback(elem, function() {
-                        service.executedJavaScript.push(elem);
-                        len -= 1;
-                        if (len == 0) {
-                          var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
-                          elementToAdd = $compile(body)(scope);
-                          grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
-                          $(elementToAdd).data('widget', widget);
-                          callback && callback();
-                        }
-                      });
+                      loadScriptCallback(elem, function(widgetDirective) {
+                        return function() {
+                          service.executedJavaScript.push(elem);
+                          len -= 1;
+                          if (len == 0) {
+                            var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
+                            elementToAdd = $compile(body)(scope);
+                            grid.addWidget(elementToAdd, x || 0, y || 0, width || 2, height || 4, auto != undefined ? auto : true);
+                            $(elementToAdd).data('widget', widget);
+                            callback && callback();
+                          }
+                        };
+                      }(widgetDirective));
                     });
               } else {
                 var body = '<div><div class="grid-stack-item-content"><'+widgetDirective+'></'+widgetDirective+'></div></div>';
