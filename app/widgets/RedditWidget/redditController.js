@@ -17,7 +17,7 @@ angular.module("warRoom")
 angular.module("warRoom")
     .directive("redditWidget", function () {
         var directive = {
-            templateUrl: "widgets/redditWidget.html"
+            templateUrl: "widgets/redditwidget/redditWidgetDesign.html"
         };
         return directive;
     });

@@ -6,7 +6,7 @@ angular.module("warRoom")
 angular.module("warRoom")
     .directive("myWidgetTwo", function () {
       var directive = {
-        templateUrl: "widgets/my-widget2.html"
+        templateUrl: "widgets/examplewidgets/my-widget2.html"
       };
       
       return directive;
