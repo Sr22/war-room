@@ -24,12 +24,8 @@ function wwWidgets($window, widgetList, widgetCtrl) {
     template: '<div class="grid-stack"></div>',
     restrict: 'EA',
     link: function($scope, elem, attrs) {
-      var windowSizeCurrent = $window.innerWidth;
-      var widgetsSize = windowSizeCurrent - 100;
-      var cols = Math.max(Math.floor(widgetsSize/340), 1);
-      
       elem.ready(function() {
-        gridstack = createGridstack($(".grid-stack"), 0, 0);
+        gridstack = createGridstack($(".grid-stack"));
 
         var numElements = widgetList.length;
         if (true || !widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid')) {
