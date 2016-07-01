@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "War Room",
+  "description": "This extension links to a developer dashboard with widgets for various tools and sites such as a calendar, clock, Stash, and Reddit.",
+  "version": "1.0",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://stash.cdk.com/rest/api/1.0/"
+  ]
+}
