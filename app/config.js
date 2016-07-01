@@ -1,7 +1,11 @@
-
-
 angular
   .module("warRoom")
   .constant("widgetList", [
-    ["MyWidgetTwo", "widgets/my-widget2.js", "myWidgetTwo"]
+    [ "StashWidget", 
+      "widgets/stash-widget/stash-api.js", 
+      "widgets/stash-widget/directive.js", 
+      "widgets/stash-widget/controller.js", 
+      "widgets/stash-widget/widget.css"
+      "stashWidget" ]
+  ]
 ]);
