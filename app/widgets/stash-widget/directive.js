@@ -4,4 +4,4 @@ angular.module('warRoom')
   return {
     templateUrl : 'widgets/stash-widget/widget.html'
   }
-});
+})

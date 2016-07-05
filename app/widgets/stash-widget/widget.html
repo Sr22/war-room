@@ -1,9 +1,18 @@
-<div ng-controller="stashWidgetController">
+<div ng-controller="stashWidgetController" class="stash-widget-wrapper">
   <div ng-if="isLoggedIn">
-    
+    <div>
+      Type: <input ng-model="stashRepoType" type="text" /><br>
+      Name: <input ng-model="stashRepoName" type="text" /><br>
+      Repo: <input ng-model="stashRepoRepo" type="text" /><br>
+      <button ng-click="updatePullRequestsJson(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
+      <span ng-if="pullRequestsJson">Pull requests: {{ pullRequestsJson }}</span>
+    </div>
   </div>
   <div ng-if="!isLoggedIn">
-    Username: <input ng-model="username" type="text" /><br>
-    Password: <input ng-model="password" type="password" />
+    <div>
+      Username: <input ng-model="username" type="text" /><br>
+      Password: <input ng-model="password" type="password" /><br>
+      <button ng-click="login(username, password)">Submit</button>
+    </div>
   </div>
 </div>
