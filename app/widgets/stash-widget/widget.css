@@ -1,3 +1,23 @@
 .stash-widget-wrapper {
   padding: 8px;
 }
+
+.stash-widget-label {
+  margin-top: 16px;
+}
+
+.stash-widget-submit {
+  margin-top: 16px;
+}
+
+.stash-widget-list-element {
+  width: 100%;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}

@@ -3,6 +3,7 @@
 <head>
   <!-- DEPENDENCIES -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-toggle/css/bootstrap2-toggle.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.min.css">
   <link rel="stylesheet" href="bower_components/gridstack/dist/gridstack.css">
@@ -17,6 +18,7 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/bootstrap-toggle/js/bootstrap2-toggle.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
@@ -46,15 +48,12 @@
           <div class="meta">
             <div class="header-container">
               <div class="page">
-                War Room
-              </div>
-              <div class="breadcrumb-links">
-                For your utility.
+                <h1 class="header-title">War Room</h1>
               </div>
             </div>
-            <div class="edit-button"><button>Edit</button></div>
-            <div class="load-button" ng-click="loadWidgets()"><button>Load</button></div>
-            <div class="save-button" ng-click="saveWidgets()"><button>Save</button></div>
+            <div class="edit-button" ng-click="toggleEnable()"><input type="checkbox" data-height="34" data-width="120" data-toggle="toggle" data-on="Editing" data-off="Not Editing" data-onstyle="success" data-offstyle="danger"></div>
+            <div class="load-button" ng-click="loadWidgets()"><button class="btn btn-primary">Load</button></div>
+            <div class="save-button" ng-click="saveWidgets()"><button class="btn btn-success">Save</button></div>
           </div>
         </div>
       </div>

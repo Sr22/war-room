@@ -1,18 +1,31 @@
 <div ng-controller="stashWidgetController" class="stash-widget-wrapper">
   <div ng-if="isLoggedIn">
-    <div>
-      Type: <input ng-model="stashRepoType" type="text" /><br>
-      Name: <input ng-model="stashRepoName" type="text" /><br>
-      Repo: <input ng-model="stashRepoRepo" type="text" /><br>
-      <button ng-click="updatePullRequestsJson(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
-      <span ng-if="pullRequestsJson">Pull requests: {{ pullRequestsJson }}</span>
+    <div ng-if="isShowingPullRequests">
+      <h1>Pull Requests</h1>
+      <ul class="list-group col-xs-12">
+        <li class="list-group-item" ng-repeat="el in pullRequestsJson">
+          <div class="stash-widget-list-element">
+            <a href="{{ el.links.self[0].href }}">{{ el.title }}</a>
+            <span>Last updated {{ lastUpdatedString(el.updatedDate) }}.</span>
+            <span ng-if="el.reviewers.length != 0" class="label label-default label-pill pull-right"><center style="margin-top: 2px;">{{ el.reviewers.length }}</center></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div ng-if="!isShowingPullRequests">
+      <div>
+        <label class="stash-widget-label">Type</label><input class="form-control" ng-model="stashRepoType" type="text" />
+        <label class="stash-widget-label">Name</label><input class="form-control" ng-model="stashRepoName" type="text" />
+        <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" />
+        <button class="stash-widget-submit btn btn-primary" ng-click="updatePullRequestsJson(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
+      </div>
     </div>
   </div>
   <div ng-if="!isLoggedIn">
     <div>
-      Username: <input ng-model="username" type="text" /><br>
-      Password: <input ng-model="password" type="password" /><br>
-      <button ng-click="login(username, password)">Submit</button>
+      <label class="stash-widget-label">Username</label><input class="form-control" ng-model="username" type="text" />
+      <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" />
+      <button class="stash-widget-submit btn btn-primary" ng-click="login(username, password)">Submit</button>
     </div>
   </div>
 </div>
