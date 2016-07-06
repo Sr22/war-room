@@ -1,4 +1,4 @@
-var app = angular.module('warRoom', []);
+var app = angular.module('warRoom', ['ngResource', 'ngCookies']);
 
 // http://www.bennadel.com/blog/2553-loading-angularjs-components-after-your-application-has-been-bootstrapped.htm
 app.config(['$controllerProvider', '$provide', '$compileProvider', function($controllerProvider, $provide, $compileProvider) {

@@ -1,11 +1,28 @@
 <style>
+    grid-stack-item-content {
+        margin: 0px;
+    }
+
+    reddit-widget {
+        margin: 0px;
+        height: 100%;
+    }
+
+    div.main {
+        /* background-color: lightblue; */
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        height: 100%;
+    }
     div.panel-group {
         padding: 10px;
         margin: 0 auto;
     }
 </style>
+<div class="main">
 <center>
-    <div class="main" >
+
         <h1>Reddit Widget</h1>
         <div class="form">
             <form name="searchForm" ng-submit="submit()">
@@ -31,5 +48,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</center>
+</center>    </div>

@@ -14,6 +14,8 @@ function createGridstack(elem) {
     //height: 8,
     removable: true,
     animate: true,
+    disableDrag: true,
+    disableResize: true
   }).data('gridstack');
 }
 

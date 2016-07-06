@@ -10,7 +10,7 @@
 }
 
 .edit-button, .save-button, .load-button {
-  margin-top: 17px;
+  margin-top: 12px;
   margin-right: 0px;
   padding-right: 6px;
   padding-left: 6px;
@@ -24,4 +24,10 @@
 
 .meta {
   margin-right: 16px;
+}
+
+.header-title {
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
 }
