@@ -5,8 +5,11 @@
       <ul class="list-group col-xs-12">
         <li class="list-group-item" ng-repeat="el in pullRequestsJson">
           <div class="stash-widget-list-element">
-            <a href="{{ el.links.self[0].href }}">{{ el.title }}</a>
-            <span>Last updated {{ lastUpdatedString(el.updatedDate) }}.</span>
+            <a class="stash-widget-repo-name" href="{{ el.links.self[0].href }}">{{ el.title }}</a>
+            <span style="margin-left: 8px; margin-right: 8px;" class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <code>{{ el.toRef.displayId }}</code>
+            <br class="stash-widget-marginless">
+            <span class="stash-widget-last-updated"><a href="{{ el.fromRef.repository.project.links.self[0].href }}">{{ el.fromRef.repository.project.name }}</a>; last updated {{ lastUpdatedString(el.updatedDate) }}.</span>
             <span ng-if="el.reviewers.length != 0" class="label label-default label-pill pull-right"><center style="margin-top: 2px;">{{ el.reviewers.length }}</center></span>
           </div>
         </li>

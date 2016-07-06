@@ -21,3 +21,19 @@
 .pull-left {
   float: left !important;
 }
+
+.stash-widget-repo-name {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.stash-widget-marginless {
+  padding: 0px;
+  margin: 0px;
+}
+
+.stash-widget-last-updated {
+  margin-top: 0px;
+  padding-top: 0px;
+  font-size: 10px;
+}

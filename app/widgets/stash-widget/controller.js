@@ -9,7 +9,7 @@ angular.module('warRoom')
   
   $scope.lastUpdatedString = function (lastUpdated) {
     if (!Date.now) { Date.now = function() { return new Date().getTime(); } }
-    var dt = Math.floor(Date.now() / 1000) - lastUpdated;
+    var dt = Math.floor(Date.now() / 1000) - Math.floor(lastUpdated / 1000);
     if (dt < 0) return "in the future";
     else if (dt < 120) return "just now";
     else if (dt < 3600) return "1 hour ago";
