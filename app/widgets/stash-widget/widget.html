@@ -1,7 +1,7 @@
 <div ng-controller="stashWidgetController" class="stash-widget-wrapper">
+  <h1>Pull Requests</h1>
   <div ng-if="isLoggedIn">
     <div ng-if="isShowingPullRequests">
-      <h1>Pull Requests</h1>
       <ul class="list-group col-xs-12">
         <li class="list-group-item" ng-repeat="el in pullRequestsJson">
           <div class="stash-widget-list-element">
@@ -28,6 +28,7 @@
     <div>
       <label class="stash-widget-label">Username</label><input class="form-control" ng-model="username" type="text" />
       <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" />
+      Remember login information? <input class="stash-widget-remember" type="checkbox" ng-model="saveLoginInformation.value"><br>
       <button class="stash-widget-submit btn btn-primary" ng-click="login(username, password)">Submit</button>
     </div>
   </div>

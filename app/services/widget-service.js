@@ -8,8 +8,8 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
     // find widget
     var widget = undefined;
     widgetList.forEach(function (el) {
-      if (el instanceof Array && el.length >= 3) {
-        if (el[0] == widgetName) {
+      if (el.name) {
+        if (el.name == widgetName) {
           widget = el;
         } else {
         }
@@ -31,8 +31,8 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
     // find widget
     var widget = undefined;
     widgetList.forEach(function (el) {
-      if (el instanceof Array && el.length >= 3) {
-        if (el[0] == widgetName) {
+      if (el.name) {
+        if (el.name == widgetName) {
           widget = el;
         } else {
         }
@@ -42,7 +42,7 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
     });
     
     // find element
-    var widgetElement = $(camelToDash(widget[widget.length-1])).closest(".grid-stack-item");
+    var widgetElement = $(camelToDash(widget.directive)).closest(".grid-stack-item");
     gridstack.removeWidget(widgetElement, true);
   };
   
@@ -56,6 +56,21 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
   
   service.setWidgetsEnabled = function (enabled) {
     enabled ? gridstack.enable() : gridstack.disable();
+  }
+  
+  service.saveValue = function (widgetName, key, value) {
+    var currentValue = getCookie("widget_"+widgetName);
+    if (!currentValue) currentValue = "{}";
+    var currentObject = JSON.parse(currentValue);
+    currentObject.key = value;
+    setCookie("widget_"+widgetName, JSON.stringify(currentObject));
+  }
+  
+  service.loadValue = function (widgetName, key) {
+    var currentValue = getCookie("widget_"+widgetName);
+    if (!currentValue) currentValue = "{}";
+    var currentObject = JSON.parse(currentValue);
+    return currentObject.key;
   }
   
   return service;

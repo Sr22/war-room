@@ -2,11 +2,7 @@
   padding: 8px;
 }
 
-.stash-widget-label {
-  margin-top: 16px;
-}
-
-.stash-widget-submit {
+.stash-widget-label, .stash-widget-submit, .stash-widget-remember {
   margin-top: 16px;
 }
 
