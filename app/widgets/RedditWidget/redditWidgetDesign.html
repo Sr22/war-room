@@ -5,32 +5,31 @@
     }
 </style>
 <center>
-    <div class="main" ng-controller="rController as r">
+    <div class="main" >
         <h1>Reddit Widget</h1>
         <div class="form">
-            <form name="searchForm" ng-submit="r.submit()">
-                <input type="text" ng-model="r.search.title" style="width:75%" placeholder="Search Reddit...">
-                <input type="submit" value="GO" style="width:15%">
+            <form name="searchForm" ng-submit="submit()">
+                <input type="text" ng-model="search" style="width:75%" placeholder="Search Reddit..." required>
+                <input type="submit" value="GO" style="width:15%" ng-disabled="searchForm.$invalid">
             </form>
         </div>
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-repeat="topic in topics">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            Item 1
+                        <a data-toggle="collapse" data-parent="#accordion" href="#{{topic.name}}">
+                            {{topic.name}}
                         </a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse out">
+                <div id="{{topic.name}}" class="panel-collapse collapse out">
                     <div class="panel-body">
-                        <p> // BODY \\ </p>
+                        <div class="posts" ng-repeat="post in topic.posts">
+                            <h3><a href="{{post.postUrl}}">{{ post.title }}</a></h3>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="posts" ng-repeat="post in posts">
-            <a href="{{ post.postURL }}">{{ post.title }}</a>
         </div>
     </div>
 </center>
