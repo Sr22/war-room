@@ -24,7 +24,7 @@ angular.module('warRoom')
   
   $scope.login = function (username, password) {
     if (stashApiService.setCredentials(username, password)) {
-      if ($scope.saveLoginInformation.value) {
+      if ($scope.saveLoginInformation.value && $scope.saveLoginInformation.value != '') {
         widgetService.saveValue('StashWidget', 'username', username);
         widgetService.saveValue('StashWidget', 'password', password);
       }
@@ -32,6 +32,13 @@ angular.module('warRoom')
     } else {
       // handle fail
     }
+  }
+  
+  $scope.logout = function () {
+    stashApiService.clearCredentials();
+    widgetService.saveValue('StashWidget', 'username', '');
+    widgetService.saveValue('StashWidget', 'password', '');
+    $scope.isLoggedIn = false;
   }
   
   $scope.updatePullRequestsJson = function (type, group, name) {
