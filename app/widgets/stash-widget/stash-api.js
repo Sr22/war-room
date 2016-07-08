@@ -1,6 +1,6 @@
 angular.module('warRoom')
 
-.service('stashApiService', ['$resource', '$http', '$cookieStore', '$rootScope', 'base64', function ($resource, $http, $cookieStore, $rootScope, base64) {
+.service('stashApiService', ['$resource', '$http', '$rootScope', 'base64', function ($resource, $http, $rootScope, base64) {
   return {
     setCredentials : function (username, password) {
       if (!username && !password) {
@@ -19,7 +19,6 @@ angular.module('warRoom')
         };
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-        $cookieStore.put('globals', $rootScope.globals);
       }
       
       return true;
@@ -27,11 +26,21 @@ angular.module('warRoom')
     
     clearCredentials : function () {
       $rootScope.globals = {};
-      $cookieStore.remove('globals');
       $http.defaults.headers.common.Authorization = 'Basic ';
     },
     
-    getPullRequests : function (type, team, repo, callback) {
+    testCredentials : function (callback) {
+      $http({
+        method: 'GET',
+        url: 'https://stash.cdk.com/rest/api/1.0/profile/recent/repos'
+      }).then(function successCallback(response) {
+        callback && callback(true);
+      }, function errorCallback(response) {
+        callback && callback(false);
+      });
+    },
+    
+    getPullRequests : function (type, team, repo, callback, errorCallback) {
       $resource('https://stash.cdk.com/rest/api/1.0/:type/:team/repos/:repo/pull-requests').get({
         type: type,
         team: team,
@@ -39,6 +48,8 @@ angular.module('warRoom')
       }, function (res) {
         pullReq = res.values;
         callback && callback(pullReq);
+      }, function (err) {
+        errorCallback && errorCallback(err);
       });
     }
   }

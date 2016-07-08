@@ -3,6 +3,8 @@ angular.module('warRoom')
 .controller('stashWidgetController', ['$scope', 'stashApiService', 'widgetService', function ($scope, stashApiService, widgetService) {
   $scope.isLoggedIn = false;
   
+  $scope.loginFailed = false;
+  
   $scope.isShowingPullRequests = false;
   
   $scope.pullRequestsJson = null;
@@ -23,12 +25,28 @@ angular.module('warRoom')
   };
   
   $scope.login = function (username, password) {
+    console.log("Logging in " + username);
+    
+    $scope.setSubmitButtonLoading('#stash-widget-submit-login', true);
+    
     if (stashApiService.setCredentials(username, password)) {
-      if ($scope.saveLoginInformation.value && $scope.saveLoginInformation.value != '') {
-        widgetService.saveValue('StashWidget', 'username', username);
-        widgetService.saveValue('StashWidget', 'password', password);
-      }
-      $scope.isLoggedIn = true;
+      stashApiService.testCredentials(function (passed) {
+        console.log(passed);
+        $scope.setSubmitButtonLoading('#stash-widget-submit-login', false);
+        if (passed) {
+          if ($scope.saveLoginInformation.value) {
+            widgetService.saveValue('StashWidget', 'username', username);
+            widgetService.saveValue('StashWidget', 'password', password);
+          }
+          $scope.isShowingPullRequests = false;
+          $scope.isLoggedIn = true;
+          $scope.loginFailed = false;
+        } else {
+          $scope.loginFailed = true;
+          $scope.isLoggedIn = false;
+          $scope.isShowingPullRequests = false;
+        }
+      });
     } else {
       // handle fail
     }
@@ -38,16 +56,30 @@ angular.module('warRoom')
     stashApiService.clearCredentials();
     widgetService.saveValue('StashWidget', 'username', '');
     widgetService.saveValue('StashWidget', 'password', '');
+    $scope.isShowingPullRequests = false;
     $scope.isLoggedIn = false;
+    $scope.loginFailed = false;
   }
   
   $scope.updatePullRequestsJson = function (type, group, name) {
+    $scope.setSubmitButtonLoading('#stash-widget-submit-pr', true);
     return stashApiService.getPullRequests(type, group, name, function (data) {
       $scope.pullRequestsJson = data;
       $scope.isShowingPullRequests = true;
-      //$scope.$digest();
+    }, function (error) {
+      $scope.pullRequestsJson = {};
+      $scope.isShowingPullRequests = false;
+      $scope.setSubmitButtonLoading('#stash-widget-submit-pr', false);
     });
   };
+  
+  $scope.setSubmitButtonLoading = function (selector, loading) {
+    if (loading) {
+      $(selector).html('<i class=\'fa fa-refresh fa-refresh-animate\' aria-hidden=\'true\'></i> Submit');
+    } else {
+      $(selector).html('Submit');
+    }
+  }
   
   var loadedUsername = widgetService.loadValue('StashWidget', 'username');
   var loadedPassword = widgetService.loadValue('StashWidget', 'password');
