@@ -10,5 +10,13 @@ angular
         'widgets/stash-widget/widget.css'
       ],
       directive: 'stashWidget'
-    } */
+    }, */
+	{
+	  name: 'JackWidget',
+	  dependencies: [
+	    'widgets/redditwidget/redditcontroller.js',
+		'widgets/redditwidget/redditgetservice.js'
+	  ],
+	  directive: 'redditWidget'
+	}
   ]);

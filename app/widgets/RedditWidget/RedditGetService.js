@@ -7,9 +7,9 @@ angular.module("warRoom")
         retrievePostInformation: function(redditSearch) {
             var defer = $q.defer();
             return $http.get("http://www.reddit.com/r/" + redditSearch + "/top/.json?limit=3").then(function onSuccess(response) {
-                console.log('SUCCESS');
+                var s = capitalizeFirstLetter(redditSearch);
                 var tempTopic = {
-                    name: redditSearch,
+                    name: s,
                     posts: [{
                             title: response.data.data.children[0].data.title,
                             postUrl: response.data.data.children[0].data.url
@@ -25,13 +25,15 @@ angular.module("warRoom")
                     ]
                 };
                 defer.resolve(tempTopic);
-                console.log(defer)
                 return defer.promise;
             }, function onError(response) {
-                console.log('ERROR');
                 defer.reject(response);
                 return defer.promise;
             })
         }
     }
-}])
+}]);
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
