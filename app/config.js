@@ -12,7 +12,7 @@ angular
       directive: 'stashWidget'
     }, */
 	{
-	  name: 'JackWidget',
+	  name: 'RedditWidget',
 	  dependencies: [
 	    'widgets/redditwidget/redditcontroller.js',
 		'widgets/redditwidget/redditgetservice.js'
