@@ -12,4 +12,5 @@ angular.module('warRoom')
       $scope.removeWidget = function(widget) {
         widgetService.removeWidget(widget);
       }
+	  
     }]);

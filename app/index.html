@@ -2,6 +2,7 @@
 <html ng-app="warRoom">
 <head>
   <meta charset="UTF-8">
+ 
 
   <!-- DEPENDENCIES -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -27,6 +28,7 @@
   <script src="bower_components/jquery-ui/jquery-ui.js"></script>
   <script src="bower_components/lodash/dist/lodash.js"></script>
   <script src="bower_components/gridstack/dist/gridstack.js"></script>
+
   
   <!-- CUSTOM -->
   <script src="warroom-util.js"></script>
@@ -36,6 +38,7 @@
   <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
+  <script src="add2.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -58,6 +61,19 @@
             <div class="edit-button"><button>Edit</button></div>
             <div class="load-button" ng-click="loadWidgets()"><button>Load</button></div>
             <div class="save-button" ng-click="saveWidgets()"><button>Save</button></div>
+			<div class="d" id="tabt" name="tab">
+            <button class="btn add dropdown-toggle" type="button" data-toggle="dropdown">Add Widget
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li id="tabby"><a href="#" value="1">Weather</a></li>
+                <li id="tabby"><a href="#" value="2">Time</a></li>
+                <li id="tabby"><a href="#" value="3">Calendar</a></li>
+                <li id="tabby"><a href="#" value="4">Stash</a></li>
+                <li id="tabby"><a href="#" value="5">Reddit</a></li>
+            </ul>
+        </div>
+			</div>
+			
           </div>
         </div>
       </div>

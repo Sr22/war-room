@@ -25,3 +25,36 @@
 .meta {
   margin-right: 16px;
 }
+.remove {
+	margin-top:0px;
+	margin-right: 0px;
+	padding-top: 0px;
+	font-size: 18px;
+	float: right;
+	color: black;
+	border: none;
+	background: white;
+}
+
+.remove:hover {
+	color: lightgrey;
+}
+	
+.btn {
+	background:white;
+	
+}
+.add {
+	 margin-top: 17px;
+  margin-right: 0px;
+  padding-right: 6px;
+  padding-left: 6px;
+  float: right;
+}	
+.dropdown-menu {
+position: relative;
+float: right;
+}
+.tabby {
+	float: absolute;
+}

@@ -54,5 +54,8 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
     widgetCtrl.instantiateWidgetsFromCookie(gridstack, "grid")
   };
   
+  service.adding = function (widgetName) {
+	 widgetList[widgetList.length + 1] = (widgetName);
+  }
   return service;
 }]);
