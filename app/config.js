@@ -1,10 +1,14 @@
-
-
 angular
-  .module("warRoom")
-  .constant("widgetList", [
-    "widgets/example-widget.html",
-    "widgets/example2-widget.html",
-    ["widgets/my-widget.html", "widgets/my-widget.js"],
-    ["widgets/my-widget2.html", "widgets/my-widget2.js"]
+  .module('warRoom')
+  .constant('widgetList', [
+    /* {
+      name: 'StashWidget',
+      dependencies: [
+        'widgets/stash-widget/stash-api.js', 
+        'widgets/stash-widget/controller.js', 
+        'widgets/stash-widget/directive.js', 
+        'widgets/stash-widget/widget.css'
+      ],
+      directive: 'stashWidget'
+    } */
   ]);
