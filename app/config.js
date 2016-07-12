@@ -1,7 +1,7 @@
 angular
   .module('warRoom')
   .constant('widgetList', [
-    /* {
+    /*{
       name: 'StashWidget',
       dependencies: [
         'widgets/stash-widget/stash-api.js', 
@@ -10,7 +10,7 @@ angular
         'widgets/stash-widget/widget.css'
       ],
       directive: 'stashWidget'
-    }, */
+    },*/
 	{
 	  name: 'RedditWidget',
 	  dependencies: [

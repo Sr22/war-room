@@ -27,6 +27,28 @@ angular.module("warRoom")
             });
             $scope.search = '';
         };
+        $scope.removeSearch = function(search) {
+            console.log("Searches: " + searches);
+            for(var a = searches.length - 1; a >- 0; a--) {
+                if (searches[a] == search) {
+                    console.log("In the first if statement. Index: " + a);
+                    $scope.$evalAsync(function() {
+                        searches.splice(a, 1);
+                        console.log(searches);
+                        widgetService.saveValue('RedditWidget', 'searches', searches);
+                    });
+                }
+            }
+            /*for(var i = 0; i < $scope.topics.length; i++) {
+                if ($scope.topics[i].name == search) {
+                    $scope.$evalAsync(function() {
+                        $scope.topics.splice(i, 1);
+                        console.log($scope.topics);
+                    });
+                }
+            }
+            console.log("HERE");*/
+        }
     }]);
 
 angular.module("warRoom")
@@ -37,3 +59,7 @@ angular.module("warRoom")
         };
         return directive;
     });
+
+function lowerCaseFirst(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+}

@@ -37,6 +37,7 @@
                         <a data-toggle="collapse" data-parent="#accordion" href="#{{topic.name}}">
                             {{topic.name}}
                         </a>
+                        <button ng-click="removeSearch(topic.name)">X</button>
                     </h4>
                 </div>
                 <div id="{{topic.name}}" class="panel-collapse collapse out">
