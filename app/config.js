@@ -2,10 +2,11 @@ angular
   .module('warRoom')
   .constant('widgetList', [
 	{
-	  name: 'RedditWidget',
+	  name: 'reddit-widget',
 	  dependencies: [
-	    'widgets/redditwidget/redditcontroller.js',
-		'widgets/redditwidget/redditgetservice.js'
+		  'widgets/reddit-widget/reddit-service.js',
+	      'widgets/reddit-widget/reddit-controller.js',
+		  'widgets/reddit-widget/reddit-directive.js'
 	  ],
 	  directive: 'redditWidget'
 	}
