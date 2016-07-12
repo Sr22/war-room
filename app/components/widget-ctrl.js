@@ -15,7 +15,7 @@ var loadScriptCallback = function(src, callback) {
 }
 
 angular.module("warRoom")
-    .factory('widgetCtrl', ['$compile', function($compile) {
+    .service('widgetCtrl', ['$compile', function($compile) {
       var service = {
         widgetList: [],
         executedJavaScript: []

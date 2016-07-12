@@ -128,3 +128,7 @@
   margin-left: 8px;
   margin-right: 8px;
 }
+
+.white-link, .white-link:hover, .white-link:active, .white-link:visited, .white-link:focus {
+  color: white;
+}

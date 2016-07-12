@@ -1,6 +1,6 @@
 <div ng-controller="stashWidgetController" class="stash-widget-wrapper">
   <div class="stash-widget-header">
-    <h1 class="stash-widget-title">Open Pull Requests</h1><button ng-click="logout()" type="button" class="btn btn-secondary-outline stash-widget-logout-button">Log out</button>
+    <h1 class="stash-widget-title"><span>Stash Widget</span></h1><button ng-if="isLoggedIn" ng-click="logout()" type="button" class="btn btn-secondary-outline stash-widget-logout-button">Log out</button>
   </div>
   <div class="stash-widget-content">
     <div ng-if="isLoggedIn">
@@ -19,11 +19,21 @@
         </ul>
       </div>
       <div ng-if="!isShowingPullRequests">
-        <div>
-          <label class="stash-widget-label">Type</label><input class="form-control" ng-model="stashRepoType" type="text" />
-          <label class="stash-widget-label">Name</label><input class="form-control" ng-model="stashRepoName" type="text" />
-          <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" />
-          <button id="stash-widget-submit-pr" class="stash-widget-submit btn btn-primary" ng-click="updatePullRequestsJson(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
+        <div ng-if="isBrowserManual">
+          <div>
+            <label class="stash-widget-label">Type</label><input class="form-control" ng-model="stashRepoType" type="text" />
+            <label class="stash-widget-label">Name</label><input class="form-control" ng-model="stashRepoName" type="text" />
+            <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" />
+            <button id="stash-widget-submit-pr" class="stash-widget-submit btn btn-primary" ng-click="updatePullRequestsJson(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
+          </div>
+        </div>
+        <div ng-if="!isBrowserManual">
+          <span class="stash-widget-pr-list-header">Name</span><hr class="stash-widget-repo-header-hr">
+          <div ng-if="isShowingRecentRepositories">
+            <div class="stash-widget-repo-element" ng-repeat="el in recentRepositoriesJson">
+              <span class="stash-widget-repo-element-content">{{ el.project.name }} / <a ng-click="" href="javascript:;">{{ el.name }}</a></span><hr class="stash-widget-repo-hr">
+            </div>
+          </div>
         </div>
       </div>
     </div>

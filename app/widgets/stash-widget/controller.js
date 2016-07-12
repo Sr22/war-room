@@ -7,7 +7,13 @@ angular.module('warRoom')
   
   $scope.isShowingPullRequests = false;
   
-  $scope.pullRequestsJson = null;
+  $scope.pullRequestsJson = {};
+  
+  $scope.isShowingRecentRepositories = false;
+  
+  $scope.recentRepositoriesJson = {};
+  
+  $scope.isBrowserManual = false;
   
   $scope.saveLoginInformation = {
     value: false
@@ -25,13 +31,11 @@ angular.module('warRoom')
   };
   
   $scope.login = function (username, password) {
-    console.log("Logging in " + username);
-    
+    $scope.logout();    
     $scope.setSubmitButtonLoading('#stash-widget-submit-login', true);
     
     if (stashApiService.setCredentials(username, password)) {
       stashApiService.testCredentials(function (passed) {
-        console.log(passed);
         $scope.setSubmitButtonLoading('#stash-widget-submit-login', false);
         if (passed) {
           if ($scope.saveLoginInformation.value) {
@@ -39,12 +43,18 @@ angular.module('warRoom')
             widgetService.saveValue('StashWidget', 'password', password);
           }
           $scope.isShowingPullRequests = false;
+          $scope.isShowingRecentRepositories = false;
           $scope.isLoggedIn = true;
           $scope.loginFailed = false;
+          
+          if (!$scope.isBrowserManual) {
+            $scope.updateRecentRepositoriesJson();
+          }
         } else {
           $scope.loginFailed = true;
           $scope.isLoggedIn = false;
           $scope.isShowingPullRequests = false;
+          $scope.isShowingRecentRepositories = false;
         }
       });
     } else {
@@ -73,6 +83,16 @@ angular.module('warRoom')
     });
   };
   
+  $scope.updateRecentRepositoriesJson = function () {
+    return stashApiService.getRecentRepositories(function (data) {
+      $scope.recentRepositoriesJson = data;
+      $scope.isShowingRecentRepositories = true;
+    }, function (error) {
+      $scope.recentRepositoriesJson = {};
+      $scope.isShowingRecentRepositories = false;
+    });
+  }
+  
   $scope.setSubmitButtonLoading = function (selector, loading) {
     if (loading) {
       $(selector).html('<i class=\'fa fa-refresh fa-refresh-animate\' aria-hidden=\'true\'></i> Submit');
@@ -83,5 +103,5 @@ angular.module('warRoom')
   
   var loadedUsername = widgetService.loadValue('StashWidget', 'username');
   var loadedPassword = widgetService.loadValue('StashWidget', 'password');
-  if (loadedUsername && loadedPassword) $scope.login(loadedUsername, loadedPassword);
+  if (!!loadedUsername && !!loadedPassword) $scope.login(loadedUsername, loadedPassword);
 }]);
