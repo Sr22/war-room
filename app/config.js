@@ -16,7 +16,8 @@ angular
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
         'widgets/reddit-widget/reddit-controller.js',
-        'widgets/reddit-widget/reddit-directive.js'
+        'widgets/reddit-widget/reddit-directive.js',
+        'widgets/reddit-widget/reddit-style.css'
       ],
       directive: 'redditWidget'
     }
