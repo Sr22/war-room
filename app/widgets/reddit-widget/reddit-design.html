@@ -1,52 +1,15 @@
-<style>
-    grid-stack-item-content {
-        margin: 0px;
-    }
-
-    reddit-widget {
-        margin: 0px;
-        height: 100%;
-    }
-
-    div.main {
-        /* background-color: lightblue; */
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        height: 100%;
-    }
-    div.panel-group {
-        padding: 10px;
-        margin: 0 auto;
-    }
-</style>
-<div class="main">
-<center>
-
-        <h1>Reddit Widget</h1>
+<style> div.panel-group { padding: 10px;  margin: 0 auto; } </style>
+<div class="main"><center><h1>Reddit Widget</h1>
         <div class="form">
             <form name="searchForm" ng-submit="submit()">
                 <input type="text" ng-model="search" style="width:75%" placeholder="Search Reddit..." required>
-                <input type="submit" value="GO" style="width:15%" ng-disabled="searchForm.$invalid">
-            </form>
-        </div>
+                <input type="submit" value="GO" style="width:15%" ng-disabled="searchForm.$invalid"></form></div>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default" ng-repeat="topic in topics">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#{{topic.name}}">
-                            {{topic.name}}
-                        </a>
-                        <button ng-click="removeSearch(topic.name)">X</button>
-                    </h4>
-                </div>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#{{topic.name}}">{{topic.name}}</a>
+                        <button ng-click="removeSearch(topic.name)">X</button></h4></div>
                 <div id="{{topic.name}}" class="panel-collapse collapse out">
-                    <div class="panel-body">
-                        <div class="posts" ng-repeat="post in topic.posts">
-                            <h3><a href="{{post.postUrl}}">{{ post.title }}</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</center>    </div>
+                    <div class="panel-body"><div class="posts" ng-repeat="post in topic.posts">
+                            <h3><a href="{{post.postUrl}}">{{ post.title }}</a></h3></div></div></div></div></div></center></div>
