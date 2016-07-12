@@ -19,9 +19,7 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
     });
     
     // find scope
-    var scope = undefined;
-    scope = angular.element($("ww-widgets")).scope();
-
+    var scope = angular.element($("ww-widgets")).scope();
     widgetCtrl.addWidget(widget, scope, callback, gridstack, x, y, width, height, autoArrange)
   };
   
