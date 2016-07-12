@@ -32,3 +32,25 @@ function setCookie(cname, cvalue, exdays) {
     var expires = exdays ? (" expires="+ d.toUTCString()) : ("");
     document.cookie = cname + "=" + cvalue + ";" + expires;
 }
+
+if (!Array.prototype.last){
+  Array.prototype.last = function() {
+    return this[this.length - 1];
+  };
+}
+
+if (!Array.prototype.contains) {
+  Array.prototype.contains = function (elem) {
+    var len = this.length;
+    for (var i=0; i<len; ++i) {
+      if (this[i] === elem) {
+        return true;
+      }
+    }
+    return false;
+  };
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
