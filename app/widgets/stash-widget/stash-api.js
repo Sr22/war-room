@@ -1,7 +1,11 @@
 angular.module('warRoom')
 
-.service('stashApiService', ['$resource', '$http', '$cookieStore', '$rootScope', 'base64', function ($resource, $http, $cookieStore, $rootScope, base64) {
+.service('stashApiService', ['$resource', '$http', '$rootScope', 'base64', function ($resource, $http, $rootScope, base64) {
   return {
+    pullRequestsResource : $resource('https://stash.cdk.com/rest/api/1.0/:type/:team/repos/:repo/pull-requests'),
+    
+    recentRepositoriesResource : $resource('https://stash.cdk.com/rest/api/1.0/profile/recent/repos'),
+    
     setCredentials : function (username, password) {
       if (!username && !password) {
         this.clearCredentials();
@@ -19,7 +23,6 @@ angular.module('warRoom')
         };
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-        $cookieStore.put('globals', $rootScope.globals);
       }
       
       return true;
@@ -27,18 +30,38 @@ angular.module('warRoom')
     
     clearCredentials : function () {
       $rootScope.globals = {};
-      $cookieStore.remove('globals');
       $http.defaults.headers.common.Authorization = 'Basic ';
     },
     
-    getPullRequests : function (type, team, repo, callback) {
-      $resource('https://stash.cdk.com/rest/api/1.0/:type/:team/repos/:repo/pull-requests').get({
+    testCredentials : function (callback) {
+      $http({
+        method: 'GET',
+        url: 'https://stash.cdk.com/rest/api/1.0/profile/recent/repos'
+      }).then(function successCallback(response) {
+        callback && callback(true);
+      }, function errorCallback(response) {
+        callback && callback(false);
+      });
+    },
+    
+    getPullRequests : function (type, team, repo, callback, errorCallback) {
+      this.pullRequestsResource.get({
         type: type,
         team: team,
         repo: repo
-      }, function (res) {
-        pullReq = res.values;
-        callback && callback(pullReq);
+      }).$promise.then(function (res) {
+        callback && callback(res.values);
+      }, function (err) {
+        errorCallback && errorCallback(err);
+      });
+    },
+    
+    getRecentRepositories : function (callback, errorCallback) {
+      this.recentRepositoriesResource.get({
+      }).$promise.then(function (res) {
+        callback(res.values);
+      }, function (err) {
+        errorCallback(err);
       });
     }
   }
