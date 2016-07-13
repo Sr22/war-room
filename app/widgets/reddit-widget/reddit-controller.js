@@ -17,7 +17,7 @@ angular.module("warRoom")
                     widgetService.saveValue('reddit-widget', 'searches', searches);
                     $scope.topics.push(data);
                 });
-            }).catch(function(error) {console.error("ERROR " + error);});
+            }).catch(function(error) {console.error("ERROR " + JSON.stringify(error));});
             $scope.search = ''; };
         $scope.removeSearch = function(search) { for(var i = $scope.topics.length - 1; i >= 0; i--) {
                 if(search == $scope.topics[i].name) {
