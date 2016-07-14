@@ -12,12 +12,16 @@ angular.module("warRoom")
                 $scope.$evalAsync(function() {$scope.topics.push(data);});
             });
         }$scope.submit = function() {
-            RedditService.retrievePostInformation($scope.search).then(function(data) { $scope.$evalAsync(function() {
+            var search = $scope.search;
+            if (searches.indexOf(search) != -1) {
+                alert("That is already in your recent searches");
+            }
+            else { RedditService.retrievePostInformation(search).then(function(data) { $scope.$evalAsync(function() {
                     searches.push(data.name);
                     widgetService.saveValue('reddit-widget', 'searches', searches);
                     $scope.topics.push(data);
                 });
-            }).catch(function(error) {console.error("ERROR " + JSON.stringify(error));});
+            }).catch(function(error) {console.error("ERROR " + JSON.stringify(error));}); alert("Please search a real subreddit")}
             $scope.search = ''; };
         $scope.removeSearch = function(search) { for(var i = $scope.topics.length - 1; i >= 0; i--) {
                 if(search == $scope.topics[i].name) {
