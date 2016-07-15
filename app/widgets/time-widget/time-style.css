@@ -1,0 +1,25 @@
+#timeDisplay{
+    list-style-type:none;
+    cursor: pointer;
+}
+
+h3{
+    text-align: center;
+}
+
+#navbar{
+    background-color: #e3f2fd;
+}
+
+#predictions{
+    background-color: rgba(43, 159, 161, 0.09);
+    display:table-row;
+
+}
+#predictions:hover {
+    background-color: rgba(160, 154, 161, 0.76);
+}
+
+#results{
+    color: black;
+}

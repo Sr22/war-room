@@ -1,0 +1,46 @@
+
+<div class="container">
+    <nav id="navbar" class="navbar navbar-light">
+            <ul class="nav nav-pills">
+                <li><a  href="#add" data-toggle="pill"><p class="navbar-brand">Time </p>
+                    <form display="inline-block" autocomplete="off" class="form-inline pull-xs-right">
+                        <input class="form-control" type="text" placeholder="Add City..." id="term" ng-model="tw.cityInput">
+                        <button class="btn btn-success-outline" type="submit" id="search" ng-click="pressEnter()">Enter</button>
+                    </form>
+                </a></li>
+                <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}}</a></li>
+                <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}}</a></li>
+                <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}}</a></li>
+                <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}}</a></li>
+                <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}</a></li>
+            </ul>
+    </nav>
+
+</div>
+
+
+<div class="tab-content">
+    <div id="add" class="tab-pane fade in  active">
+        <ul id="timeDisplay">
+            <div id="predictions" ng-repeat="predictions in cityArr">
+                <a id="results" ng-click="placeClick(predictions.description, predictions.place_id)"> {{ predictions.description }}</a>
+            </div>
+        </ul>
+
+    </div>
+    <div id="city1" class="tab-pane fade">
+        <h3>{{ timeArr[0] }}</h3>
+    </div>
+    <div id="city2" class="tab-pane fade">
+        <h3>{{ timeArr[1] }}</h3>
+    </div>
+    <div id="city3" class="tab-pane fade">
+        <h3>{{ timeArr[2] }}</h3>
+    </div>
+    <div id="city4" class="tab-pane fade">
+        <h3>{{ timeArr[3] }}</h3>
+    </div>
+    <div id="city5" class="tab-pane fade">
+        <h3>{{ timeArr[4] }}</h3>
+    </div>
+</div>
