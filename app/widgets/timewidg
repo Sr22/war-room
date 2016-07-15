@@ -1,5 +1,0 @@
-angular.module("warRoom").directive("timeWidget", function(){
-    return {
-      templateUrl: "widgets/international-time-widget.html"
-    };
-});
