@@ -1,22 +1,28 @@
-
 <div class="container">
     <nav id="navbar" class="navbar navbar-light">
-            <ul class="nav nav-pills">
-                <li><a  href="#add" data-toggle="pill"><p class="navbar-brand">Time </p>
-                    <form display="inline-block" autocomplete="off" class="form-inline pull-xs-right">
-                        <input class="form-control" type="text" placeholder="Add City..." id="term" ng-model="tw.cityInput">
-                        <button class="btn btn-success-outline" type="submit" id="search" ng-click="pressEnter()">Enter</button>
-                    </form>
-                </a></li>
-                <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}}</a></li>
-                <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}}</a></li>
-                <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}}</a></li>
-                <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}}</a></li>
-                <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}</a></li>
-            </ul>
+        <ul class="nav nav-pills">
+            <li><a  href="#add" data-toggle="pill"><p class="navbar-brand">Time </p>
+                <form display="inline-block" autocomplete="off" class="form-inline pull-xs-right">
+                    <input class="form-control" type="text" placeholder="Add City..." id="term" ng-model="tw.cityInput">
+                    <button class="btn btn-success-outline" type="submit" id="search" ng-click="pressEnter()">Enter</button>
+                </form>
+            </a></li>
+            <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}}</a></li>
+            <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}}</a></li>
+            <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}}</a></li>
+            <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}}</a></li>
+            <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}</a></li>
+        </ul>
     </nav>
 
 </div>
+
+<!--<div class="alert alert-danger alert-dismissible fade in" role="alert">-->
+    <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+        <!--<span aria-hidden="true">&times;</span>-->
+    <!--</button>-->
+    <!--<strong>You've reached the tab limit</strong>-->
+<!--</div>-->
 
 
 <div class="tab-content">

@@ -2,13 +2,13 @@ angular.module('warRoom')
 
     .controller('timeWidgetController',['$scope', 'googlemapsApiService', 'timezoneApiService', 'widgetService', function($scope, googlemapsApiService, timezoneApiService, widgetService) {
         var vm = this;
-        vm.time='';
-        vm.cityInput='';
-        $scope.lat='';
-        $scope.longit='';
-        $scope.numInList=0;
-        $scope.onlyCity='';
-        $scope.tf1 = true;
+        vm.time='';//the city's time in the array that is eventually pushed to the time array
+        vm.cityInput='';//the value of what the user types
+        $scope.lat='';//self-explanatory
+        $scope.longit='';//see above
+        $scope.numInList=0; //autocomplete list length
+        $scope.onlyCity=''; //the only city name in the autocomplete list when enter button is pressed
+        $scope.tf1 = true; //whether the tab is hidden or not
         $scope.tf2 = true;
         $scope.tf3 = true;
         $scope.tf4 = true;
@@ -19,9 +19,9 @@ angular.module('warRoom')
         $scope.timeArr = [];
         $scope.cityArr = [];
         $scope.indexInTab=0;
-        $scope.deltaTime = [];
+        $scope.deltaTime = []; // difference between local time and given city's time
         var date;
-        var secsUntil;
+        var secsUntil; //seconds until next change in minute
 
         $scope.$watch('tw.cityInput', function(newVal, oldVal) {
             googlemapsApiService.autoComplete(newVal, function (cityList) {
@@ -42,7 +42,7 @@ angular.module('warRoom')
             var date= new Date(timeInMillis);
             var hours= date.getHours()-5;
             var min= date.getMinutes();
-            var am=false;
+            var am = false;
             if (hours == 0) {
                 hours += 12;
             } else if (hours < 0) {
@@ -70,27 +70,28 @@ angular.module('warRoom')
             return timeDisplay;
         }
 
-        $scope.nextTab = function(){
-            if($scope.tf1 == false){
-                if($scope.tf2 == true){
+        $scope.nextTab = function() {
+
+            if($scope.tf1 == false) {
+                if($scope.tf2 == true) {
                     $scope.tf2 = false;
                     $scope.placeInTab=2
-                } else{
-                    if($scope.tf3 == true){
+                } else {
+                    if($scope.tf3 == true) {
                         $scope.tf3 = false;
                         $scope.placeInTab=3
-                    } else{
-                        if($scope.tf4 == true){
+                    } else {
+                        if($scope.tf4 == true) {
                             $scope.tf4 = false;
                             $scope.placeInTab=4
-                        } else{
+                        } else {
                             if($scope.tf5 == true) {
                                 $scope.tf5 = false;
                                 $scope.placeInTab=5
 
-                            } else{
-                                alert("You've reached the tab limit")
-                            }
+                            } else {
+                               alert("Tab Limit")
+                            };
                         }
                     }
                 }
@@ -100,12 +101,17 @@ angular.module('warRoom')
             $scope.tabName()
         }
 
-        $scope.tabName = function (){
-            $scope.tabNames.push($scope.officialName);
+        $scope.tabName = function () {
+            if ($scope.tabNames.length < 5) {
+                $scope.tabNames.push($scope.officialName);
+            }
         }
 
-        $scope.pushTimeArr = function(){
-            $scope.timeArr.push($scope.time)
+        $scope.pushTimeArr = function() {
+
+            if ($scope.tabNames.length <= 5) {
+                $scope.timeArr.push($scope.time);
+            }
         }
 
         $scope.pressEnter= function() {
@@ -113,7 +119,7 @@ angular.module('warRoom')
                 alert("Please enter something");
             } else if(($scope.tabNames.indexOf(cityList[0].description))!=-1) {
                 alert("This city already exists in your tabs. Try another city!")
-            } else{
+            } else {
                 if($scope.numInList === 1) {
                     $scope.officialName = cityList[0].description;
                     $scope.onlyCity = cityList[0].place_id;
@@ -129,6 +135,7 @@ angular.module('warRoom')
                             updateTime();
                             $scope.pushTimeArr();
                             refreshArray();
+
                         });
                     });
 
@@ -143,6 +150,7 @@ angular.module('warRoom')
         $scope.placeClick= function(name, placeId) {
             $scope.officialName = name;
             if (($scope.tabNames.indexOf(name)) != -1) {
+
                 alert("This city already exists in your tabs. Try another city!")
             } else {
                 $scope.nextTab();
@@ -154,7 +162,6 @@ angular.module('warRoom')
                     timezoneApiService.getTime(lat, longit, function (timestamp) {
                         $scope.deltaTime[$scope.placeInTab-1] = (timestamp * 1000) - Date.now();
                         $scope.indexInTab = $scope.tabNames.indexOf(name);
-                        updateTime();
                         $scope.pushTimeArr();
                         refreshArray();
                     });
@@ -162,30 +169,19 @@ angular.module('warRoom')
             }
         }
 
-        var setTime = function(){
-
+        var refreshArray = function() {
+            updateTimeArray();
         }
 
-        var updateTime = function() {
-            date=new Date();
-            secsUntil = 60-date.getSeconds();
-            setTimeout(function() {$scope.$apply(function(){refreshArray()})}, (secsUntil*1000+1000));
-            var currentTime = $scope.deltaTime[$scope.placeInTab-1] + Date.now();
-            $scope.time = timeToString(currentTime);
-        }
-
-        var refreshArray = function(){
-            for(var j=0;j<$scope.timeArr.length; j++){
-                updateTimeArray(j);
-            }
-        }
-
-        var updateTimeArray = function(j){
+        var updateTimeArray = function() {
             date = new Date();
             secsUntil = 60-date.getSeconds();
-            var currentTime = $scope.deltaTime[j] + Date.now();
-            $scope.timeArr[j] = timeToString(currentTime);
-            setTimeout(function() {$scope.$apply(function(){refreshArray()})}, (secsUntil*1000+1000));
+            for(var j=0;j<$scope.timeArr.length; j++) {
+                var currentTime = $scope.deltaTime[j] + Date.now();
+                $scope.timeArr[j] = timeToString(currentTime);
+            }
+            setTimeout(function() {$scope.$apply(function(){refreshArray()})}, (secsUntil*1000+10));
         }
 
+        updateTimeArray();
     }]);
