@@ -9,8 +9,17 @@
   margin: 8px;
 }
 
-.edit-button, .save-button, .load-button {
-  margin-top: 17px;
+.save-button, .load-button {
+  margin-top: 12px;
+  margin-right: 0px;
+  padding-right: 6px;
+  padding-left: 6px;
+  float: right;
+  text-decoration: none;
+}
+
+.edit-button {
+  margin-top: 12px;
   margin-right: 0px;
   padding-right: 6px;
   padding-left: 6px;
@@ -24,4 +33,18 @@
 
 .meta {
   margin-right: 16px;
+}
+
+.header-title {
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
+}
+
+.grid-stack-item, .grid-stack-item-content {
+  padding: 0px;
+}
+
+.grid-stack-item-content {
+  border-radius: 5px;
 }
