@@ -2,10 +2,12 @@
 <html ng-app="warRoom">
 <head>
   <meta charset="UTF-8">
- 
 
   <!-- DEPENDENCIES -->
+  <!--<link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
+  <link rel="stylesheet" href="bower_components/tether/dist/css/tether-theme-basic.min.css">-->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap-toggle/css/bootstrap2-toggle.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="bower_components/rdash-ui/dist/css/rdash.min.css">
   <link rel="stylesheet" href="bower_components/gridstack/dist/gridstack.css">
@@ -19,16 +21,16 @@
   <!-- DEPENDENCIES -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <!--<script src="bower_components/tether/dist/js/tether.min.js"></script>-->
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/bootstrap-toggle/js/bootstrap2-toggle.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/lodash/dist/lodash.js"></script>
   <script src="bower_components/gridstack/dist/gridstack.js"></script>
-
   
   <!-- CUSTOM -->
   <script src="warroom-util.js"></script>
@@ -38,7 +40,6 @@
   <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
-  <script src="add2.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -52,10 +53,7 @@
           <div class="meta">
             <div class="header-container">
               <div class="page">
-                War Room
-              </div>
-              <div class="breadcrumb-links">
-                For your utility.
+                <h1 class="header-title">War Room</h1>
               </div>
             </div>
             <div class="edit-button"><button>Edit</button></div>
@@ -73,7 +71,7 @@
             </ul>
         </div>
 			</div>
-			
+
           </div>
         </div>
       </div>

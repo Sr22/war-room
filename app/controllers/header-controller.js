@@ -12,5 +12,10 @@ angular.module('warRoom')
       $scope.removeWidget = function(widget) {
         widgetService.removeWidget(widget);
       }
-	  
+      
+      $scope.gridstackEnabled = false;
+      $scope.toggleEnable = function() {
+        $scope.gridstackEnabled = !$scope.gridstackEnabled;
+        widgetService.setWidgetsEnabled($scope.gridstackEnabled);
+      }
     }]);

@@ -25,36 +25,17 @@
 .meta {
   margin-right: 16px;
 }
-.remove {
-	margin-top:0px;
-	margin-right: 0px;
-	padding-top: 0px;
-	font-size: 18px;
-	float: right;
-	color: black;
-	border: none;
-	background: white;
+
+.header-title {
+  margin: 0px;
+  padding: 0px;
+  font-size: 40px;
 }
 
-.remove:hover {
-	color: lightgrey;
+.grid-stack-item, .grid-stack-item-content {
+  padding: 0px;
 }
-	
-.btn {
-	background:white;
-	
-}
-.add {
-	 margin-top: 17px;
-  margin-right: 0px;
-  padding-right: 6px;
-  padding-left: 6px;
-  float: right;
-}	
-.dropdown-menu {
-position: relative;
-float: right;
-}
-.tabby {
-	float: absolute;
+
+.grid-stack-item-content {
+  border-radius: 5px;
 }
