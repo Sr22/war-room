@@ -1,15 +1,33 @@
-<div class="main"><center><img class="header" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Reddit_logo.svg/1280px-Reddit_logo.svg.png"/>
-        <img class="icon" src="http://freevector.co/wp-content/uploads/2012/06/reddit-2.png"/>
+<div class="main">
+    <center><img class="header" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Reddit_logo.svg/1280px-Reddit_logo.svg.png" />
+        <img class="icon" src="http://freevector.co/wp-content/uploads/2012/06/reddit-2.png" />
         <div class="form">
             <form name="searchForm" ng-submit="submit()">
                 <input class="searchbar" type="text" ng-model="search" style="width:75%" placeholder="Search Reddit..." required>
-                <input class="gobutton" type="submit" value="GO" style="width:15%" ng-disabled="searchForm.$invalid"></form></div>
+                <input class="gobutton" type="submit" value="GO" style="width:15%" ng-disabled="searchForm.$invalid">
+            </form>
+        </div>
+        <div id="searchError"></div>
+        <div id="duplicateError"></div>
         <div class="panel-group" id="accordion">
             <div class="panel panel-default" ng-repeat="topic in topics">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a class="titles" data-toggle="collapse" data-parent="#accordion" href="#{{topic.name}}">r/{{topic.name}}</a>
-                        <button class="xbutton" ng-click="removeSearch(topic.name)">X</button></h4></div>
+                        <button class="xbutton" ng-click="removeSearch(topic.name)">X</button></h4>
+                </div>
                 <div id="{{topic.name}}" class="panel-collapse collapse out">
-                    <div class="panel-body"><div class="posts" ng-repeat="post in topic.posts">
-                            <p><a class="posts" href="{{post.postUrl}}">{{ post.title }}</a></p></div></div></div></div></div></center></div>
+                    <div class="panel-body">
+                        <div class="posts" ng-repeat="post in topic.posts">
+                            <p class="post"><a class="posts" href="{{post.postUrl}}">{{ post.title }}</a>
+                            </p>
+                            <hr>
+                        </div>
+                        <button class="redirect" ng-click="redirectToSite(topic.name)"><b>See More</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+</div>

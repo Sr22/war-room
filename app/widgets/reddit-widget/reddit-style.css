@@ -1,8 +1,48 @@
-div.panel-group { padding: 10px;  margin: 0 auto;}
-button.xbutton {  padding: 0; margin: 0 auto; border: none; background-color: transparent; color: lightgrey; float: right;}
-input.gobutton {  height: 25px; border: none; background-color: orangered; color: white;}
-img.header { height: 80px; width: 216px; padding: 15px 0px 15px 15px;}
-img.icon { height: 80px; width: 96px; padding: 15px 15px 15px 10px;}
-input.searchbar { height: 25px; }
-a.titles { color: orangered; }
-a.posts { color: black; }
+div.panel-group {
+    padding: 10px;
+    margin: 0 auto;
+}
+button.xbutton {
+    padding: 5px 0 0 0;
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
+    color: lightgrey;
+    float: right;
+}
+input.gobutton {
+    height: 25px;
+    border: none;
+    background-color: orangered;
+    color: white;
+}
+img.header {
+    height: 80px;
+    width: 180px;
+    padding: 15px 0px 15px 15px;
+}
+img.icon {
+    height: 80px;
+    width: 90px;
+    padding: 15px 15px 15px 10px;
+}
+input.searchbar {
+    height: 25px;
+}
+a.titles {
+    color: orangered;
+    font-size: 25px;
+}
+a.posts {
+    color: black;
+}
+p.post {
+    font-size: 17px;
+}
+button.redirect {
+    border: none;
+    background-color: transparent;
+    height: 25px;
+    font-size: 18px;
+    color: orangered;
+}
