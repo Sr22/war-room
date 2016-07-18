@@ -6,9 +6,8 @@ angular.module("warRoom")
     return {
         retrievePostInformation: function(redditSearch) {
             var defer = $q.defer();
-            return $http.get("http://www.reddit.com/r/" + redditSearch + "/top/.json?limit=3").then(function onSuccess(response) {
-                var a = redditSearch.toLowerCase();
-                var s = capitalizeFirstLetter(a);
+            return $http.get("https://www.reddit.com/r/" + redditSearch + "/top/.json?limit=3").then(function onSuccess(response) {
+                var s = redditSearch.toLowerCase();
                 if (response.data.data.children[1] == null) { var tempTopic = {
                         name: s,
                         posts: [{ title: response.data.data.children[0].data.title, postUrl: response.data.data.children[0].data.url}]};
