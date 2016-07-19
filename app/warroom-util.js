@@ -1,6 +1,6 @@
 function camelToDash(str) {
   return str.replace(/\W+/g, '-')
-      .replace(/([a-z\d])([A-Z])/g, '$1-$2');
+      .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
 function dashToCamel(str) {
@@ -33,7 +33,7 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires;
 }
 
-if (!Array.prototype.last){
+if (!Array.prototype.last) {
   Array.prototype.last = function() {
     return this[this.length - 1];
   };
@@ -53,4 +53,14 @@ if (!Array.prototype.contains) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function randomString(num) {
+    var text = "";
+    var possible = "abcdefghijklmnopqrstuvwxyz";
+
+    for( var i=0; i < num; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }
