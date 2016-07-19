@@ -1,0 +1,32 @@
+<style>
+	#forecast {
+				color: black;
+				
+				<!-- background: url("http://widewallpaper.info/wp-content/uploads/2016/02/Green-Wallpapers-23.jpg"); -->
+				<!-- no-repeat center center fixed;  
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				height : 100%;	 -->
+				 position: absolute;
+				 top: 0; left: 0;
+				 width: 100%; height: 100%;
+				 text-allign:center;
+				 font-family: cursive;
+
+			}
+</style>
+<center> 
+<script src="widgets/weather-widget/weather-widget.js"></script> 
+
+<form id="forecast">
+	<h1>Weather</h1>
+		<input type="text"  id="weather-search"  placeholder="What zip code?"></input>
+			<button id="button1" class="btn btn-small btn-primary" ng-keypress="vm.keypressDown($event)" ng-click="vm.find()"> Enter </button>
+			<p><i class="fa fa-globe"></i>   Weather in: <span  id="loc" > </span></p>
+			<p>It is currently <span id="temp"> </span> °F and <span id="desc"> </span></p>
+			<p><i class="fa fa-flag-o"></i>  Wind: <span id="wind"></span></p>
+</center>
+
+</form>
+<!-- onclick="" -->
