@@ -1,10 +1,6 @@
 angular.module("warRoom")
-    .controller("meganController",   ['$scope', 'widgetService', 'WidgetCtrl', function ($scope, widgetCtrl, widgetService) {
-		
-      $scope.addWidget = function(widget) {
-        widgetService.addWidget(widget);
-      }
-	  
+    .controller("meganController",   ['$scope', 'WidgetCtrl', function ($scope, widgetCtrl) {
+
     }]);
 	
 angular.module("warRoom")
