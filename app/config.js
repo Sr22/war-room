@@ -35,9 +35,9 @@ angular
 	{
 		name: 'WeatherWidget',
 		dependencies: [
-		'widgets/weather-widget/weather-widget-controller.js',
+		/* 'widgets/weather-widget/weather-widget-controller.js', */
 		'widgets/weather-widget/weather-widget.js',
-		'widgets/weather-widget/weather-widget.css'
+		/* 'widgets/weather-widget/weather-widget.css' */
 		],
 		directive: 'weatherWidget'
 	}
