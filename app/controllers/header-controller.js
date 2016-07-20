@@ -17,5 +17,21 @@ angular.module('warRoom')
       $scope.toggleEnable = function() {
         $scope.gridstackEnabled = !$scope.gridstackEnabled;
         widgetService.setWidgetsEnabled($scope.gridstackEnabled);
-      }
+      };
+        $scope.bookmarks = [{
+                name: 'Stash',
+                url: 'http://stash.cdk.com/projects'
+            },
+            {
+                name: 'Jira',
+                url: 'https://jira.cdk.com'
+            },
+            {
+                name: 'Confluence',
+                url: 'https://confluence.cdk.com'
+            }
+        ];
+        $scope.addBookmark = function() {
+
+        }
     }]);

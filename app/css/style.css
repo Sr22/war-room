@@ -48,3 +48,13 @@
 .grid-stack-item-content {
   border-radius: 5px;
 }
+
+.bookmarks-bar li {
+  display:inline;
+  padding: 25px;
+}
+
+.bookmarks-bar {
+  margin-top: -35px;
+  margin-left: 200px;
+}
