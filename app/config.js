@@ -36,16 +36,7 @@ angular
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    },
-
-    {
-      name: 'MeganWidget',
-      dependencies: [
-          'widgets/meganwidget.js'
-      ],
-      directive: 'meganWidget'
     }
-
   ]);
 
 angular.module('warRoom')
