@@ -52,3 +52,17 @@
 .dropdown-menu {
   left: 80%;
 }
+
+.remove {
+  background: none;
+  float: right;
+  font-size: 17px;
+}
+.remove:hover {
+  color: salmon;
+}
+
+.removestash {
+  padding-top: 0px;
+  padding-right: 0px;
+}
