@@ -2,7 +2,7 @@
   <div class="stash-widget-header">
     <h1 class="stash-widget-title"><span ng-repeat="t in pageStack | limitTo: (pageStack.length-1)"><a ng-click="showPageByName(pageStackInternal[$index])" href="#" class="white-link">{{ t }}</a> <i style="margin-left: 3px; margin-right: 3px;" class="fa fa-caret-right" aria-hidden="true"></i>
  </span><span><a ng-click="showPageByName(pageStackInternal[pageStackInternal.length-1])" href="#" class="white-link">{{pageStack[pageStack.length-1]}}</a></span></h1><button ng-if="page != 'login'" ng-click="showLogout()" type="button" class="btn btn-secondary-outline stash-widget-logout-button">Log out</button>
-    <div ng-controller="headerController"><button class="btn remove removestash" ng-click="removeWidget('StashWidget')">x</button></div>
+
   </div>
   <div class="stash-widget-content">
     <div ng-switch on="page">
