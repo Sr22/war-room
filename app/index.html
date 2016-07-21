@@ -56,7 +56,7 @@
                 <h1 class="header-title">War Room</h1>
                   <ul class="bookmarks-bar">
                     <li ng-repeat="bookmark in bookmarks"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></li>
-                    <li><button ng-click="addBookmark()">Add Link</button></li>
+                    <li><button class="btn btn-primary" ng-click="addBookmark()">Add Link</button></li>
                   </ul>
               </div>
             </div>
@@ -67,13 +67,12 @@
             <button class="btn add btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li id="tabby"><a href="#" value="1" ng-click="addWeather()">Weather</a></li>
-              <li id="tabby"><a href="#" value="2" ng-click="addTime()">Time</a></li>
-              <li id="tabby"><a href="#" value="3" ng-click="addCalendar()">Calendar</a></li>
-              <li id="tabby"><a href="#" value="4" ng-click="addStash()">Stash</a></li>
-              <li id="tabby"><a href="#" value="5" ng-click="addReddit()">Reddit</a></li>
-              <li id="tabby"><a href="#" value="6" ng-click="addNotify()">Notifications</a><li>
-              <li id="tabby"><a href="#" value="7" ng-click="addBoi()">dat boi</a></li>
+              <li><a href="#" value="1" ng-click="addWeather()">Weather</a></li>
+              <li><a href="#" value="2" ng-click="addTime()">Time</a></li>
+              <li><a href="#" value="3" ng-click="addCalendar()">Calendar</a></li>
+              <li><a href="#" value="4" ng-click="addStash()">Stash</a></li>
+              <li><a href="#" value="5" ng-click="addReddit()">Reddit</a></li>
+              <li><a href="#" value="6" ng-click="addNotify()">Notifications</a><li>
             </ul>
         </div>
 			</div>

@@ -38,7 +38,12 @@ angular.module('warRoom')
         $scope.addBookmark = function() {
             var linkUrl = window.prompt("Url of Link (Copy and Paste from Website): ", " ");
             var linkName = window.prompt("Name of Link: ", " ");
+            console.log(linkUrl);
+            console.log(linkName);
             if (linkUrl == " " || linkName == " ") {
+                alert("Please fill all input fields");
+            }
+            else if (linkUrl == null || linkName == null) {
                 alert("Please fill all input fields");
             }
             else {

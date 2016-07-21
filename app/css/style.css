@@ -51,11 +51,11 @@
 
 .bookmarks-bar li {
   display:inline;
-  padding: 25px;
+  padding: 17px;
 }
 
 .bookmarks-bar {
-  margin-top: -35px;
+  margin-top: -42px;
   margin-left: 200px;
 }
 .dropdown-menu {
