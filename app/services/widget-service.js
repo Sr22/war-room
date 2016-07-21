@@ -1,12 +1,12 @@
 
-angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', function (widgetCtrl, widgetList) {
+angular.module('warRoom').service('widgetService', ['$injector', 'widgetList', function ($injector, widgetList) {
   var service = {
     executedFiles : []
   };
   
   service.addWidget = function (widget, callback) {    
     // find scope
-    var scope = angular.element($("ww-widgets")).scope();
+    var scope = angular.element($('ww-widgets')).scope();
     var loadScriptCallback = function(src, cb) {
       return (function (src, cb) {
         $.ajax({
@@ -21,7 +21,7 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
         });
       })(src, cb);
     };
-    widget.content.dependencies.filter(function (elem) { return elem.endsWith(".css") && !service.executedFiles.contains(elem); })
+    widget.content.dependencies.filter(function (elem) { return elem.endsWith('.css') && !service.executedFiles.contains(elem); })
       .forEach(function (elem) {
         service.executedFiles.push(elem);
         var link = document.createElement('link');
@@ -30,7 +30,7 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
         link.setAttribute('href', elem);
         document.getElementsByTagName('head')[0].appendChild(link);
       });
-    var jsFiles = widget.content.dependencies.filter(function (elem) { return elem.endsWith(".js") && !service.executedFiles.contains(elem); });
+    var jsFiles = widget.content.dependencies.filter(function (elem) { return elem.endsWith('.js') && !service.executedFiles.contains(elem); });
     if (jsFiles.length > 0) {
       var len = jsFiles.length;
       jsFiles.forEach(function (elem) {
@@ -51,63 +51,70 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
   };
   
   service.removeWidget = function (id) {
-    if (widgetList.length == 0) return;
-
-    // find widget
-    var widget = undefined;
-    widgetList.forEach(function (el) {
-      if (el.name) {
-        if (el.name == widgetName) {
-          widget = el;
-        } else {
-        }
-      } else {
-        throw ("Invalid widget: " + el);
-      }
-    });
-    
-    // find element
     service.scope().widgets = service.scope().widgets.filter(function (el) {
-      return el.id === id;
+      return !(el.identifier === id);
     });
   };
+  
+  service.removeAllWidgets = function () {
+    service.scope().widgets = [];
+  };
+  
+  service.getWidgetId = function (elem) {
+    return elem.closest('.grid-stack-item').data('widget').identifier;
+  }
   
   service.commit = function () {
     service.scope().updateWidgets();
   };
   
   service.scope = function () {
-    return angular.element($("ww-widgets")).scope();
+    return angular.element($('ww-widgets')).scope();
   };
   
   service.saveWidgets = function () {
-    service.gridster().container.children('.grid-stack-item').each(function (index, el) {
-        el = $(el);
-        
-        var saveObject = undefined;
-        var serialize = el.attr('widget').serialize.split('.');
-        if (serialize) angular.injector().invoke([serialize[0], function (s) {
-          saveObject = s[serialize[1]](angular.element(el).scope());
-        }]);
-        
-        widgets.push({
-          content: el.data('widget'), 
-          x: el.attr('data-gs-x'),
-          y: el.attr('data-gs-y'),
-          width: el.attr('data-gs-width'),
-          height: el.attr('data-gs-height'),
-          save: saveObject
-        });
+    var widgets = [];
+    service.gridstack().container.children('.grid-stack-item').each(function (index, el) {
+      el = $(el);
+      
+      var saveObject = {};
+      if (el.data('widget') && el.data('widget').content) {
+        var serialize = el.data('widget').content.serialize;
+        if (serialize) {
+          var serializeSplit = serialize.split('.');
+          $injector.invoke([serializeSplit[0], function (s) {
+            saveObject = s[serializeSplit[1]](angular.element(el).scope());
+          }]);
+        }
+      }
+      
+      widgets.push({
+        content: el.data('widget'), 
+        x: el.attr('data-gs-x'),
+        y: el.attr('data-gs-y'),
+        width: el.attr('data-gs-width'),
+        height: el.attr('data-gs-height'),
+        save: saveObject
       });
-    var toSave = {"widgets": widgets};
-    setCookie("grid", toSave);
+    });
+    var toSave = {'widgets': widgets};
+    setCookie('grid', JSON.stringify(toSave));
   };
   
   service.loadWidgets = function () {
-    var cookie = getCookie('key');
+    var cookie = getCookie('grid');
     if (cookie) {
       object = JSON.parse(cookie);
-      object.forEach(function (el) {
+      object.widgets.map(function (el) {
+        var content = el.content;
+        content.x = el.x;
+        content.y = el.y;
+        content.width = el.width;
+        content.height = el.height;
+        content.save = el.save;
+        content.auto = false;
+        return content;
+      }).forEach(function (el) {
         service.addWidget(el);
       });
     }
@@ -118,16 +125,16 @@ angular.module('warRoom').service('widgetService', ['widgetCtrl', 'widgetList', 
   };
   
   service.saveValue = function (widgetName, key, value) {
-    var currentValue = getCookie("widget_"+widgetName);
-    if (!currentValue) currentValue = "{}";
+    var currentValue = getCookie('widget_'+widgetName);
+    if (!currentValue) currentValue = '{}';
     var currentObject = JSON.parse(currentValue);
     currentObject.key = value;
-    setCookie("widget_"+widgetName, JSON.stringify(currentObject));
+    setCookie('widget_'+widgetName, JSON.stringify(currentObject));
   };
   
   service.loadValue = function (widgetName, key) {
-    var currentValue = getCookie("widget_"+widgetName);
-    if (!currentValue) currentValue = "{}";
+    var currentValue = getCookie('widget_'+widgetName);
+    if (!currentValue) currentValue = '{}';
     var currentObject = JSON.parse(currentValue);
     return currentObject.key;
   };

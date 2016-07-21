@@ -1,12 +1,13 @@
 angular.module('warRoom')
-    .controller('headerController', ['$scope', 'widgetCtrl', 'widgetService', function ($scope, widgetCtrl, widgetService) {
+    .controller('headerController', ['$scope', 'widgetService', function ($scope, widgetService) {
       $scope.saveWidgets = function() {
-        widgetCtrl.saveWidgetsToCookie(gridstack, 'grid');
+        widgetService.saveWidgets();
       };
       
       $scope.loadWidgets = function() {
-        widgetCtrl.removeAllWidgets(gridstack);
-        widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid');
+        widgetService.removeAllWidgets();
+        widgetService.loadWidgets();
+        widgetService.commit();
       }
       
       $scope.removeWidget = function(widget) {

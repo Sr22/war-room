@@ -1,14 +1,12 @@
 angular.module('warRoom')
 
-.service(function () {
+.service('stashWidgetService', function () {
   return {
     initialize : function ($scope, obj) {
-      console.log('Loaded stash-widget.');
     },
     
     serialize : function ($scope) {
-      console.log('Saved stash-widget.');
       return {};
     }
-  }
+  };
 });

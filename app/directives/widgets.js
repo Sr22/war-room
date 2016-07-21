@@ -2,7 +2,7 @@
 angular
   .module('warRoom')
   
-  .controller('wwWidgetsController', ['$scope', '$sce', '$compile', 'widgetList', 'widgetService', function ($scope, $sce, $compile, widgetList, widgetService) {
+  .controller('wwWidgetsController', ['$scope', '$sce', '$compile', 'widgetList', 'widgetService', '$injector', function ($scope, $sce, $compile, widgetList, widgetService, $injector) {
     $scope.gridstack = $('.grid-stack').gridstack({
       virtualMargin: 4,
       float: false,
@@ -14,7 +14,7 @@ angular
       disableResize: true }).data('gridstack');
 
     $scope.widgets = [];
-
+    
     $scope.updateWidgets = function () {
       $scope.gridstack.removeAll(true);
       $('#widgets').html('');
@@ -27,10 +27,13 @@ angular
         localScope.identifier = el[2].identifier;
         $scope.gridstack.addWidget(el[0], el[2].x || 0, el[2].y || 0, el[2].width || 4, el[2].height || 0, el[2].auto === undefined ? true : el[2].auto);
         $('#widgets').append(el[0]);
-        if (el[2].initialize) angular.injector().invoke([el[2].initialize.split('.')[0], function (s) {
-          console.log("calling " + el[2].initialize.split('.')[0]);
-          s[el[2].initialize.split('.')[1]](localScope, el[0].save);
-        }]);
+        if (el[2].content.initialize) {
+          var initializeFunction = el[2].content.initialize.split('.');
+          $injector.invoke([initializeFunction[0], function (s) {
+            s[initializeFunction[1]](localScope, el[0].save);
+          }]);
+        }
+        el[0].data('widget', el[2]);
       });
     };
 
