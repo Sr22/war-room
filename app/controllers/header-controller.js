@@ -18,20 +18,32 @@ angular.module('warRoom')
         $scope.gridstackEnabled = !$scope.gridstackEnabled;
         widgetService.setWidgetsEnabled($scope.gridstackEnabled);
       };
-        $scope.bookmarks = [{
-                name: 'Stash',
-                url: 'http://stash.cdk.com/projects'
-            },
-            {
-                name: 'Jira',
-                url: 'https://jira.cdk.com'
-            },
-            {
-                name: 'Confluence',
-                url: 'https://confluence.cdk.com'
-            }
-        ];
+        $scope.linkName;
+        $scope.linkUrl;
+        $scope.bookmarks = [
+                {
+                    name: 'Stash',
+                    url: 'http://stash.cdk.com/projects'
+                },
+                {
+                    name: 'Jira',
+                    url: 'https://jira.cdk.com'
+                },
+                {
+                    name: 'Confluence',
+                    url: 'https://confluence.cdk.com'
+                }
+            ];
         $scope.addBookmark = function() {
-
+            var linkUrl = window.prompt("Url of Link (Copy and Paste from Website): ", " ");
+            var linkName = window.prompt("Name of Link: ", " ");
+            if (linkUrl == " " || linkName == " ") {
+                alert("Please fill all input fields");
+            }
+            else {
+                $scope.$evalAsync(function() {
+                    $scope.bookmarks.push({name: linkName, url: linkUrl });
+                });
+            }
         }
     }]);

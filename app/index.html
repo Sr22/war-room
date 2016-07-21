@@ -38,7 +38,6 @@
   <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
-  <script src="header-bar.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -54,7 +53,7 @@
                 <h1 class="header-title">War Room</h1>
                   <ul class="bookmarks-bar">
                     <li ng-repeat="bookmark in bookmarks"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a></li>
-                    <li><button ng-click="addBookmark">X</button></li>
+                    <li><button ng-click="addBookmark()">Add Link</button></li>
                   </ul>
               </div>
             </div>
@@ -64,11 +63,10 @@
           </div>
         </div>
       </div>
+      </div>
       <!-- End Header Bar -->
-
-      <!-- Main Content -->
+    <!-- Main Content -->
       <ww-widgets class="widget-wrapper"></ww-widgets>
-      
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
 </body>
