@@ -1,12 +1,13 @@
 angular.module('warRoom')
-    .controller('headerController', ['$scope', 'widgetCtrl', 'widgetService', function ($scope, widgetCtrl, widgetService) {
+    .controller('headerController', ['$scope', 'widgetService', function ($scope, widgetService) {
       $scope.saveWidgets = function() {
-        widgetCtrl.saveWidgetsToCookie(gridstack, 'grid');
+        widgetService.saveWidgets();
       };
       
       $scope.loadWidgets = function() {
-        widgetCtrl.removeAllWidgets(gridstack);
-        widgetCtrl.instantiateWidgetsFromCookie(gridstack, 'grid');
+        widgetService.removeAllWidgets();
+        widgetService.loadWidgets();
+        widgetService.commit();
       }
       
       $scope.removeWidget = function(widget) {
@@ -41,9 +42,32 @@ angular.module('warRoom')
                 alert("Please fill all input fields");
             }
             else {
-                $scope.$evalAsync(function() {
-                    $scope.bookmarks.push({name: linkName, url: linkUrl });
+                $scope.$evalAsync(function () {
+                    $scope.bookmarks.push({name: linkName, url: linkUrl});
                 });
             }
         }
+      $scope.addWeather = function() {
+          widgetService.addWidget('WeatherWidget', 0, 0, 2, 4, true);
+      };
+
+      $scope.addTime = function() {
+          widgetService.addWidget('TimeWidget', 0, 0, 2, 4, true);
+      };
+
+      $scope.addCalendar = function() {
+          widgetService.addWidget('CalendarWidget', 0, 0, 2, 4, true);
+      };
+
+      $scope.addReddit = function() {
+          widgetService.addWidget('RedditWidget', 0, 0, 2, 4, true);
+      };
+
+      $scope.addNotify = function() {
+          widgetService.addWidget('NotificationsWidget', 0, 0, 2, 4, true);
+      };
+
+      $scope.addStash = function() {
+          widgetService.addWidget('StashWidget', 0, 0, 2, 4, true);
+      };
     }]);

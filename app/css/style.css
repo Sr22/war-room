@@ -9,7 +9,7 @@
   margin: 8px;
 }
 
-.save-button, .load-button {
+.save-button, .load-button, .add {
   margin-top: 12px;
   margin-right: 0px;
   padding-right: 6px;
@@ -57,4 +57,21 @@
 .bookmarks-bar {
   margin-top: -35px;
   margin-left: 200px;
+}
+.dropdown-menu {
+  left: 80%;
+}
+
+.remove {
+  background: none;
+  float: right;
+  font-size: 17px;
+}
+.remove:hover {
+  color: salmon;
+}
+
+.removestash {
+  padding-top: 0px;
+  padding-right: 0px;
 }
