@@ -41,6 +41,7 @@
   <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
+  <script src="controllers/remove-controller.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -67,12 +68,7 @@
             <button class="btn add btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="#" value="1" ng-click="addWeather()">Weather</a></li>
-              <li><a href="#" value="2" ng-click="addTime()">Time</a></li>
-              <li><a href="#" value="3" ng-click="addCalendar()">Calendar</a></li>
-              <li><a href="#" value="4" ng-click="addStash()">Stash</a></li>
-              <li><a href="#" value="5" ng-click="addReddit()">Reddit</a></li>
-              <li><a href="#" value="6" ng-click="addNotify()">Notifications</a><li>
+              <li ng-repeat="widget in widgetList" id="tabby"><a href="#" value="1" ng-click="addWidget(widget.name)">{{ widget.displayName }}</a></li>
             </ul>
         </div>
 			</div>

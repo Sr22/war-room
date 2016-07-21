@@ -21,11 +21,11 @@ angular
       $scope.widgets.map(function (el) {
         el.identifier = randomString(12);
         var dir = camelToDash(dashToCamel(el.content.directive));
-        return [$compile('<div><div class="grid-stack-item-content"><'+dir+'></'+dir+'></div></div>')($scope), dir, el];
+        return [$compile('<div><div class="grid-stack-item-content"><div ng-controller="removeController"><button class="btn remove-widget" ng-click="removeWidget()">x</button></div><'+dir+'></'+dir+'></div></div>')($scope), dir, el];
       }).forEach(function (el) {
         var localScope = angular.element(el[0]).find(el[1]).scope();
         localScope.identifier = el[2].identifier;
-        $scope.gridstack.addWidget(el[0], el[2].x || 0, el[2].y || 0, el[2].width || 4, el[2].height || 0, el[2].auto === undefined ? true : el[2].auto);
+        $scope.gridstack.addWidget(el[0], el[2].x || 0, el[2].y || 0, el[2].width || 4, el[2].height || 4, el[2].auto === undefined ? true : el[2].auto);
         $('#widgets').append(el[0]);
         if (el[2].content.initialize) {
           var initializeFunction = el[2].content.initialize.split('.');

@@ -5,6 +5,7 @@ angular
   .constant('widgetList', [
     {
       name: 'StashWidget',
+      displayName: 'Stash',
       dependencies: [
         'widgets/stash-widget/stash-api.js',
         'widgets/stash-widget/stash-widget-service.js',
@@ -18,6 +19,7 @@ angular
     },
     {
       name: 'RedditWidget',
+      displayName: 'Reddit',
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
         'widgets/reddit-widget/reddit-controller.js',
@@ -28,6 +30,7 @@ angular
     },
     {
       name: 'TimeWidget',
+      displayName: 'Time',
       dependencies: [
         'widgets/time-widget/googlemaps-api-service.js',
         'widgets/time-widget/timezone-api-service.js',
