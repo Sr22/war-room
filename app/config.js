@@ -6,12 +6,15 @@ angular
     {
       name: 'StashWidget',
       dependencies: [
-        'widgets/stash-widget/stash-api.js', 
-        'widgets/stash-widget/stash-widget-controller.js', 
-        'widgets/stash-widget/stash-widget-directive.js', 
+        'widgets/stash-widget/stash-api.js',
+        'widgets/stash-widget/stash-widget-service.js',
+        'widgets/stash-widget/stash-widget-controller.js',
+        'widgets/stash-widget/stash-widget-directive.js',
         'widgets/stash-widget/stash-widget.css'
       ],
-      directive: 'stashWidget'
+      directive: 'stashWidget',
+      initialize: 'stashWidgetService.initialize',
+      serialize: 'stashWidgetService.serialize'
     },
     {
       name: 'RedditWidget',
@@ -33,16 +36,7 @@ angular
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    },
-
-    {
-      name: 'MeganWidget',
-      dependencies: [
-          'widgets/meganwidget.js'
-      ],
-      directive: 'meganWidget'
     }
-
   ]);
 
 angular.module('warRoom')

@@ -1,6 +1,6 @@
 angular.module('warRoom')
 
-.controller('stashWidgetController', ['$scope', 'stashApiService', 'widgetService', function ($scope, stashApiService, widgetService) {
+.controller('stashWidgetController', ['$scope', '$element', 'stashApiService', 'widgetService', function ($scope, $element, stashApiService, widgetService) {
   $scope.page = 'login';
   $scope.pageStack = ['Stash Widget'];
   $scope.pageStackInternal = ['stash-widget'];
@@ -220,7 +220,7 @@ angular.module('warRoom')
     default:
       break;
     }
-  }
+  };
   
   var loadedUsername = widgetService.loadValue('StashWidget', 'username');
   var loadedPassword = widgetService.loadValue('StashWidget', 'password');
