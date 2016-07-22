@@ -26,37 +26,15 @@ angular.module('warRoom')
  };
 
   $scope.widgetList = widgetList;
-    $scope.linkName;
-    $scope.linkUrl;
-    $scope.bookmarks = [
-        {
-            name: 'Stash',
-            url: 'http://stash.cdk.com/projects'
-        },
-        {
-            name: 'Jira',
-            url: 'https://jira.cdk.com'
-        },
-        {
-            name: 'Confluence',
-            url: 'https://confluence.cdk.com'
-        }
-    ];
+    $scope.bookmarks = [];
     $scope.addBookmark = function() {
-        var linkUrl = window.prompt("Url of Link (Copy and Paste from Website): ", " ");
-        var linkName = window.prompt("Name of Link: ", " ");
-        console.log(linkUrl);
-        console.log(linkName);
-        if (linkUrl == " " || linkName == " ") {
-            alert("Please fill all input fields");
-        }
-        else if (linkUrl == null || linkName == null) {
-            alert("Please fill all input fields");
-        }
-        else {
-            $scope.$evalAsync(function () {
-                $scope.bookmarks.push({name: linkName, url: linkUrl});
-            });
-        }
-    }
+        add_link_form();
+    };
+    $scope.finishForm = function () {
+        alert("hi");
+    };
 }]);
+
+add_link_form = function() {
+    $('#link_form').html('<div class="alert alert-success fade in"><button ng-click="finishForm()">Submit</button></div>');
+};

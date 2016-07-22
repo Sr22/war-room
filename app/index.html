@@ -46,10 +46,11 @@
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
 <body>
+  <div class="main" ng-controller="headerController">
   <div id="content-wrapper">
     <div class="page-content">
       <!-- Header Bar -->
-      <div class="row header" ng-controller="headerController">
+      <div class="row header">
         <div class="col-xs-12">
           <div class="meta">
             <div class="header-container">
@@ -78,9 +79,12 @@
       </div>
       </div>
       <!-- End Header Bar -->
+      <div id="link_form"></div>
+
     <!-- Main Content -->
       <ww-widgets class="widget-wrapper"></ww-widgets>
     </div><!-- End Page Content -->
   </div><!-- End Content Wrapper -->
+  </div>
 </body>
 </html>
