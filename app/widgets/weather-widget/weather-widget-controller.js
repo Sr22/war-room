@@ -25,11 +25,11 @@ angular.module('warRoom')
 						$scope.place = place;
 						$scope.windspeed = windspeed;
 						$scope.description = description;
-					}, //function error(errorMessage) {
-						// Do display logic for errorMessage
+					} //function error(errorMessage) {
+
 					//}
-			)
+						)
 				}
 
 
-			}])	
+			}])
