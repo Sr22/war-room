@@ -1,5 +1,5 @@
 angular.module('warRoom')
-    .controller('headerController', ['$scope', '$http', 'widgetList', 'widgetService', function($scope, $http, widgetList, widgetService) {
+    .controller('headerController', ['$scope', '$q','$http', 'widgetList', 'widgetService', function($scope, $q, $http, widgetList, widgetService) {
         $scope.toggleEnableAdd = false;
         $scope.saveWidgets = function() {
             widgetService.saveWidgets();
@@ -49,7 +49,7 @@ angular.module('warRoom')
         $scope.finishForm = function() {
             var tempLinkUrl = $scope.bookmarkUrl;
             var tempLinkName = $scope.bookmarkName;
-            if(ValidURL($http, tempLinkUrl) == true) {
+            if(ValidURL($http, $q, tempLinkUrl) == true) {
                 $scope.bookmarks.push({
                     url: tempLinkUrl,
                     name: tempLinkName
@@ -68,12 +68,15 @@ angular.module('warRoom')
         }
     }]);
 
-    function ValidURL($http, str) {
+    function ValidURL($http, $q, str) {
+        var defer = $q.defer();
         return $http.get(str).then(function onTrue() {
             var tVar = true;
             defer.resolve(tVar);
             return defer.promise;
         }, function onFalse() {
-            return false;
+            var fVar = false;
+            defer.resolve(fVar);
+            return defer.promise;
         });
     }
