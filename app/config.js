@@ -39,7 +39,21 @@ angular
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    }
+    },
+	{
+		name: 'WeatherWidget',
+		dependencies: [
+		'widgets/weather-widget/weather-api-service.js',
+		'widgets/weather-widget/weather-widget-controller.js',
+		'widgets/weather-widget/weather-widget-directive.js',
+		'widgets/weather-widget/weather-widget.html',
+		'widgets/weather-widget/weather-widget.css'
+		
+		
+	
+		],
+		directive: 'weatherWidget'
+	}
   ]);
 
 angular.module('warRoom')
