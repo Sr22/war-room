@@ -1,5 +1,5 @@
 angular.module("warRoom")
-    .directive("redditWidget", function () {
+    .directive("redditWidget", function() {
         var directive = {
             templateUrl: "widgets/reddit-widget/reddit-design.html",
             controller: "redditController"

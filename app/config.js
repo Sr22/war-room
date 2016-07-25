@@ -1,30 +1,25 @@
+
+
 angular
   .module('warRoom')
   .constant('widgetList', [
     {
       name: 'StashWidget',
+      displayName: 'Stash',
       dependencies: [
-        'widgets/stash-widget/stash-api.js', 
-        'widgets/stash-widget/stash-widget-controller.js', 
-        'widgets/stash-widget/stash-widget-directive.js', 
+        'widgets/stash-widget/stash-api.js',
+        'widgets/stash-widget/stash-widget-service.js',
+        'widgets/stash-widget/stash-widget-controller.js',
+        'widgets/stash-widget/stash-widget-directive.js',
         'widgets/stash-widget/stash-widget.css'
       ],
-      directive: 'stashWidget'
+      directive: 'stashWidget',
+      initialize: 'stashWidgetService.initialize',
+      serialize: 'stashWidgetService.serialize'
     },
-<<<<<<< HEAD
-	{
-	  name: 'reddit-widget',
-	  dependencies: [
-		  'widgets/reddit-widget/reddit-service.js',
-	      'widgets/reddit-widget/reddit-controller.js',
-		  'widgets/reddit-widget/reddit-directive.js',
-		  'widgets/reddit-widget/reddit-style.css'
-	  ],
-	  directive: 'redditWidget'
-	}
-=======
     {
       name: 'RedditWidget',
+      displayName: 'Reddit',
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
         'widgets/reddit-widget/reddit-controller.js',
@@ -35,6 +30,7 @@ angular
     },
     {
       name: 'TimeWidget',
+      displayName: 'Time',
       dependencies: [
         'widgets/time-widget/googlemaps-api-service.js',
         'widgets/time-widget/timezone-api-service.js',
@@ -43,8 +39,21 @@ angular
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    }
->>>>>>> 15ca9eec9e89f7a36e1fb4445d2ccfba6ec3ba57
+    },
+	{
+		name: 'WeatherWidget',
+		dependencies: [
+		'widgets/weather-widget/weather-api-service.js',
+		'widgets/weather-widget/weather-widget-controller.js',
+		'widgets/weather-widget/weather-widget-directive.js',
+		'widgets/weather-widget/weather-widget.html',
+		'widgets/weather-widget/weather-widget.css'
+		
+		
+	
+		],
+		directive: 'weatherWidget'
+	}
   ]);
 
 angular.module('warRoom')

@@ -14,6 +14,7 @@
     "https://stash.cdk.com/rest/api/1.0/",
     "https://maps.googleapis.com/",
     "http://api.timezonedb.com/",
-    "https://www.reddit.com/r/"
+    "https://www.reddit.com/r/",
+    "https://api.wunderground.com/"
   ]
 }
