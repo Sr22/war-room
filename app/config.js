@@ -1,9 +1,5 @@
-
-
-angular
-  .module('warRoom')
-  .constant('widgetList', [
-    {
+angular.module('warRoom')
+    .constant('widgetList', [{
       name: 'StashWidget',
       displayName: 'Stash',
       dependencies: [
@@ -16,8 +12,7 @@ angular
       directive: 'stashWidget',
       initialize: 'stashWidgetService.initialize',
       serialize: 'stashWidgetService.serialize'
-    },
-    {
+    }, {
       name: 'RedditWidget',
       displayName: 'Reddit',
       dependencies: [
@@ -27,20 +22,7 @@ angular
         'widgets/reddit-widget/reddit-style.css'
       ],
       directive: 'redditWidget'
-    },
-    {
-      name: 'TimeWidget',
-      displayName: 'Time',
-      dependencies: [
-        'widgets/time-widget/googlemaps-api-service.js',
-        'widgets/time-widget/timezone-api-service.js',
-        'widgets/time-widget/time-widg-controller.js',
-        'widgets/time-widget/time-widg-directive.js',
-        'widgets/time-widget/time-style.css'
-      ],
-      directive: 'timeWidget'
-    }
-  ]);
+    }]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
