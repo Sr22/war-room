@@ -1,6 +1,6 @@
 angular.module('warRoom')
     .controller('headerController', ['$scope', '$q','$http', 'widgetList', 'widgetService', function($scope, $q, $http, widgetList, widgetService) {
-        $scope.toggleEnableAdd = false;
+        $scope.$root.toggleEnableRemove = false;
         $scope.saveWidgets = function() {
             widgetService.saveWidgets();
         };
@@ -13,8 +13,8 @@ angular.module('warRoom')
 
         $scope.gridstackEnabled = false;
         $scope.toggleEnable = function() {
-            $scope.toggleEnableAdd = !$scope.toggleEnableAdd;
             $scope.gridstackEnabled = !$scope.gridstackEnabled;
+            $scope.$root.toggleEnableRemove = !$scope.$root.toggleEnableRemove;
             widgetService.setWidgetsEnabled($scope.gridstackEnabled);
         };
 
@@ -30,16 +30,13 @@ angular.module('warRoom')
         };
 
         $scope.widgetList = widgetList;
-        $scope.bookmarks = [{
-            url: 'http://stash.cdk.com',
-            name: 'Stash'
-        }, {
-            url: 'http://jira.cdk.com',
-            name: 'Jira'
-        }, {
-            url: 'http://confluence.cdk.com',
-            name: 'Confluence'
-        }];
+        $scope.bookmarks = [];
+        /*if ($scope.bookmarks.length == 0) {
+            $scope.bookmarks.push({name: 'Confluence', url: 'http://confluence.cdk.com'});
+            $scope.bookmarks.push({name: 'Jira', url: 'http://jira.cdk.com'});
+            $scope.bookmarks.push({name: 'Stash', url: 'http://stash.cdk.com'});
+        }*/
+        //console.log($scope.bookmarks);
         $scope.bookmarkUrl = '';
         $scope.bookmarkName = '';
         $scope.displayLinkForm = false;
@@ -49,11 +46,12 @@ angular.module('warRoom')
         $scope.finishForm = function() {
             var tempLinkUrl = $scope.bookmarkUrl;
             var tempLinkName = $scope.bookmarkName;
-            if(ValidURL($http, $q, tempLinkUrl) == true) {
+            if(true == true) {
                 $scope.bookmarks.push({
-                    url: tempLinkUrl,
-                    name: tempLinkName
-                })
+                    name: tempLinkName,
+                    url: tempLinkUrl
+                });
+                //widgetService.saveValue('headerbar', 'bookmarks', $scope.bookmarks);
             }
             else {
                 alert("Invalid Url");
@@ -65,10 +63,11 @@ angular.module('warRoom')
                     $scope.bookmarks.splice(i, 1);
                 }
             }
+            widgetService.saveValue('headerbar', 'bookmarks', $scope.bookmarks);
         }
     }]);
 
-    function ValidURL($http, $q, str) {
+    /*function ValidURL($http, $q, str) {
         var defer = $q.defer();
         return $http.get(str).then(function onTrue() {
             var tVar = true;
@@ -79,4 +78,4 @@ angular.module('warRoom')
             defer.resolve(fVar);
             return defer.promise;
         });
-    }
+    }*/

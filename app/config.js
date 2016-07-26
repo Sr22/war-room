@@ -34,8 +34,8 @@ angular.module('warRoom')
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    }
-	/*{
+    },
+	{
 		name: 'WeatherWidget',
         displayName: 'Weather',
 		dependencies: [
@@ -46,7 +46,7 @@ angular.module('warRoom')
 		    'widgets/weather-widget/weather-widget.css'
 		],
 		directive: 'weatherWidget'
-	}*/]);
+	}]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
