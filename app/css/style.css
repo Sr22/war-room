@@ -9,7 +9,7 @@
   margin: 8px;
 }
 
-.save-button, .load-button {
+.save-button, .load-button, .add {
   margin-top: 12px;
   margin-right: 0px;
   padding-right: 6px;
@@ -47,4 +47,20 @@
 
 .grid-stack-item-content {
   border-radius: 5px;
+}
+
+.dropdown-menu {
+  left: 80%;
+}
+
+.remove-widget {
+  background: none;
+  float: right;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  font-size: 17px;
+}
+.remove-widget:hover {
+  color: salmon;
 }

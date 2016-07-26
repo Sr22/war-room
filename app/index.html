@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="warRoom">
 <head>
+  <meta charset="UTF-8">
+
   <!-- DEPENDENCIES -->
   <!--<link rel="stylesheet" href="bower_components/tether/dist/css/tether.min.css">
   <link rel="stylesheet" href="bower_components/tether/dist/css/tether-theme-basic.min.css">-->
@@ -25,6 +27,7 @@
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/lodash/dist/lodash.js"></script>
@@ -38,6 +41,7 @@
   <script src="services/widget-service.js"></script>
   <script src="directives/widgets.js"></script>
   <script src="controllers/header-controller.js"></script>
+  <script src="controllers/remove-controller.js"></script>
   
   <!-- DYNAMIC DEPENDENCIES -->
 </head>
@@ -57,6 +61,15 @@
             <div class="edit-button" ng-click="toggleEnable()"><input type="checkbox" data-height="38" data-width="150" data-toggle="toggle" data-on="Stop Editing" data-off="Start Editing" data-onstyle="danger" data-offstyle="success"></div>
             <div class="load-button"><button ng-click="loadWidgets()" class="btn btn-primary">Load</button></div>
             <div class="save-button"><button ng-click="saveWidgets()" class="btn btn-success">Save</button></div>
+			<div class="d" id="tabt" name="tab">
+            <button class="btn add btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li ng-repeat="widget in widgetList" id="tabby"><a href="#" value="1" ng-click="addWidget(widget.name)">{{ widget.displayName }}</a></li>
+            </ul>
+        </div>
+			</div>
+
           </div>
         </div>
       </div>

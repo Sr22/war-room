@@ -1,18 +1,25 @@
+
+
 angular
   .module('warRoom')
   .constant('widgetList', [
     {
       name: 'StashWidget',
+      displayName: 'Stash',
       dependencies: [
-        'widgets/stash-widget/stash-api.js', 
-        'widgets/stash-widget/stash-widget-controller.js', 
-        'widgets/stash-widget/stash-widget-directive.js', 
+        'widgets/stash-widget/stash-api.js',
+        'widgets/stash-widget/stash-widget-service.js',
+        'widgets/stash-widget/stash-widget-controller.js',
+        'widgets/stash-widget/stash-widget-directive.js',
         'widgets/stash-widget/stash-widget.css'
       ],
-      directive: 'stashWidget'
+      directive: 'stashWidget',
+      initialize: 'stashWidgetService.initialize',
+      serialize: 'stashWidgetService.serialize'
     },
     {
       name: 'RedditWidget',
+      displayName: 'Reddit',
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
         'widgets/reddit-widget/reddit-controller.js',
@@ -23,6 +30,7 @@ angular
     },
     {
       name: 'TimeWidget',
+      displayName: 'Time',
       dependencies: [
         'widgets/time-widget/googlemaps-api-service.js',
         'widgets/time-widget/timezone-api-service.js',
@@ -31,7 +39,21 @@ angular
         'widgets/time-widget/time-style.css'
       ],
       directive: 'timeWidget'
-    }
+    },
+	{
+		name: 'WeatherWidget',
+		dependencies: [
+		'widgets/weather-widget/weather-api-service.js',
+		'widgets/weather-widget/weather-widget-controller.js',
+		'widgets/weather-widget/weather-widget-directive.js',
+		'widgets/weather-widget/weather-widget.html',
+		'widgets/weather-widget/weather-widget.css'
+		
+		
+	
+		],
+		directive: 'weatherWidget'
+	}
   ]);
 
 angular.module('warRoom')
