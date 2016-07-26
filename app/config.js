@@ -1,9 +1,5 @@
-
-
-angular
-  .module('warRoom')
-  .constant('widgetList', [
-    {
+angular.module('warRoom')
+    .constant('widgetList', [{
       name: 'StashWidget',
       displayName: 'Stash',
       dependencies: [
@@ -16,8 +12,7 @@ angular
       directive: 'stashWidget',
       initialize: 'stashWidgetService.initialize',
       serialize: 'stashWidgetService.serialize'
-    },
-    {
+    }, {
       name: 'RedditWidget',
       displayName: 'Reddit',
       dependencies: [
@@ -42,19 +37,16 @@ angular
     },
 	{
 		name: 'WeatherWidget',
+        displayName: 'Weather',
 		dependencies: [
-		'widgets/weather-widget/weather-api-service.js',
-		'widgets/weather-widget/weather-widget-controller.js',
-		'widgets/weather-widget/weather-widget-directive.js',
-		'widgets/weather-widget/weather-widget.html',
-		'widgets/weather-widget/weather-widget.css'
-		
-		
-	
+		    'widgets/weather-widget/weather-api-service.js',
+		    'widgets/weather-widget/weather-widget-controller.js',
+		    'widgets/weather-widget/weather-widget-directive.js',
+		    'widgets/weather-widget/weather-widget.html',
+		    'widgets/weather-widget/weather-widget.css'
 		],
 		directive: 'weatherWidget'
-	}
-  ]);
+	}]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
