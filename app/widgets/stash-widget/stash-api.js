@@ -7,8 +7,11 @@ angular.module('warRoom')
     recentRepositoriesResource : $resource('https://stash.cdk.com/rest/api/1.0/profile/recent/repos'),
     
     setCredentials : function (username, password) {
+        console.log('Trying to set credentials', username, password)
+        //this.clearCredentials()
       if (!username && !password) {
         this.clearCredentials();
+          console.log("suh dude")
       } else {
         username = username || "";
         password = password || "";
@@ -29,11 +32,13 @@ angular.module('warRoom')
     },
     
     clearCredentials : function () {
+        console.log('Clearing creds')
       $rootScope.globals = {};
       $http.defaults.headers.common.Authorization = 'Basic ';
     },
     
     testCredentials : function (callback) {
+        console.log('testing creds')
       $http({
         method: 'GET',
         url: 'https://stash.cdk.com/rest/api/1.0/profile/recent/repos'
