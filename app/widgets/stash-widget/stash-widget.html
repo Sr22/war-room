@@ -8,7 +8,7 @@
       <div ng-switch-when="login">
         <div>
           <label class="stash-widget-label">Username</label><input class="form-control" ng-model="username" type="text" />
-          <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" />
+          <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" ng-keypress="showLoginKeypress(username, password, $event)"/>
           Remember login information? <input class="stash-widget-remember" type="checkbox" ng-model="saveLoginInformation.value"><br>
           <button id="stash-widget-submit-login" class="stash-widget-submit btn btn-primary" ng-click="showLogin(username, password)">Submit</button>
         </div>
@@ -23,7 +23,7 @@
         <div>
           <label class="stash-widget-label">Type</label><input class="form-control" ng-model="stashRepoType" type="text" />
           <label class="stash-widget-label">Name</label><input class="form-control" ng-model="stashRepoName" type="text" />
-          <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" />
+          <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" ng-keypress="showPullRequestsManualKeypress(stashRepoType, stashRepoName, stashRepoRepo, $event)"/>
           <button id="stash-widget-submit-manual" class="stash-widget-submit btn btn-primary" ng-click="showPullRequestsManual(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
         </div>
       </div>
