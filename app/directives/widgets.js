@@ -30,7 +30,7 @@ angular
         if (el[2].content.initialize) {
           var initializeFunction = el[2].content.initialize.split('.');
           $injector.invoke([initializeFunction[0], function (s) {
-            s[initializeFunction[1]](localScope, el[0].save);
+            s[initializeFunction[1]](localScope, el[2].save);
           }]);
         }
         el[0].data('widget', el[2]);
