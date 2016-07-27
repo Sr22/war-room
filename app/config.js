@@ -35,18 +35,33 @@ angular.module('warRoom')
       ],
       directive: 'timeWidget'
     },
-	{
-		name: 'WeatherWidget',
-        displayName: 'Weather',
-		dependencies: [
-		    'widgets/weather-widget/weather-api-service.js',
-		    'widgets/weather-widget/weather-widget-controller.js',
-		    'widgets/weather-widget/weather-widget-directive.js',
-		    'widgets/weather-widget/weather-widget.html',
-		    'widgets/weather-widget/weather-widget.css'
-		],
-		directive: 'weatherWidget'
-	}]);
+    {
+      name: 'WeatherWidget',
+      displayName: 'Weather',
+      dependencies: [
+        'widgets/weather-widget/weather-api-service.js',
+        'widgets/weather-widget/weather-widget-controller.js',
+        'widgets/weather-widget/weather-widget-directive.js',
+        'widgets/weather-widget/weather-widget.html',
+        'widgets/weather-widget/weather-widget.css'
+      ],
+      directive: 'weatherWidget'
+    },
+    {
+      name: 'NotesWidget',
+      displayName: 'Notes',
+      dependencies: [
+        'bower_components/showdown/dist/showdown.js',
+        'widgets/notes-widget/notes-widget-service.js',
+        'widgets/notes-widget/notes-widget-controller.js',
+        'widgets/notes-widget/notes-widget.js',
+        'widgets/notes-widget/notes-widget.css'
+      ],
+      directive: 'notesWidget',
+      initialize: 'notesWidgetService.initialize',
+      serialize: 'notesWidgetService.serialize'
+    }
+  ]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
