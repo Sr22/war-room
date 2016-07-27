@@ -55,7 +55,7 @@
               <div class="page">
                 <h1 class="header-title">War Room</h1>
                 <ul class="bookmarks-bar">
-                  <li ng-repeat="bookmark in bookmarks"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a>
+                  <li ng-repeat="bookmark in bookmarks track by $id($index)"><a href="{{ bookmark.url }}">{{ bookmark.name }}</a>
                     <button ng-show="displayLinkForm" id="bookmark-x-button" ng-click="removeBookmark(bookmark.name)">x</button>
                   </li>
                   <li>
@@ -99,6 +99,7 @@
   </div>
 </div>
 <!-- End Header Bar -->
+<div id="maxBookmarksError"></div>
 <!-- Main Content -->
 <ww-widgets class="widget-wrapper"></ww-widgets>
 </div>

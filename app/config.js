@@ -48,18 +48,18 @@ angular.module('warRoom')
       directive: 'weatherWidget'
     },
     {
-      name: 'NotesWidget',
-      displayName: 'Notes',
-      dependencies: [
-        'bower_components/showdown/dist/showdown.js',
-        'widgets/notes-widget/notes-widget-service.js',
-        'widgets/notes-widget/notes-widget-controller.js',
-        'widgets/notes-widget/notes-widget.js',
-        'widgets/notes-widget/notes-widget.css'
-      ],
-      directive: 'notesWidget',
-      initialize: 'notesWidgetService.initialize',
-      serialize: 'notesWidgetService.serialize'
+        name: 'NotesWidget',
+        displayName: 'Notes',
+        dependencies: [
+            'bower_components/showdown/dist/showdown.js',
+            'widgets/notes-widget/notes-widget-service.js',
+            'widgets/notes-widget/notes-widget-controller.js',
+            'widgets/notes-widget/notes-widget.js',
+            'widgets/notes-widget/notes-widget.css'
+        ],
+        directive: 'notesWidget',
+        initialize: 'notesWidgetService.initialize',
+        serialize: 'notesWidgetService.serialize'
     }
   ]);
 

@@ -30,13 +30,11 @@ angular.module('warRoom')
         };
 
         $scope.widgetList = widgetList;
-        $scope.bookmarks = [];
-        /*if ($scope.bookmarks.length == 0) {
-            $scope.bookmarks.push({name: 'Confluence', url: 'http://confluence.cdk.com'});
-            $scope.bookmarks.push({name: 'Jira', url: 'http://jira.cdk.com'});
-            $scope.bookmarks.push({name: 'Stash', url: 'http://stash.cdk.com'});
-        }*/
-        //console.log($scope.bookmarks);
+        $scope.bookmarks = widgetService.loadValue('header-bar', 'bookmarks', $scope.bookmarks) || [
+                {name: 'Confluence', url: 'http://confluence.cdk.com'}, 
+                {name: 'Jira', url: 'http://jira.cdk.com'}, 
+                {name: 'Stash', url: 'http://stash.cdk.com'}];
+        widgetService.saveValue('header-bar', 'bookmarks', $scope.bookmarks);
         $scope.bookmarkUrl = '';
         $scope.bookmarkName = '';
         $scope.displayLinkForm = false;
@@ -44,17 +42,17 @@ angular.module('warRoom')
             $scope.displayLinkForm = !$scope.displayLinkForm;
         };
         $scope.finishForm = function() {
-            var tempLinkUrl = $scope.bookmarkUrl;
-            var tempLinkName = $scope.bookmarkName;
-            if(true == true) {
-                $scope.bookmarks.push({
-                    name: tempLinkName,
-                    url: tempLinkUrl
-                });
-                //widgetService.saveValue('headerbar', 'bookmarks', $scope.bookmarks);
+            if($scope.bookmarks.length < 7) {
+                var newBookmark = { name: $scope.bookmarkName, url: $scope.bookmarkUrl};
+                $scope.bookmarks.push(newBookmark);
+                widgetService.saveValue('header-bar', 'bookmarks', $scope.bookmarks);
+                $scope.bookmarkName = '';
+                $scope.bookmarkUrl = '';
             }
             else {
-                alert("Invalid Url");
+                max_error_alert();
+                $scope.bookmarkName = '';
+                $scope.bookmarkUrl = '';
             }
         };
         $scope.removeBookmark = function(name) {
@@ -63,19 +61,13 @@ angular.module('warRoom')
                     $scope.bookmarks.splice(i, 1);
                 }
             }
-            widgetService.saveValue('headerbar', 'bookmarks', $scope.bookmarks);
+            widgetService.saveValue('header-bar', 'bookmarks', $scope.bookmarks);
         }
     }]);
 
-    /*function ValidURL($http, $q, str) {
-        var defer = $q.defer();
-        return $http.get(str).then(function onTrue() {
-            var tVar = true;
-            defer.resolve(tVar);
-            return defer.promise;
-        }, function onFalse() {
-            var fVar = false;
-            defer.resolve(fVar);
-            return defer.promise;
-        });
-    }*/
+max_error_alert = function() {
+    $('#maxBookmarksError').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span><strong>Error!</strong> You have reached the maximum amount of bookmarks</span></div>');
+    $('#maxBookmarksError').fadeTo(2000, 500).slideUp(500, function() {
+        $('#maxBookmarksError').alert('close');
+    });
+};
