@@ -125,16 +125,16 @@ angular.module('warRoom').service('widgetService', ['$injector', 'widgetList', f
   };
   
   service.saveValue = function (widgetName, key, value) {
-    var currentValue = getCookie('widget_'+widgetName);
-    if (!currentValue) currentValue = '{}';
+    var currentValue = getCookie("widget_"+widgetName+"_"+key);
+    if (!currentValue) currentValue = "{}";
     var currentObject = JSON.parse(currentValue);
     currentObject.key = value;
-    setCookie('widget_'+widgetName, JSON.stringify(currentObject));
-  };
+    setCookie("widget_"+widgetName+"_"+key, JSON.stringify(currentObject));
+  }
   
   service.loadValue = function (widgetName, key) {
-    var currentValue = getCookie('widget_'+widgetName);
-    if (!currentValue) currentValue = '{}';
+    var currentValue = getCookie("widget_"+widgetName+"_"+key);
+    if (!currentValue) currentValue = "{}";
     var currentObject = JSON.parse(currentValue);
     return currentObject.key;
   };

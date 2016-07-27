@@ -21,7 +21,7 @@ angular.module("warRoom")
             } else {
                 RedditService.retrievePostInformation(search).then(function(data) {
                     $scope.$evalAsync(function() {
-                        searches.push(data.name);
+                        searches.push(search);
                         widgetService.saveValue('reddit-widget', 'searches', searches);
                         $scope.topics.push(data);
                     });

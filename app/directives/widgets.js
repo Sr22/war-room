@@ -21,7 +21,7 @@ angular
       $scope.widgets.map(function (el) {
         el.identifier = randomString(12);
         var dir = camelToDash(dashToCamel(el.content.directive));
-        return [$compile('<div><div class="grid-stack-item-content"><div ng-controller="removeController"><button class="btn remove-widget" ng-click="removeWidget()">x</button></div><'+dir+'></'+dir+'></div></div>')($scope), dir, el];
+        return [$compile('<div><div class="grid-stack-item-content"><div ng-controller="removeController"><button class="btn remove-widget" ng-click="removeWidget()" ng-show="toggleEnableRemove">x</button></div><'+dir+'></'+dir+'></div></div>')($scope), dir, el];
       }).forEach(function (el) {
         var localScope = angular.element(el[0]).find(el[1]).scope();
         localScope.identifier = el[2].identifier;

@@ -1,9 +1,5 @@
-
-
-angular
-  .module('warRoom')
-  .constant('widgetList', [
-    {
+angular.module('warRoom')
+    .constant('widgetList', [{
       name: 'StashWidget',
       displayName: 'Stash',
       dependencies: [
@@ -16,8 +12,7 @@ angular
       directive: 'stashWidget',
       initialize: 'stashWidgetService.initialize',
       serialize: 'stashWidgetService.serialize'
-    },
-    {
+    }, {
       name: 'RedditWidget',
       displayName: 'Reddit',
       dependencies: [
@@ -42,6 +37,7 @@ angular
     },
     {
       name: 'WeatherWidget',
+      displayName: 'Weather',
       dependencies: [
         'widgets/weather-widget/weather-api-service.js',
         'widgets/weather-widget/weather-widget-controller.js',
@@ -53,6 +49,7 @@ angular
     },
     {
       name: 'NotesWidget',
+      displayName: 'Notes',
       dependencies: [
         'bower_components/showdown/dist/showdown.js',
         'widgets/notes-widget/notes-widget-service.js',
@@ -68,3 +65,4 @@ angular
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
+
