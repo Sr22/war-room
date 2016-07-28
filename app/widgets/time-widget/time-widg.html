@@ -1,52 +1,48 @@
-<div class="container">
+<div class="tab-content" id="tabular">
+    <div id="city1" class="tab-pane fade">
+        <h1>{{ timeArr[0] }}</h1>
+    </div>
+    <div id="city2" class="tab-pane fade">
+        <h1>{{ timeArr[1] }}</h1>
+    </div>
+    <div id="city3" class="tab-pane fade">
+        <h1>{{ timeArr[2] }}</h1>
+    </div>
+    <div id="city4" class="tab-pane fade">
+        <h1>{{ timeArr[3] }}</h1>
+    </div>
+    <div id="city5" class="tab-pane fade">
+        <h1>{{ timeArr[4] }}</h1>
+    </div>
+</div>
+
+
+<div class="container" id="time-container">
     <nav id="navbar" class="navbar navbar-light">
-        <ul class="nav nav-pills">
-            <li><a  href="#add" data-toggle="pill"><p class="navbar-brand">Time </p>
+        <ul class="nav nav-pills nav-stacked">
+            <li><a  href="#add" data-toggle="pill"><h4>Time Widget</h4>
                 <form display="inline-block" autocomplete="off" class="form-inline pull-xs-right">
                     <input class="form-control" type="text" placeholder="Add City..." id="term" ng-model="tw.cityInput">
                     <button class="btn btn-success-outline" type="submit" id="search" ng-click="pressEnter()">Enter</button>
                 </form>
             </a></li>
-            <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}}</a></li>
-            <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}}</a></li>
-            <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}}</a></li>
-            <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}}</a></li>
-            <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}</a></li>
+            <div class="tab-content">
+                <div id="add" class="tab-pane fade in active">
+                    <ul id="time-display">
+                        <div id="predictions" ng-repeat="predictions in cityArr">
+                            <a id="results" ng-click="placeClick(predictions.description, predictions.place_id)"> {{ predictions.description }}</a>
+                        </div>
+                    </ul>
+
+                </div>
+
+            </div>
+            <div id="alert"></div>
+            <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}} <i ng-hide="tf1" ng-click="deleteTab(tabNames[0])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
+            <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}} <i ng-hide="tf2" ng-click="deleteTab(tabNames[1])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
+            <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}} <i ng-hide="tf3" ng-click="deleteTab(tabNames[2])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
+            <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}} <i ng-hide="tf4" ng-click="deleteTab(tabNames[3])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
+            <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}<i ng-hide="tf5" ng-click="deleteTab(tabNames[4])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
         </ul>
     </nav>
-
-</div>
-
-<!--<div class="alert alert-danger alert-dismissible fade in" role="alert">-->
-    <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-        <!--<span aria-hidden="true">&times;</span>-->
-    <!--</button>-->
-    <!--<strong>You've reached the tab limit</strong>-->
-<!--</div>-->
-
-
-<div class="tab-content">
-    <div id="add" class="tab-pane fade in  active">
-        <ul id="timeDisplay">
-            <div id="predictions" ng-repeat="predictions in cityArr">
-                <a id="results" ng-click="placeClick(predictions.description, predictions.place_id)"> {{ predictions.description }}</a>
-            </div>
-        </ul>
-
-    </div>
-    <div id="city1" class="tab-pane fade">
-        <h3>{{ timeArr[0] }}</h3>
-    </div>
-    <div id="city2" class="tab-pane fade">
-        <h3>{{ timeArr[1] }}</h3>
-    </div>
-    <div id="city3" class="tab-pane fade">
-        <h3>{{ timeArr[2] }}</h3>
-    </div>
-    <div id="city4" class="tab-pane fade">
-        <h3>{{ timeArr[3] }}</h3>
-    </div>
-    <div id="city5" class="tab-pane fade">
-        <h3>{{ timeArr[4] }}</h3>
-    </div>
 </div>
