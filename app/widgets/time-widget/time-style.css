@@ -1,18 +1,23 @@
-#timeDisplay{
+#time-container{
+    width: 100%;
+}
+
+#time-display{
     list-style-type:none;
     cursor: pointer;
 }
 
-h3{
+h1{
     text-align: center;
 }
 
 #navbar{
     background-color: #e3f2fd;
+    text-align:left;
 }
 
 #predictions{
-    background-color: rgba(43, 159, 161, 0.09);
+    background-color: white;
     display:table-row;
 
 }
@@ -22,4 +27,8 @@ h3{
 
 #results{
     color: black;
+    text-align: center;
+}
+#add {
+    background-color: white;
 }
