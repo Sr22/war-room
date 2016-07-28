@@ -4,6 +4,18 @@ angular
   .module('warRoom')
   .constant('widgetList', [
     {
+      name: 'CalendarWidget',
+      displayName: 'CalendarWidget',
+      dependencies: [
+          'widgets/calendar-widget/calendar-compile.js',
+          'widgets/calendar-widget/calendar-functions.js',
+          'widgets/calendar-widget/calendar-controller.js',
+          'widgets/calendar-widget/calendar-directive.js',
+          'widgets/calendar-widget/calendar-styles.css'
+      ],
+      directive: 'calendarWidget'
+    },
+    {
       name: 'StashWidget',
       displayName: 'Stash',
       dependencies: [
