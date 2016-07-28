@@ -1,18 +1,6 @@
-<div class="tab-content" id="tabular">
-    <div id="city1" class="tab-pane fade">
-        <h1>{{ timeArr[0] }}</h1>
-    </div>
-    <div id="city2" class="tab-pane fade">
-        <h1>{{ timeArr[1] }}</h1>
-    </div>
-    <div id="city3" class="tab-pane fade">
-        <h1>{{ timeArr[2] }}</h1>
-    </div>
-    <div id="city4" class="tab-pane fade">
-        <h1>{{ timeArr[3] }}</h1>
-    </div>
-    <div id="city5" class="tab-pane fade">
-        <h1>{{ timeArr[4] }}</h1>
+<div class="tab-content">
+    <div ng-repeat="index in [0,1,2,3,4]" id="city{{index}}" class="tab-pane fade">
+        <h1 class="time">{{ timeArr[index] }}</h1>
     </div>
 </div>
 
@@ -26,6 +14,7 @@
                     <button class="btn btn-success-outline" type="submit" id="search" ng-click="pressEnter()">Enter</button>
                 </form>
             </a></li>
+            <div id="alert"></div>
             <div class="tab-content">
                 <div id="add" class="tab-pane fade in active">
                     <ul id="time-display">
@@ -37,12 +26,7 @@
                 </div>
 
             </div>
-            <div id="alert"></div>
-            <li><a ng-hide="tf1" data-toggle="pill" href="#city1">{{tabNames[0]}} <i ng-hide="tf1" ng-click="deleteTab(tabNames[0])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
-            <li><a ng-hide="tf2" data-toggle="pill" href="#city2">{{tabNames[1]}} <i ng-hide="tf2" ng-click="deleteTab(tabNames[1])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
-            <li><a ng-hide="tf3" data-toggle="pill" href="#city3">{{tabNames[2]}} <i ng-hide="tf3" ng-click="deleteTab(tabNames[2])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
-            <li><a ng-hide="tf4" data-toggle="pill" href="#city4">{{tabNames[3]}} <i ng-hide="tf4" ng-click="deleteTab(tabNames[3])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
-            <li><a ng-hide="tf5" data-toggle="pill" href="#city5">{{tabNames[4]}}<i ng-hide="tf5" ng-click="deleteTab(tabNames[4])" class="fa fa-times-circle" aria-hidden="true"></i> </a></li>
+            <li ng-repeat="n in [0,1,2,3,4]"><a ng-hide="tf[n]" data-toggle="pill" href="#city{{n}}">{{tabNames[n]}} <i ng-hide="tf[n]" ng-click="deleteTab(tabNames[n])" class="fa fa-times-circle" aria-hidden="true"></i></a></li
         </ul>
     </nav>
 </div>

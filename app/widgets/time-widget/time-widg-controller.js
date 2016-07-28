@@ -8,17 +8,13 @@ angular.module('warRoom')
         $scope.longit='';//see above
         $scope.numInList=0; //autocomplete list length
         $scope.onlyCity=''; //the only city name in the autocomplete list when enter button is pressed
-        $scope.tf1 = true; //whether the tab is hidden or not
-        $scope.tf2 = true;
-        $scope.tf3 = true;
-        $scope.tf4 = true;
-        $scope.tf5 = true;
+        $scope.tf=$scope.tf||[];
         $scope.placeInTab=1;
         $scope.officialName = '';
-        $scope.tabNames = [];
-        $scope.timeArr = [];
+        $scope.tabNames = $scope.tabNames || [];
+        $scope.timeArr = $scope.timeArr || [];
         $scope.cityArr = [];
-        $scope.deltaTime = []; // difference between local time and given city's time
+        $scope.deltaTime = $scope.deltaTime||[]; // difference between local time and given city's time
         var date;
         var secsUntil; //seconds until next change in minute
         var firstOne;
@@ -35,7 +31,13 @@ angular.module('warRoom')
             })
 
         });
-
+        var setUpTf= function() {
+            for(var i=0;i<5;i++)
+            {
+                $scope.tf.push(true);
+            }
+        };
+        setUpTf();
         // timestamp in milliseconds since 1970 -> string like 4:30 pm
         var timeToString = function (timeInMillis) {
             date= new Date(timeInMillis);
@@ -94,56 +96,34 @@ angular.module('warRoom')
             $scope.deltaTime=tempDelta;
             $scope.tabNames=tempCity;
             $scope.timeArr=tempTime;
-
-            if ($scope.tabNames.length==0) {
-                $scope.tf1=true;
-            }
-            else if ($scope.tabNames.length==1) {
-                $scope.tf2=true;
-            }
-            else if ($scope.tabNames.length==2) {
-                $scope.tf3=true;
-            }
-            else if ($scope.tabNames.length==3) {
-                $scope.tf4=true;
-            }
-            else {
-                $scope.tf5=true;
-            }
+            $scope.tf[$scope.tabNames.length]=true;
         };
 
         $scope.nextTab = function() {
-            if($scope.tf1 == false) {
-                if($scope.tf2 == true) {
-                    $scope.tf2 = false;
-                    $scope.placeInTab=2;
-                } else {
-                    if($scope.tf3 == true) {
-                        $scope.tf3 = false;
-                        $scope.placeInTab=3;
-                    } else {
-                        if($scope.tf4 == true) {
-                            $scope.tf4 = false;
-                            $scope.placeInTab=4;
-                        } else {
-                            if($scope.tf5 == true) {
-                                $scope.tf5 = false;
-                                $scope.placeInTab=5;
-
-                            } else {
-                                $('#alert').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span>You have reached the tab limit.</span></div>');
-
-                                $('#alert').fadeTo(2000, 500).slideUp(500, function() {
-                                    $('#alert').alert('close');
-                                });
-                            }
-                        }
-                    }
-                }
-            } else{
-                $scope.tf1 = false;
-            };
+            $scope.placeInTab=1;
+            while($scope.tf[$scope.placeInTab-1]==false && $scope.placeInTab<5) {
+                $scope.placeInTab++;
+                console.log($scope.tf[$scope.placeInTab-1]);
+            }
+            console.log($scope.placeInTab);
+            if($scope.placeInTab>=5) {
+                $scope.alertBootstrap("You have reached the tab limit");
+            } else {
+                $scope.tf[$scope.placeInTab-1]=false;
+            }
             $scope.tabName();
+
+        };
+        $scope.loadTabs= function(obj)
+        {
+            $scope.tabNames=obj.tabNames;
+            $scope.tf=obj.tf;
+            console.log(obj)
+            $scope.deltaTime=obj.deltaTime;
+            $scope.timeArr= new Array($scope.tabNames.length);
+            updateTimeArray();
+
+
         };
 
         $scope.tabName = function () {
@@ -161,17 +141,9 @@ angular.module('warRoom')
 
         $scope.pressEnter= function() {
             if(typeof(cityList[0]) == 'undefined') {
-                $('#alert').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span>Please enter something.</span></div>');
-
-                $('#alert').fadeTo(2000, 500).slideUp(500, function() {
-                    $('#alert').alert('close');
-                });
+                $scope.alertBootstrap("Please enter something.")
             } else if(($scope.tabNames.indexOf(cityList[0].description))!=-1) {
-                $('#alert').html('<div class="alert alert-warning fade in"><a class="close" data-dismiss="alert"></a><span>This city already exists in your tabs. Try another one!</span></div>');
-
-                $('#alert').fadeTo(2000, 500).slideUp(500, function() {
-                    $('#alert').alert('close');
-                });
+                $scope.alertBootstrap("This city already exists in your tabs. Try another one!")
             } else {
                 if($scope.numInList === 1) {
                     $scope.officialName = cityList[0].description;
@@ -190,37 +162,31 @@ angular.module('warRoom')
                             secsUntil = 60-date.getSeconds();
                             updateTimeArray();
 
-
                             if($scope.tabNames.length==1) {
                                 $timeout(startInterval, (secsUntil * 1000), 1);
                             }
 
                         });
                     });
-
-
                     //if there's only one city and the person presses enter, then we can get the (only) placeId in the list
                     //and call the api to get longlat and then eventually the time
                 } else {
-                    $('#alert').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span>Please enter more characters; there are multiple cities shown.</span></div>');
-
-                    $('#alert').fadeTo(2000, 500).slideUp(500, function() {
-                        $('#alert').alert('close');
-                    });
-
+                    $scope.alertBootstrap("Please enter more characters; there are multiple cities shown.")
                 }
             }
         };
+        $scope.alertBootstrap= function(message)
+        {
+            $('#alert').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span>'+message+'</span></div>');
 
+            $('#alert').fadeTo(2000, 500).slideUp(500, function() {
+                $('#alert').alert('close');
+            });
+        };
         $scope.placeClick= function(name, placeId) {
             $scope.officialName = name;
             if (($scope.tabNames.indexOf(name)) != -1) {
-
-                $('#alert').html('<div class="alert alert-warning fade in"><a class="close" data-dismiss="alert"></a><span>This city already exists in your tabs. Try another one!</span></div>');
-
-                $('#alert').fadeTo(2000, 500).slideUp(500, function() {
-                    $('#alert').alert('close');
-                });
+                $scope.alertBootstrap("This city already exists in your tabs. Try another one!")
             } else {
                 $scope.nextTab();
                 $scope.cityArr.length=0;
@@ -232,14 +198,9 @@ angular.module('warRoom')
                         $scope.deltaTime[$scope.placeInTab-1] = (timestamp * 1000) - Date.now();
                         $scope.indexInTab = $scope.tabNames.indexOf(name);
                         $scope.pushTimeArr();
-                        date = new Date();
-                        secsUntil = 60-date.getSeconds();
+
                         updateTimeArray();
 
-
-                        if($scope.tabNames.length==1) {
-                            $timeout(startInterval, (secsUntil * 1000), 1);
-                        }
 
                     });
                 });
@@ -250,12 +211,18 @@ angular.module('warRoom')
             $interval(updateTimeArray,60*1000);
         };
 
-
         var updateTimeArray = function() {
             for(var j=0;j<$scope.timeArr.length; j++) {
                 var currentTime = $scope.deltaTime[j] + Date.now();
                 $scope.timeArr[j] = timeToString(currentTime+2000);
                 date= new Date();
             }
+        };
+        var initializeTime=function() {
+            date = new Date();
+            secsUntil = 60-date.getSeconds();
+            $timeout(startInterval, (secsUntil * 1000), 1);
         }
+        initializeTime()
+
     }]);
