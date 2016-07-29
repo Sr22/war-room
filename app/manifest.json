@@ -10,7 +10,6 @@
   },
   "permissions": [
     "activeTab",
-    "http://www.catsvscancer.org/",
     "https://ajax.googleapis.com/",
     "https://stash.cdk.com/rest/api/1.0/",
     "https://maps.googleapis.com/",
