@@ -1,11 +1,11 @@
 angular.module('warRoom')
 		.controller('weatherWidgetController', ['$scope', 'weatherApiService','widgetService', function($scope, weatherApiService, widgetService) {
 			
-				$scope.zip;
-				$scope.temperature;
-				$scope.place;
-				$scope.windspeed;
-				$scope.description;
+				$scope.zip = null;
+				$scope.temperature = null;
+				$scope.place = null;
+				$scope.windspeed = null;
+				$scope.description = null;
 			    $scope.hide = true;
 				
 				
@@ -41,20 +41,11 @@ angular.module('warRoom')
 						}
 						else {
 							$scope.colorOutput = "#FF6347"; //red
-
 						
 						}
 				
 						$('#forecast').css('background', $scope.colorOutput);
-
-
-						function error(errorMessage) {
-							$('#alert').html('<div class="alert alert-danger fade in"><a class="close" data-dismiss="alert"></a><span>Please enter correct zipcode or city!.</span></div>');
-
-							$('#alert').fadeTo(2000, 500).slideUp(500, function () {
-								$('#alert').alert('close');
-							});
-						}
+						
 					});
 				}
 			}])
