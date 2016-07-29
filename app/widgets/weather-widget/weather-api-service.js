@@ -8,13 +8,12 @@ angular.module('warRoom')
                     },
 
                     function (response) {
-                        console.log(response);
                         try {
                             place = response.location.city;
                             temperature = response.current_observation.temp_f;
                             description = response.current_observation.weather;
                             windspeed = response.current_observation.wind_string;
-                            console.log(place + "," + temperature + "," + description + "," + windspeed)
+
                             if (callback) {
                                 callback(place, temperature, description, windspeed);
                             }

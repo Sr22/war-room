@@ -16,12 +16,13 @@ angular.module("warRoom")
         }
         $scope.submit = function() {
             var search = $scope.search;
+            search = search.toLowerCase();
             if (searches.indexOf(search) != -1) {
                 duplicate_alert();
             } else {
                 RedditService.retrievePostInformation(search).then(function(data) {
                     $scope.$evalAsync(function() {
-                        searches.push(data.name);
+                        searches.push(search);
                         widgetService.saveValue('reddit-widget', 'searches', searches);
                         $scope.topics.push(data);
                     });
