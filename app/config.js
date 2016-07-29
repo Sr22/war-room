@@ -23,30 +23,10 @@ angular
         'widgets/stash-widget/stash-widget-directive.js',
         'widgets/stash-widget/stash-widget.css'
       ],
-<<<<<<< HEAD
-      directive: 'stashWidget'
-    },
-    {
-      name: 'NewsWidget' ,
-      dependencies: [
-          'widgets/news-widget/nyt-service.js',
-          'widgets/news-widget/news-service.js',
-          'widgets/news-widget/espn-service.js',
-          'widgets/news-widget/news-controller.js',
-          'widgets/news-widget/news-directive.js',
-          'widgets/news-widget/news-style.css'
-          // 'widgets/new-widget/api-key.js'
-          
-      ],
-      directive: 'newsWidget'
-    },
-    {
-=======
       directive: 'stashWidget',
       initialize: 'stashWidgetService.initialize',
       serialize: 'stashWidgetService.serialize'
     }, {
->>>>>>> 15a10cb5cae203756b77e9a1f757f58e3d17d733
       name: 'RedditWidget',
       displayName: 'Reddit',
       dependencies: [
@@ -82,7 +62,9 @@ angular
         'widgets/weather-widget/weather-widget.html',
         'widgets/weather-widget/weather-widget.css'
       ],
-      directive: 'weatherWidget'
+      directive: 'timeWidget',
+      initialize: 'timeWidgetService.initialize',
+      serialize:'timeWidgetService.serialize'
     },
     {
         name: 'NotesWidget',
@@ -97,13 +79,22 @@ angular
         directive: 'notesWidget',
         initialize: 'notesWidgetService.initialize',
         serialize: 'notesWidgetService.serialize'
-    }
+    } {
+          name: 'NewsWidget' ,
+          displayName: 'News',
+          dependencies: [
+              'widgets/news-widget/nyt-service.js',
+              'widgets/news-widget/news-service.js',
+              'widgets/news-widget/espn-service.js',
+              'widgets/news-widget/news-controller.js',
+              'widgets/news-widget/news-directive.js',
+              'widgets/news-widget/news-style.css'
+              // 'widgets/new-widget/api-key.js'
+
+          ],
+          directive: 'newsWidget'
+      }
   ]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> 15a10cb5cae203756b77e9a1f757f58e3d17d733

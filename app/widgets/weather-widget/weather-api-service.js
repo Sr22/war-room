@@ -6,7 +6,6 @@ angular.module('warRoom')
                         zip: zipCode
 
                     },
-
                     function (response) {
                         try {
                             place = response.location.city;

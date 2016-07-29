@@ -5,7 +5,7 @@ angular.module('warRoom')
         
         $scope.dataNyt = [];
         $scope.dataNews = [];
-        #scope.dataSport = [];
+        $scope.dataSport = [];
         $scope.tb1Nyt = true;
         $scope.tb2News = true;
         $scope.tb3Sport = true;
