@@ -6,8 +6,6 @@ button:focus {outline: 0;}
 /*Title Bar Style*/
 #calendarTitle {
     height: 46px;
-    background: #000;
-    color: #fff;
     text-align: center;
     padding: 4px 0;
     margin: 0 0 16px 0;
@@ -31,7 +29,6 @@ button:focus {outline: 0;}
 /*Display Box Style*/
 .box {
     height: 123px;
-    background: #e6e6e6;
     overflow: auto;
     font-size: 12px;
     padding: 4px;
@@ -48,7 +45,6 @@ button:focus {outline: 0;}
 /*Create-an-event form style*/
 #create {
     height: 120px;
-    background: #e6e6e6;
     font-size: 12px;
     padding: 3px 3px;
     margin: 0 16px;
@@ -114,14 +110,12 @@ button:focus {outline: 0;}
 /*Tool Bar Style*/
 #toolbar {
     height: 30px;
-    background: #000;
     margin: 0 16px;
 }
 
 /*Tool bar button generic style*/
 .toolBarItem {
-    background: #000;
-    color: #FFF;
+    /*color: #FFF;*/
     border: none;
     height: 21px;
     margin: 5px 16px 0 16px;

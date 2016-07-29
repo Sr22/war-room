@@ -35,7 +35,6 @@ angular.module('warRoom')
             $scope.createDesc = '';
             $scope.createRepeat = 'X';
             $scope.createRepeatInf ='Iteration of event: None';
-            $scope.createColor = '#e6e6e6';
             $scope.defCon = 0;
             $scope.star = 'star_border';
 
@@ -43,17 +42,35 @@ angular.module('warRoom')
             $scope.deleteTHide = true;
             $scope.deleteEvents = [];
             $scope.deleteCheck = [];
-            $scope.deleteColor = '#e6e6e6';
             $scope.deleteConBoxHide = true;
 
             $scope.events = [];
             $scope.data = {};
 
             //BarBck, BarTxt, BoxBck, BoxTxt, CalBck, CalTxt, ToBck, ToTx, Df0, Df1, Df2, DfTxt, Background
-            $scope.theme = ['background: #000000;', 'color: #ffffff;', '#e6e6e6', '#000000','#cccccc','#000000',
-                '#000000', '#ffffff', '#66ccff', '#ff9966', '#ff6666', '#ffffff', '#ffffff'];
+            $scope.theme = ['#000000;', '#ffffff;', '#e6e6e6', '#000000','#cccccc','#000000',
+                '#000000', '#ffffff', '#66ccff', '#ff9966', '#ff6666', '#ffffff', '#ffffff', '#000000'];
         }
-        $scope.test = function () {return 'background: #000000;';};
+
+        //Theme functions
+        {
+            $scope.calBarTheme = function () {
+                return 'background:' + $scope.theme[0] + '; color:' + $scope.theme[1] + ';';};
+            $scope.calBoxTheme = function () {
+                return 'background:' + $scope.theme[2] + '; color:' + $scope.theme[3] + ';';};
+            $scope.calCalTheme = function () {
+                return 'background:' + $scope.theme[4] + '; color:' + $scope.theme[5] + ';';};
+            $scope.calToTheme = function () {
+                return 'background:' + $scope.theme[6] + '; color:' + $scope.theme[7] + ';';};
+            $scope.calDf0Theme = function () {
+                return 'background:' + $scope.theme[8] + ';';};
+            $scope.calDf1Theme = function () {
+                return 'background:' + $scope.theme[9] + ';';};
+            $scope.calDf2Theme = function () {
+                return 'background:' + $scope.theme[10] + ';';};
+            $scope.calBckTheme = function () {
+                return 'background:' + $scope.theme[12] + '; color:' + $scope.theme[13]};
+        }
 
         //Generates calendar and calendar days
         $scope.calendar = function(){
@@ -61,13 +78,13 @@ angular.module('warRoom')
                 var c = new Date($scope.yearA, $scope.monthA.val, 1);//Sets calendar to current month and year
                 dt = 1; //First day of the month - variable deals with the actual date displayed in the button!
                 var gen = '<tr id="des" style="font-size: 12px; text-align: center;"> ' +
-                    '<td class="itemBox" id="sun"><strong>Sun</strong></td> ' +
-                    '<td class="itemBox" id="mon"><strong>Mon</strong></td> ' +
-                    '<td class="itemBox" id="tue"><strong>Tue</strong></td> ' +
-                    '<td class="itemBox" id="wed"><strong>Wed</strong></td> ' +
-                    '<td class="itemBox" id="thu"><strong>Thu</strong></td> ' +
-                    '<td class="itemBox" id="fri"><strong>Fri</strong></td> ' +
-                    '<td class="itemBox" id="sat"><strong>Sat</strong></td> ' +
+                    '<td class="itemBox" id="sun" style="{{calBckTheme()}}"><strong>Sun</strong></td> ' +
+                    '<td class="itemBox" id="mon" style="{{calBckTheme()}}"><strong>Mon</strong></td> ' +
+                    '<td class="itemBox" id="tue" style="{{calBckTheme()}}"><strong>Tue</strong></td> ' +
+                    '<td class="itemBox" id="wed" style="{{calBckTheme()}}"><strong>Wed</strong></td> ' +
+                    '<td class="itemBox" id="thu" style="{{calBckTheme()}}"><strong>Thu</strong></td> ' +
+                    '<td class="itemBox" id="fri" style="{{calBckTheme()}}"><strong>Fri</strong></td> ' +
+                    '<td class="itemBox" id="sat" style="{{calBckTheme()}}"><strong>Sat</strong></td> ' +
                     '</tr>';
                 gen += calendarFirWeek(c.getDay());
                 for (a = 0; a < 3; a++) {
@@ -107,16 +124,16 @@ angular.module('warRoom')
 
         //Display box dynamic height function
         $scope.boxHeight = function () {
-            var h = document.getElementById('calendarNgWidget').offsetHeight - 411;
+            var h = document.getElementById('calendarNgWidget').offsetHeight - 420;
             if (h <= 0) {h = 123;}
-            return 'height: ' + h + 'px;';
+            return 'height: ' + h + 'px;' + $scope.calBoxTheme();
         };
 
         //Display create box dynamic height function
         $scope.createHeight = function () {
-            var h = document.getElementById('calendarNgWidget').offsetHeight - 411;
+            var h = document.getElementById('calendarNgWidget').offsetHeight - 420;
             if (h <= 0) {h = 123;}
-            return 'height: ' + h + 'px; background: ' + $scope.createColor + ';';
+            return 'height: ' + h + 'px;' + $scope.calBoxTheme();
         };
 
         //Initialization for chrome.storage.sync
@@ -225,8 +242,9 @@ angular.module('warRoom')
                 }
             }
             if ($scope.createTitle == '') { //Ensures that required fields are filled (Title)
-                $scope.createColor = '#ffcccc';
-                var f = function() {$scope.createColor = '#e6e6e6';};
+                var original = $scope.theme[2];
+                $scope.theme[2] = '#ffcccc';
+                var f = function() {$scope.theme[2] = original;};
                 $interval(f, 100, 1);
             } else {
                 var day = new Date($scope.yearA, $scope.monthA.val, $scope.dateA).getDay();
@@ -319,63 +337,12 @@ angular.module('warRoom')
 
         //Display delete box dynamic height function
         $scope.deleteHeight = function () {
-            var h = document.getElementById('calendarNgWidget').offsetHeight - 411;
+            var h = document.getElementById('calendarNgWidget').offsetHeight - 420;
             if (h <= 0) {h = 123;}
-            return 'height: ' + h + 'px; background: ' + $scope.deleteColor + ';';
+            return 'height: ' + h + 'px;' + $scope.calBoxTheme();
         };
         
         //Read and display delete list
-        {/*$scope.deleteRead = function () {
-            if ($scope.deleteHide == false) {
-                var gen = '';
-                var sort = [];
-                var day = new Date($scope.yearA, $scope.monthA.val, $scope.dateA).getDay();
-                if ($scope.events.length > 0){
-                    var b = 0;
-                    for (a = 0; a < $scope.events.length; a++) {
-                        var ev = $scope.events[a];
-                        var date = $scope.data[ev][2].split(' ');
-                        if (date[4] == 'X' && date[0] == $scope.yearA &&
-                            date[1] == $scope.monthA.val && date[2] == $scope.dateA){
-                            deletePush($scope.deleteEvents, $scope.deleteCheck, ev);
-                            gen += deleteContainer($scope.data[ev][0], date[5], date[6], ev, b);
-                            b++;
-                        }
-                        if (date[4] == 'D'){
-                            deletePush($scope.deleteEvents, $scope.deleteCheck, ev);
-                            gen += deleteContainer($scope.data[ev][0], date[5], date[6], ev, b);
-                            b++;
-                        }
-                        if (date[4] == 'W' && date[3] == day){
-                            deletePush($scope.deleteEvents, $scope.deleteCheck, ev);
-                            gen += deleteContainer($scope.data[ev][0], date[5], date[6], ev, b);
-                            b++;
-                        }
-                        if (date[4] == 'M' && date[2] == $scope.dateA){
-                            deletePush($scope.deleteEvents, $scope.deleteCheck, ev);
-                            gen += deleteContainer($scope.data[ev][0], date[5], date[6], ev, b);
-                            b++;
-                        }
-                        if (date[4] == 'Y' && date[1] == $scope.monthA.val && date[2] == $scope.dateA){
-                            deletePush($scope.deleteEvents, $scope.deleteCheck, ev);
-                            gen += deleteContainer($scope.data[ev][0], date[5], date[6], ev, b);
-                            b++;
-                        }
-                        if (gen != ''){
-                            sort.push(gen);
-                            gen = '';
-                        }
-                        console.log('Checking: ' + ev);
-                    }
-                    sort.sort();
-                    gen = sort.join('');
-                }
-                console.log('Generated: ' + gen);
-                console.log('DE:' + $scope.deleteEvents);
-                console.log('DC:' + $scope.deleteCheck);
-                return gen;
-            }
-        };*/}
         $scope.deleteRead = function () {
             if ($scope.deleteHide == false) {
                 var gen = '';
@@ -431,8 +398,9 @@ angular.module('warRoom')
                 }
             }
             if ($scope.deleteEvents.length == count) { //Ensures that something is being deleted
-                $scope.deleteColor = '#ffcccc';
-                var f = function() {$scope.deleteColor = '#e6e6e6';};
+                var original = $scope.theme[2];
+                $scope.theme[2] = '#ffcccc';
+                var f = function() {$scope.theme[2] = original;};
                 $interval(f, 100, 1);
             } else if ($scope.deleteEvents.length != count) {
                 $scope.deleteTHide = true;
@@ -466,4 +434,5 @@ angular.module('warRoom')
             $scope.deleteConBoxHide = true;
             $scope.boxHide = false;
         };
+
     }]);

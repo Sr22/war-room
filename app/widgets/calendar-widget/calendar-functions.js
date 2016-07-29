@@ -108,13 +108,13 @@ function eventContainer(title, desc, defCon, time){
     var v = new Date().getTime();
     var gen = '<div class="reminderBox"';
     if (defCon == 0) {
-        gen += 'id="' + time + 'dfC" style="background: #66ccff">';
+        gen += 'id="' + time + 'dfC" style="{{calDf0Theme()}}">';
     }
     if (defCon == 1) {
-        gen += 'id="' + time + 'dfB" style="background: #ff9966">';
+        gen += 'id="' + time + 'dfB" style="{{calDf1Theme()}}">';
     }
     if (defCon == 2) {
-        gen += 'id="' + time + 'dfA" style="background: #ff6666">';
+        gen += 'id="' + time + 'dfA" style="{{calDf2Theme()}}">';
     }
     gen += at + title + '<br><small><em>' + desc + '</em></small></div>';
     return gen;
@@ -154,13 +154,13 @@ function deleteContainer(title, defCon, time, id, num) {
     var v = new Date().getTime();
     var gen = '<div class="reminderBox"';
     if (defCon == 0) {
-        gen += 'id="' + time + 'dfC" style="background: #66ccff">';
+        gen += 'id="' + time + 'dfC" style="{{calDf0Theme()}}">';
     }
     if (defCon == 1) {
-        gen += 'id="' + time + 'dfB" style="background: #ff9966">';
+        gen += 'id="' + time + 'dfB" style="{{calDf1Theme()}}">';
     }
     if (defCon == 2) {
-        gen += 'id="' + time + 'dfA" style="background: #ff6666">';
+        gen += 'id="' + time + 'dfA" style="{{calDf2Theme()}}">';
     }
     gen += '<button class="deleteCheck" id="bt' + id + '"' +
         ' ng-mousedown="hitListUpdate(';
