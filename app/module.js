@@ -33,4 +33,7 @@ app.config(['$controllerProvider', '$provide', '$compileProvider', function($con
       $compileProvider.directive( name, factory );
       return this;
   };
+    app.config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data|chrome-extension):/);
+    }])
 }]);
