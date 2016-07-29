@@ -3,7 +3,7 @@ angular
   .constant('widgetList', [
     {
       name: 'CalendarWidget',
-      displayName: 'CalendarWidget',
+      displayName: 'Calendar',
       dependencies: [
           'widgets/calendar-widget/calendar-compile.js',
           'widgets/calendar-widget/calendar-functions.js',
@@ -45,7 +45,8 @@ angular
         'widgets/time-widget/timezone-api-service.js',
         'widgets/time-widget/time-widg-controller.js',
         'widgets/time-widget/time-widg-directive.js',
-        'widgets/time-widget/time-style.css'
+        'widgets/time-widget/time-style.css',
+        'widgets/time-widget/time-widget-service.js'
       ],
       directive: 'timeWidget',
       initialize: 'timeWidgetService.initialize',
