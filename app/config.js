@@ -12,6 +12,19 @@ angular
       directive: 'stashWidget'
     },
     {
+      name: 'NewsWidget' ,
+      dependencies: [
+          'widgets/news-widget/news-service.js',
+          'widgets/news-widget/nyt-service.js',
+          'widgets/news-widget/news-controller.js',
+          'widgets/news-widget/news-directive.js',
+          'widgets/news-widget/news-style.css'
+          // 'widgets/new-widget/api-key.js'
+          
+      ],
+      directive: 'newsWidget'
+    },
+    {
       name: 'RedditWidget',
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
@@ -36,3 +49,4 @@ angular
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
+   

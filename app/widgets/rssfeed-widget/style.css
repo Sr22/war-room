@@ -1,0 +1,41 @@
+@import url("http://www.google.com/uds/solutions/dynamicfeed/gfdynamicfeedcontrol.css");
+
+#feedControl {
+	max-width: 100%;
+	height: auto;
+	width: auto;
+	margin-top : 5%;
+	margin-left: 0%;
+	width : 440px;
+	font-size: 12px;
+	color: #9CADD0;
+
+}
+.box {
+	height: 10%;
+	width: 15%;
+	border:2px inset #cccccc;
+	float: center;
+
+}
+div img {
+	opacity: 1;
+}
+
+div br a img {
+	z-index: 2;
+
+}
+#yahoo {
+	margin-left: 10%;
+
+}
+
+#nyt {
+	margin-left: 10%;
+}
+
+#cnn {
+	margin-left: 25%;
+}
+

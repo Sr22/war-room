@@ -1,0 +1,10 @@
+<div ng-controller="myNewWidgetController">
+  <p>{{ message }}</p>
+</div>
+
+
+angular.module('warRoom').directive("myNewWidgetDirective", function() {
+  return {
+    templateUrl: "widgets/my-new-widget/template.html"
+  }
+});

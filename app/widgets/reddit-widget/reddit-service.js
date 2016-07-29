@@ -8,6 +8,7 @@ angular.module("warRoom")
                 var defer = $q.defer();
                 return $http.get("https://www.reddit.com/r/" + redditSearch + "/top/.json?limit=3").then(function onSuccess(response) {
                     var s = redditSearch.toLowerCase();
+                    console.log(response);
                     if (response.data.data.children[1] == null) {
                         var tempTopic = {
                             name: s,
