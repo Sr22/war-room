@@ -1,4 +1,5 @@
 angular.module('warRoom')
+     
     .service('weatherApiService', ['$resource',function ($resource) {
         return {
             getWeather: function (zipCode, callback, errCallback) {
@@ -7,7 +8,7 @@ angular.module('warRoom')
 
                     },
 
-                    function (response) {
+                   function (response) {
                         try {
                             place = response.location.city;
                             temperature = response.current_observation.temp_f;
