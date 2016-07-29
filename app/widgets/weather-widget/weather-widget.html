@@ -5,10 +5,12 @@
 <script src="widgets/weather-widget/weather-widget.js"></script> 
 
 <form id="forecast">
+	<nav id="weather-head" class="navbar navbar-default">
 	<!--<div background="http://www.catsvscancer.org/wp-content/uploads/2015/04/Taco-Cat-Spelled-Backwards-Is-Taco-Cat.-e1430184838220.jpg">-->
 	<!--</div>-->
-	<h1>Weather</h1>
-		<input type="text" ng-model="zip" id="weather-search"  placeholder="Add zip code or place" />
+	<h4>Weather</h4>
+	</nav>
+		<input type="text" ng-model="zip" id="weather-search"  placeholder="Add zip code " />
 			<button id="button1" class="btn btn-small btn-primary"  ng-keypress="keypressDown($event)" ng-click="find()"> Enter </button>
 			<p ng-hide ='hide'><i class="fa fa-globe"></i>   Weather in: {{ place }}</p>
 			<p ng-hide ='hide'>It is currently {{ temperature }} °F and {{ description }}</p>
