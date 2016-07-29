@@ -47,7 +47,9 @@ angular
         'widgets/time-widget/time-widg-directive.js',
         'widgets/time-widget/time-style.css'
       ],
-      directive: 'timeWidget'
+      directive: 'timeWidget',
+      initialize: 'timeWidgetService.initialize',
+      serialize:'timeWidgetService.serialize'
     },
     {
       name: 'WeatherWidget',
