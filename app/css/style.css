@@ -5,11 +5,7 @@
   margin: 8px;
 }
 
-.widget-wrapper p {
-  margin: 8px;
-}
-
-.save-button, .load-button {
+.save-button, .load-button, .add {
   margin-top: 12px;
   margin-right: 0px;
   padding-right: 6px;
@@ -47,4 +43,51 @@
 
 .grid-stack-item-content {
   border-radius: 5px;
+}
+
+.bookmarks-bar li {
+  display:inline;
+  padding: 17px;
+}
+
+.bookmarks-bar {
+  margin-top: -42px;
+  margin-left: 200px;
+}
+.dropdown-menu {
+  left: 80%;
+}
+
+.remove-widget {
+  background: none;
+  float: right;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  font-size: 17px;
+}
+.remove-widget:hover {
+  color: salmon;
+}
+#link-new {
+  border: none;
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  margin-top: -20px;
+}
+#linkNameField {
+  border-color: #337ab7;
+}
+#linkUrlField {
+  border-color: #337ab7;
+  margin-top: 5px;
+}
+#linkSubmit {
+  margin-top: 5px;
+}
+#bookmark-x-button {
+  padding: 6px;
+  border: none;
+  background-color: transparent;
+  color: darkgrey;
 }

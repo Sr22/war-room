@@ -2,20 +2,36 @@ angular
   .module('warRoom')
   .constant('widgetList', [
     {
-      name: 'StashWidget',
+      name: 'CalendarWidget',
+      displayName: 'Calendar',
       dependencies: [
-        'widgets/stash-widget/stash-api.js', 
-        'widgets/stash-widget/stash-widget-controller.js', 
-        'widgets/stash-widget/stash-widget-directive.js', 
+          'widgets/calendar-widget/calendar-compile.js',
+          'widgets/calendar-widget/calendar-functions.js',
+          'widgets/calendar-widget/calendar-controller.js',
+          'widgets/calendar-widget/calendar-directive.js',
+          'widgets/calendar-widget/calendar-styles.css'
+      ],
+      directive: 'calendarWidget'
+    },
+      {
+      name: 'StashWidget',
+      displayName: 'Stash',
+      dependencies: [
+        'widgets/stash-widget/stash-api.js',
+        'widgets/stash-widget/stash-widget-service.js',
+        'widgets/stash-widget/stash-widget-controller.js',
+        'widgets/stash-widget/stash-widget-directive.js',
         'widgets/stash-widget/stash-widget.css'
       ],
+<<<<<<< HEAD
       directive: 'stashWidget'
     },
     {
       name: 'NewsWidget' ,
       dependencies: [
-          'widgets/news-widget/news-service.js',
           'widgets/news-widget/nyt-service.js',
+          'widgets/news-widget/news-service.js',
+          'widgets/news-widget/espn-service.js',
           'widgets/news-widget/news-controller.js',
           'widgets/news-widget/news-directive.js',
           'widgets/news-widget/news-style.css'
@@ -25,7 +41,14 @@ angular
       directive: 'newsWidget'
     },
     {
+=======
+      directive: 'stashWidget',
+      initialize: 'stashWidgetService.initialize',
+      serialize: 'stashWidgetService.serialize'
+    }, {
+>>>>>>> 15a10cb5cae203756b77e9a1f757f58e3d17d733
       name: 'RedditWidget',
+      displayName: 'Reddit',
       dependencies: [
         'widgets/reddit-widget/reddit-service.js',
         'widgets/reddit-widget/reddit-controller.js',
@@ -36,17 +59,51 @@ angular
     },
     {
       name: 'TimeWidget',
+      displayName: 'Time',
       dependencies: [
         'widgets/time-widget/googlemaps-api-service.js',
         'widgets/time-widget/timezone-api-service.js',
         'widgets/time-widget/time-widg-controller.js',
         'widgets/time-widget/time-widg-directive.js',
-        'widgets/time-widget/time-style.css'
+        'widgets/time-widget/time-style.css',
+        'widgets/time-widget/time-widget-service.js'
       ],
-      directive: 'timeWidget'
+      directive: 'timeWidget',
+      initialize: 'timeWidgetService.initialize',
+      serialize:'timeWidgetService.serialize'
+    },
+    {
+      name: 'WeatherWidget',
+      displayName: 'Weather',
+      dependencies: [
+        'widgets/weather-widget/weather-api-service.js',
+        'widgets/weather-widget/weather-widget-controller.js',
+        'widgets/weather-widget/weather-widget-directive.js',
+        'widgets/weather-widget/weather-widget.html',
+        'widgets/weather-widget/weather-widget.css'
+      ],
+      directive: 'weatherWidget'
+    },
+    {
+        name: 'NotesWidget',
+        displayName: 'Notes',
+        dependencies: [
+            'bower_components/showdown/dist/showdown.js',
+            'widgets/notes-widget/notes-widget-service.js',
+            'widgets/notes-widget/notes-widget-controller.js',
+            'widgets/notes-widget/notes-widget.js',
+            'widgets/notes-widget/notes-widget.css'
+        ],
+        directive: 'notesWidget',
+        initialize: 'notesWidgetService.initialize',
+        serialize: 'notesWidgetService.serialize'
     }
   ]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 15a10cb5cae203756b77e9a1f757f58e3d17d733

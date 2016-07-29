@@ -10,13 +10,18 @@
   },
   "permissions": [
     "activeTab",
+    "storage",
     "https://ajax.googleapis.com/",
     "https://stash.cdk.com/rest/api/1.0/",
     "https://maps.googleapis.com/",
     "http://api.timezonedb.com/",
     "https://www.reddit.com/r/",
+<<<<<<< HEAD
     "http://api.nytimes.com/"
 
 
+=======
+    "https://api.wunderground.com/"
+>>>>>>> 15a10cb5cae203756b77e9a1f757f58e3d17d733
   ]
 }

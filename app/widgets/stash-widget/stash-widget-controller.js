@@ -1,6 +1,6 @@
 angular.module('warRoom')
 
-.controller('stashWidgetController', ['$scope', 'stashApiService', 'widgetService', function ($scope, stashApiService, widgetService) {
+.controller('stashWidgetController', ['$scope', '$element', 'stashApiService', 'widgetService', function ($scope, $element, stashApiService, widgetService) {
   $scope.page = 'login';
   $scope.pageStack = ['Stash Widget'];
   $scope.pageStackInternal = ['stash-widget'];
@@ -62,10 +62,22 @@ angular.module('warRoom')
   }
   
   $scope.login = function (username, password, callback, errorFunc) {
+    console.log('called with ' + username)
     if (stashApiService.setCredentials(username, password)) {
+      if(!username) {
+        console.log('no username so im returning')
+        var submitLogin = '#stash-widget-submit-login';
+
+        $scope.setSubmitButtonLoading(submitLogin, false);
+        return
+      }
       stashApiService.testCredentials(function (passed) {
+        console.log('did I pass? ', passed)
+        console.log($scope.isLoggedIn)
         if (passed) {
+
           if ($scope.saveLoginInformation.value) {
+            //console.log('yeah value here')
             widgetService.saveValue('StashWidget', 'username', username);
             widgetService.saveValue('StashWidget', 'password', password);
           }
@@ -75,6 +87,7 @@ angular.module('warRoom')
           callback && callback();
         } else {
           $scope.loginFailed = true;
+          alert("Oops! The username or password was incorrect. Try again!")
           $scope.isLoggedIn = false;
           
           errorFunc && errorFunc();
@@ -104,6 +117,14 @@ angular.module('warRoom')
       $(selector).html('Submit');
     }
   };
+
+  // $scope.setPageLoading = function (loading) {
+  //   if (loading) {
+  //     $scope.html('<i class=\'fa fa-refresh fa-refresh-animate\' aria-hidden=\'true\'></i> Submit');
+  //   } else {
+  //     $scope.html('Submit');
+  //   }
+  // };
   
   $scope.updatePullRequestsJson = function (type, group, name, callback, errorFunc) {
     return stashApiService.getPullRequests(type, group, name, function (data) {
@@ -143,22 +164,41 @@ angular.module('warRoom')
     else if (dt < 86400*2-1) return "a day ago";
     else return "" + Math.floor(dt / 86400) + " days ago";
   };
-  
+
   $scope.pushPastPage = function (func, params) {
     $scope.pastPages.push(func + '(' + params.map(function (elem) { return JSON.stringify(elem) + ""; }).join(',') + ')');
   }
   
-  $scope.showLogin = function (username, password) {    
+  $scope.showLogin = function (username, password) {
+    $scope.logout()
     var submitLogin = '#stash-widget-submit-login';
     $scope.setSubmitButtonLoading(submitLogin, true);
-    $scope.login(username, password, function () { 
+    $scope.login(username, password, function () {
       $scope.setSubmitButtonLoading(submitLogin, false);
       $scope.showBrowserSelect();
-    }, function () { 
-      $scope.setSubmitButtonLoading(submitLogin, false); 
+    }, function () {
+      $scope.setSubmitButtonLoading(submitLogin, false);
     });
     
     $scope.pushPastPage('$scope.showLogin', [username, password]);
+  };
+
+  $scope.showLoginKeypress = function (username, password, $event) {
+    var keyCode = $event.which || $event.keyCode;
+    if(keyCode ===13){
+      $scope.logout()
+      var submitLogin = '#stash-widget-submit-login';
+      $scope.setSubmitButtonLoading(submitLogin, true);
+      $scope.login(username, password, function () {
+        $scope.setSubmitButtonLoading(submitLogin, false);
+        $scope.showBrowserSelect();
+      }, function () {
+        $scope.setSubmitButtonLoading(submitLogin, false);
+      });
+
+      $scope.pushPastPage('$scope.showLogin', [username, password]);
+    }
+    
   };
   
   $scope.showLogout = function () {
@@ -177,9 +217,29 @@ angular.module('warRoom')
       $scope.setSubmitButtonLoading(submitManual, false); 
     });
   };
+
+  $scope.showPullRequestsManualKeypress = function (type, group, name, $event) {
+
+    var keyCode = $event.which || $event.keyCode;
+    if(keyCode ===13) {
+
+      var submitManual = '#stash-widget-submit-manual';
+
+      $scope.setSubmitButtonLoading(submitManual, true);
+      $scope.updatePullRequestsJson(type, group, name, function () {
+        $scope.setSubmitButtonLoading(submitManual, false);
+        $scope.switchPage('pull-requests');
+      }, function () {
+        $scope.setSubmitButtonLoading(submitManual, false);
+      });
+    }
+  };
   
   $scope.showPullRequestsRecentObject = function (obj) {
+    var submitRecent = '#stash-widget-pr-list-header';
+    $scope.setSubmitButtonLoading(submitRecent, true);
     $scope.updatePullRequestsJson(obj.project.type ===  'PERSONAL' ? 'users' : 'projects', obj.project.type === 'PERSONAL' ? obj.project.owner.name : obj.project.key, obj.slug, function () { 
+      $scope.setSubmitButtonLoading (submitRecent, false);
       $scope.switchPage('pull-requests');
     });
   };
@@ -220,9 +280,12 @@ angular.module('warRoom')
     default:
       break;
     }
-  }
+  };
   
   var loadedUsername = widgetService.loadValue('StashWidget', 'username');
   var loadedPassword = widgetService.loadValue('StashWidget', 'password');
-  if (!!loadedUsername && !!loadedPassword) $scope.login(loadedUsername, loadedPassword);  
+  console.log('>>>', loadedUsername)
+  if (!!loadedUsername && !!loadedPassword) {
+    $scope.showLogin(loadedUsername, loadedPassword);
+  }
 }]);

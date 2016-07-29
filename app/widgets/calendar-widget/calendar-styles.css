@@ -1,0 +1,152 @@
+/*CUSTOM STYLES FOR CALENDAR WIDGET*/
+
+/*Global styles*/
+button:focus {outline: 0;}
+
+/*Title Bar Style*/
+#calendarTitle {
+    height: 46px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 4px 0;
+    margin: 0 0 16px 0;
+    font-size: 20px;
+}
+
+/*Date Selection Bar Generic Style*/
+#dateBar {
+    display: table;
+    margin: 0 auto 16px auto;
+}
+
+/*Date Selection Bar Generic Style*/
+.dateBarItem {
+    margin: 0 2px;
+    background: #FFF;
+    border: 2px solid #000;
+    height: 30px;
+}
+
+/*Display Box Style*/
+.box {
+    height: 123px;
+    background: #e6e6e6;
+    overflow: auto;
+    font-size: 12px;
+    padding: 4px;
+    margin: 0 16px;
+}
+
+/*Reminder box generic style*/
+.reminderBox {
+    color: #FFF;
+    margin: 0 0 3px 0;
+    padding: 4px;
+}
+
+/*Create-an-event form style*/
+#create {
+    height: 120px;
+    background: #e6e6e6;
+    font-size: 12px;
+    padding: 3px 3px;
+    margin: 0 16px;
+}
+
+/*Create-an-event styles*/
+.textArea {
+    font-size: 12px;
+    width: 100%;
+    height: 91px;
+    padding: 4px;
+    resize: none;
+    margin: 3px 0;
+    border: none;
+    outline: none;
+}
+
+.createInput {
+    height: 22px;
+    padding: 4px;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+/*Delete-an-event styles*/
+.deleteCheck {
+    background: none;
+    color: #FFF;
+    height: 20px;
+    width: 20px;
+    border: none;
+    margin: 0 10px 0 0;
+}
+
+#delCBack {
+    background: #000;
+    opacity: 0.2;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right:0;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+#delConBox {
+    background: #000;
+    color: #FFF;
+    height: 80px;
+    width: 160px;
+    padding: 4px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+    top: 130px;
+    left: 0;
+    right:0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Tool Bar Style*/
+#toolbar {
+    height: 30px;
+    background: #000;
+    margin: 0 16px;
+}
+
+/*Tool bar button generic style*/
+.toolBarItem {
+    background: #000;
+    color: #FFF;
+    border: none;
+    height: 21px;
+    margin: 5px 16px 0 16px;
+    width: 30px;
+    text-align: center;
+}
+
+/*Calendar Container Styles*/
+#calendar {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+/*Date Button Container Generic Style*/
+.itemBox {
+    width: 38px;
+    height: 38px;
+    text-align: center;
+}
+
+/*Date Button Generic Style*/
+.dateButton {
+    border: none;
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    background: #cccccc;
+}

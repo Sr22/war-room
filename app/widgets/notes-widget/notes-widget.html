@@ -1,0 +1,10 @@
+<div class="notes-widget-wrapper">
+  <div class="notes-widget-header">
+    <h1 class="notes-widget-title">Notes</h1>
+    <i class="fa fa-pencil-square-o notes-edit-icon" ng-click="render(!rendering)" aria-hidden="true"></i>
+  </div>
+  <div class="notes-widget-content">
+    <textarea ng-model="content" ng-show="!rendering" class="notes-textarea" placeholder="Speak your mind! This textbox supports Markdown." name="Notes"></textarea>
+    <span ng-show="rendering" ng-bind-html="markdown" class="notes-rendered"></span>
+  </div>
+</div>

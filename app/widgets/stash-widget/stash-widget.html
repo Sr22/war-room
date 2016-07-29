@@ -2,13 +2,14 @@
   <div class="stash-widget-header">
     <h1 class="stash-widget-title"><span ng-repeat="t in pageStack | limitTo: (pageStack.length-1)"><a ng-click="showPageByName(pageStackInternal[$index])" href="#" class="white-link">{{ t }}</a> <i style="margin-left: 3px; margin-right: 3px;" class="fa fa-caret-right" aria-hidden="true"></i>
  </span><span><a ng-click="showPageByName(pageStackInternal[pageStackInternal.length-1])" href="#" class="white-link">{{pageStack[pageStack.length-1]}}</a></span></h1><button ng-if="page != 'login'" ng-click="showLogout()" type="button" class="btn btn-secondary-outline stash-widget-logout-button">Log out</button>
+
   </div>
   <div class="stash-widget-content">
     <div ng-switch on="page">
       <div ng-switch-when="login">
         <div>
           <label class="stash-widget-label">Username</label><input class="form-control" ng-model="username" type="text" />
-          <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" />
+          <label class="stash-widget-label">Password</label><input class="form-control" ng-model="password" type="password" ng-keypress="showLoginKeypress(username, password, $event)"/>
           Remember login information? <input class="stash-widget-remember" type="checkbox" ng-model="saveLoginInformation.value"><br>
           <button id="stash-widget-submit-login" class="stash-widget-submit btn btn-primary" ng-click="showLogin(username, password)">Submit</button>
         </div>
@@ -23,7 +24,7 @@
         <div>
           <label class="stash-widget-label">Type</label><input class="form-control" ng-model="stashRepoType" type="text" />
           <label class="stash-widget-label">Name</label><input class="form-control" ng-model="stashRepoName" type="text" />
-          <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" />
+          <label class="stash-widget-label">Repo</label><input class="form-control" ng-model="stashRepoRepo" type="text" ng-keypress="showPullRequestsManualKeypress(stashRepoType, stashRepoName, stashRepoRepo, $event)"/>
           <button id="stash-widget-submit-manual" class="stash-widget-submit btn btn-primary" ng-click="showPullRequestsManual(stashRepoType, stashRepoName, stashRepoRepo)">Submit</button></br>
         </div>
       </div>

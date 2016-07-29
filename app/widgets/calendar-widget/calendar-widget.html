@@ -1,0 +1,130 @@
+<!--CALENDAR WIDGET MAIN HTML FILE-->
+
+<div id="calendarNgWidget" style="height: 98%; font-family: 'Raleway', sans-serif;">
+
+    <!--Google References-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:600' rel='stylesheet' type='text/css'>
+
+    <!--Title Bar-->
+    <p id="calendarTitle"><sub><strong>Calendar Widget</strong></sub></p>
+
+    <!--Date selection bar-->
+    <form><span id="dateBar">
+
+        <!--Year select box-->
+        <input title="Year" type="number" id="year" class="dateBarItem"
+               style="width: 60px; padding-left: 4px"
+               ng-model="yearA" ng-change="setToFirst()">
+
+        <!--Month select box-->
+        <select title="Month" id="month" class="dateBarItem"
+                style="padding-left: 4px"
+                ng-model="monthA" ng-options="month.name for month in months" ng-change="setToFirst()">
+        </select>
+
+        <!--Date select box-->
+        <input title="Date" type="number" id="date" class="dateBarItem"
+               style="width: 44px; padding-left: 4px"
+               ng-model="dateA" min="1" max="{{mtdNg()}}" ng-maxlength="2">
+
+        <!--Reset select box-->
+        <button id="reset" title="Snap back to current date" class="dateBarItem"
+                style="width: 30px; text-align: center;"
+                ng-mousedown="reset()">
+            <strong>&#x21BB;</strong>
+        </button>
+
+    </span></form>
+
+    <!--Create and event form-->
+    <div id="create" ng-hide="createHide" style="{{createHeight()}}">
+        <form>
+            <span>
+                <input id="createTitle" class="createInput" maxlength="40"
+                        style="width: 153px;"
+                        placeholder="Title" ng-model="createTitle">
+                <input id="createTime" class="createInput" title="Time of event" type="time"
+                        style="width: 100px;"
+                        ng-model="createTime">
+            </span>
+            <textarea id="createDesc" class="textArea" maxlength="200"
+                      placeholder="Description" ng-model="createDesc"></textarea>
+        </form>
+    </div>
+
+    <!--Display box-->
+    <div id="box" class="box" ng-hide="boxHide" style="{{boxHeight()}}" compile="calendarRead()"></div>
+
+    <!--Delete confirmation delete box-->
+    <div id="delCBack" ng-hide="deleteConBoxHide" style="{{boxHeight()}}"></div>
+    <div id="delConBox" ng-hide="deleteConBoxHide">
+        <p style="text-align: center">Are you sure?</p>
+        <span style="display: table; margin: 0 auto;">
+            <button class="toolBarItem" ng-mousedown="confirmDeleteKill()">
+                <i class="material-icons" style="font-size:16px">done</i></button>
+            <button class="toolBarItem" ng-mousedown="cancelDeleteKill()">
+                <i class="material-icons" style="font-size:16px">clear</i></button>
+        </span>
+    </div>
+
+    <!--Delete display box-->
+    <div id="delete" class="box" ng-hide="deleteHide" style="{{deleteHeight()}}" compile="deleteRead()"></div>
+
+    <!--Tool bar-->
+    <div id="toolbar"><span style="display: table; margin: 0 auto;">
+
+        <!--Add event button-->
+        <button id="addEvent" title="Add an event"
+                class="toolBarItem" ng-hide="boxHide" ng-mousedown="startCreate()">
+            <i class="material-icons" style="font-size:16px">create</i>
+        </button>
+
+        <!--Delete event button-->
+        <button id="delEvent" title="Remove events"
+                class="toolBarItem" ng-hide="boxHide" ng-mousedown="startDelete()">
+            <i class="material-icons" style="font-size:16px">delete</i>
+        </button>
+
+        <!--Repeat of event button-->
+        <button id="repeatEvent" title="{{createRepeatInf}}" style="font-size: 12px;"
+                class="toolBarItem" ng-hide="createHide" ng-mousedown="createRepeatChange()">
+            &#x21BB;<sup>{{createRepeat}}</sup>
+        </button>
+
+        <!--DEFCON of create button-->
+        <button id="defConEvent" title="Change level of importance"
+                class="toolBarItem" ng-hide="createHide" ng-mousedown="defConChange()">
+            <i class="material-icons" style="font-size:16px">{{star}}</i>
+        </button>
+
+        <!--Confirm create event button-->
+        <button id="conCrtEvent" title="Confirm"
+                class="toolBarItem" ng-hide="createHide" ng-mousedown="confirmCreate()">
+            <i class="material-icons" style="font-size:16px">done</i>
+        </button>
+
+        <!--Cancel create event button-->
+        <button id="canCrtEvent" title="Cancel"
+                class="toolBarItem" ng-hide="createHide" ng-mousedown="cancelCreate()">
+            <i class="material-icons" style="font-size:16px">clear</i>
+        </button>
+
+        <!--Confirm delete event button-->
+        <button id="conDelEvent" title="Confirm"
+                class="toolBarItem" ng-hide="deleteTHide" ng-mousedown="confirmDelete()">
+            <i class="material-icons" style="font-size:16px">done</i>
+        </button>
+
+        <!--Cancel delete event button-->
+        <button id="canDelEvent" title="Cancel"
+                class="toolBarItem" ng-hide="deleteTHide" ng-mousedown="cancelDelete()">
+            <i class="material-icons" style="font-size:16px">clear</i>
+        </button>
+
+    </span></div>
+
+    <!--Calendar-->
+    <table id="calendar" compile="calendar()"></table>
+
+</div>
