@@ -48,7 +48,12 @@ angular.module('warRoom')
 
             $scope.events = [];
             $scope.data = {};
+
+            //BarBck, BarTxt, BoxBck, BoxTxt, CalBck, CalTxt, ToBck, ToTx, Df0, Df1, Df2, DfTxt, Background
+            $scope.theme = ['background: #000000;', 'color: #ffffff;', '#e6e6e6', '#000000','#cccccc','#000000',
+                '#000000', '#ffffff', '#66ccff', '#ff9966', '#ff6666', '#ffffff', '#ffffff'];
         }
+        $scope.test = function () {return 'background: #000000;';};
 
         //Generates calendar and calendar days
         $scope.calendar = function(){
@@ -460,6 +465,5 @@ angular.module('warRoom')
             $scope.deleteTHide = true;
             $scope.deleteConBoxHide = true;
             $scope.boxHide = false;
-        }
-
+        };
     }]);
