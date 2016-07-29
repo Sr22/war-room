@@ -42,9 +42,9 @@ angular.module('warRoom')
 						else {
 							$scope.colorOutput = "#FF6347"; //red
 
-							//$scope.imagePath =  "http://www.catsvscancer.org/wp-content/uploads/2015/04/Taco-Cat-Spelled-Backwards-Is-Taco-Cat.-e1430184838220.jpg";
+						
 						}
-						//"http://www.catsvscancer.org/wp-content/uploads/2015/04/Taco-Cat-Spelled-Backwards-Is-Taco-Cat.-e1430184838220.jpg"
+				
 						$('#forecast').css('background', $scope.colorOutput);
 
 
