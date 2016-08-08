@@ -6,7 +6,7 @@ angular.module('warRoom')
                 $resource('http://api.nytimes.com/svc/topstories/v1/:section.json?api-key=d60b0871560c4805a6ce5a7c571be4d1').get({
                         section: section
                     }, function(response) {
-                        allDataNyt = response.results
+                        allDataNyt = response.results;
                         if (callback) {
                             callback(allDataNyt);
                         }

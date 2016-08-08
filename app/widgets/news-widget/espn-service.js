@@ -1,6 +1,3 @@
-/**
- * Created by hank on 7/29/2016.
- */
 angular.module('warRoom')
 
     .service('espnService', ['$resource', function ($resource) {

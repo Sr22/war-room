@@ -1,5 +1,5 @@
 
-<img src="http://static.wixstatic.com/media/83e4c1_dd7ba368b26044c482aed62bf72a447d.gif" style="width:50%; height: 27%">
+<img src="http://static.wixstatic.com/media/83e4c1_dd7ba368b26044c482aed62bf72a447d.gif" style="width:40%; height:30% ">
 
 <div id = "tabstyle">
     <ul class="nav nav-pills">
@@ -26,6 +26,8 @@
 
 <div>
     <div id ="cnn"  ng-hide = "tb2News" ng-repeat="info in dataNews">
+        <img src="{{info.urlToImage}}" style="height: 30%; width: 40%; padding-bottom: 2%">
+
             <h4 class="panel-title">
                 <a href="{{info.url}}">
                    <em>{{info.title}}</em>
@@ -38,6 +40,7 @@
     </div>
 </div>
     <div id = "espn" ng-hide = "tb3Sport" ng-repeat="sport in dataSport">
+        <img src="{{sport.urlToImage}}" style="height: 30%; width: 40%; padding-bottom:2%">
             <h4 class="panel-title">
                 <a href="{{sport.url}}">
                     <em>{{sport.title}}</em>
@@ -48,8 +51,3 @@
             </h6>
 
     </div>
-
-
-</form>
-
-</div>

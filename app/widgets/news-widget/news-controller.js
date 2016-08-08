@@ -1,6 +1,6 @@
 angular.module('warRoom')
 
-    .controller('newsController', ['$scope', 'nytService', 'newsService', 'espnService', 'widgetService', function ($scope, nytService, newsService, widgetService) {
+    .controller('newsController', ['$scope', 'nytService', 'newsService', 'espnService', 'widgetService', function ($scope, nytService, newsService, espnService, widgetService) {
 
         
         $scope.dataNyt = [];
@@ -13,18 +13,22 @@ angular.module('warRoom')
         $scope.appear = function() {
             $scope.tb2News = true;
             $scope.tb1Nyt = false;
+            $scope.tb3Sport = true;
 
-        } 
+        };
         $scope.newsAppear = function() {
             $scope.tb2News = false;
             $scope.tb1Nyt = true;
-
-
-        }
-        $scope.sportAppear = function() {
             $scope.tb3Sport = true;
+
+
+        };
+        $scope.sportAppear = function() {
+            $scope.tb3Sport = false;
+            $scope.tb1Nyt = true;
+            $scope.tb2News = true;
             
-        }
+        };
             
         
         nytService.getnytNews('home', function (allDataNyt) {
@@ -34,7 +38,7 @@ angular.module('warRoom')
             }
         });
 
-        newsService.getNews(function (allData) {
+        newsService.getAllNews(function (allData) {
             for(var i=0;i<allData.length-1;i++)
             {
                 if(!(allData[i].title===allData[i+1].title))
