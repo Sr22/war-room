@@ -28,26 +28,46 @@ function mtd(y, m) {
 
 //foo day box function
 function fooDay() {
-    return '<td class="itemBox" style="background: #e6e6e6"><button class="dateButton" id="foo" disabled="disabled"' +
+    return '<td class="itemBox" style="background: #e6e6e6;"><button class="dateButton" id="foo" disabled="disabled"' +
         ' style="background: #e6e6e6; color: #e6e6e6;">foo</button></td>';
 }
 
 //Real day box function
 function realDay(dt){
-    return '<td  class="itemBox" id="dt' + dt + '" style="background: #cccccc"><button type="button" class="dateButton" ' +
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}"><button type="button" class="dateButton" ' +
         'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();">' + dt + '</button></td>';
 }
 
 //Today box function
 function toDay(dt){
-    return '<td  class="itemBox" id="dt' + dt + '" style="background: #cccccc"><button type="button" class="dateButton" ' +
-        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="background: #000; color: #FFF">' + dt +
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}"><button type="button" class="dateButton" ' +
+        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calBarTheme()}}">' + dt +
         '</button></td>';
 }
 
 //Normal no highlight box function
 function inactiveCont(dt) {
-    return '<td  class="itemBox" id="dt' + dt + '" style="background: #cccccc">';
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}">';
+}
+
+//Event df0 no highlight box function
+function df10Cont(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf0Theme()}}">';
+}
+
+//Event df1 no highlight box function
+function df1Cont(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf1Theme()}}">';
+}
+
+//Event df2 no highlight box function
+function df2Cont(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf2Theme()}}">';
+}
+
+//Today no highlight box function
+function todayCont(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calBarTheme()}}">';
 }
 
 //Active highlight box function

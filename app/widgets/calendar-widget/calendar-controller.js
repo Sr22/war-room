@@ -44,8 +44,8 @@ angular.module('warRoom')
             $scope.deleteCheck = [];
             $scope.deleteConBoxHide = true;
 
-            $scope.events = [];
-            $scope.data = {};
+            $scope.events = null;
+            $scope.data = null;
 
             //BarBck, BarTxt, BoxBck, BoxTxt, CalBck, CalTxt, ToBck, ToTx, Df0, Df1, Df2, DfTxt, Background
             $scope.theme = ['#000000;', '#ffffff;', '#e6e6e6', '#000000','#cccccc','#000000',
@@ -142,7 +142,7 @@ angular.module('warRoom')
             if (data.events == null){
                 chrome.storage.sync.set({'events': []}, function(){
                     error();
-                    chrome.storage.sync.get('events', function (data) { //Test stuff. Delete later
+                    chrome.storage.sync.get('events', function (data) {
                         error();
                         $scope.events = data.events;
                         $scope.data = data;
@@ -152,7 +152,7 @@ angular.module('warRoom')
                     });
                 });
             } else {
-                chrome.storage.sync.get(null, function (data) { //Test stuff. Delete later
+                chrome.storage.sync.get(null, function (data) {
                     error();
                     $scope.events = data.events;
                     $scope.data = data;
@@ -294,7 +294,7 @@ angular.module('warRoom')
                 var gen = '';
                 var sort = [];
                 var day = new Date($scope.yearA, $scope.monthA.val, $scope.dateA).getDay();
-                if ($scope.events.length > 0){
+                if ($scope.events != null){
                     for (a = 0; a < $scope.events.length; a++) {
                         var ev = $scope.events[a];
                         var date = $scope.data[ev][2].split(' ');
@@ -321,6 +321,15 @@ angular.module('warRoom')
                     }
                     sort.sort();
                     gen = sort.join('');
+                }
+                if (gen == '' && $scope.events == null){
+                    gen = '<br><p style="display: table; margin: 0 auto; text-align: center;">' +
+                        'Press &nbsp;&#x21BB;&nbsp; to quick load the calendar.</p>'
+                } else if (gen == '' && $scope.events != null) {
+                        gen = '<br><p style="display: table; margin: 0 auto; text-align: center;">' +
+                            'No events today.<br></p><p style="color: #666; font-size: 10px; text-align: center;">' +
+                            'Click on &nbsp;<i class="material-icons" style="font-size:12px">' +
+                            'create</i>&nbsp;to create an event!</p>';
                 }
                 return gen;
             }
@@ -360,6 +369,10 @@ angular.module('warRoom')
                         }
                     sort.sort();
                     gen = sort.join('');
+                }
+                if (gen == ''){
+                    gen = '<br><p style="display: table; margin: 0 auto; text-align: center;">' +
+                        'No events to delete!</p>'
                 }
                 return gen;
             }
@@ -406,6 +419,13 @@ angular.module('warRoom')
                 $scope.deleteTHide = true;
                 $scope.deleteConBoxHide = false;
             }
+        };
+
+        //Dynamic stopper function
+        $scope.killsavHeight = function () {
+            var h = document.getElementById('calendarNgWidget').offsetHeight - 420;
+            if (h <= 0) {h = 123;}
+            return 'height: ' + h + 'px;';
         };
 
         //Cancel the kill events
