@@ -1,13 +1,14 @@
 <!--CALENDAR WIDGET MAIN HTML FILE-->
 
-<div id="calendarNgWidget" style="height: 98%; font-family: 'Raleway', sans-serif;">
+<div id="calendarNgWidget" style="height: 100%; font-family: 'Raleway', sans-serif; {{calBckTheme()}}">
 
     <!--Google References-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href='https://fonts.googleapis.com/css?family=Raleway:600' rel='stylesheet' type='text/css'>
+    <script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 
     <!--Title Bar-->
-    <p id="calendarTitle"><sub><strong>Calendar Widget</strong></sub></p>
+    <p id="calendarTitle" style="{{calBarTheme()}}"><sub><strong>Calendar Widget</strong></sub></p>
 
     <!--Date selection bar-->
     <form><span id="dateBar">
@@ -57,13 +58,13 @@
     <div id="box" class="box" ng-hide="boxHide" style="{{boxHeight()}}" compile="calendarRead()"></div>
 
     <!--Delete confirmation delete box-->
-    <div id="delCBack" ng-hide="deleteConBoxHide" style="{{boxHeight()}}"></div>
-    <div id="delConBox" ng-hide="deleteConBoxHide">
+    <div id="delCBack" ng-hide="deleteConBoxHide" style="{{killsavHeight()}}"></div>
+    <div id="delConBox" ng-hide="deleteConBoxHide" style="{{calBarTheme()}}">
         <p style="text-align: center">Are you sure?</p>
         <span style="display: table; margin: 0 auto;">
-            <button class="toolBarItem" ng-mousedown="confirmDeleteKill()">
+            <button class="toolBarItem" style="{{calBarTheme()}}" ng-mousedown="confirmDeleteKill()">
                 <i class="material-icons" style="font-size:16px">done</i></button>
-            <button class="toolBarItem" ng-mousedown="cancelDeleteKill()">
+            <button class="toolBarItem" style="{{calBarTheme()}}" ng-mousedown="cancelDeleteKill()">
                 <i class="material-icons" style="font-size:16px">clear</i></button>
         </span>
     </div>
@@ -72,52 +73,52 @@
     <div id="delete" class="box" ng-hide="deleteHide" style="{{deleteHeight()}}" compile="deleteRead()"></div>
 
     <!--Tool bar-->
-    <div id="toolbar"><span style="display: table; margin: 0 auto;">
+    <div id="toolbar" style="{{calBarTheme()}}"><span style="display: table; margin: 0 auto;">
 
         <!--Add event button-->
-        <button id="addEvent" title="Add an event"
+        <button id="addEvent" title="Add an event" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="boxHide" ng-mousedown="startCreate()">
             <i class="material-icons" style="font-size:16px">create</i>
         </button>
 
         <!--Delete event button-->
-        <button id="delEvent" title="Remove events"
+        <button id="delEvent" title="Remove events" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="boxHide" ng-mousedown="startDelete()">
             <i class="material-icons" style="font-size:16px">delete</i>
         </button>
 
         <!--Repeat of event button-->
-        <button id="repeatEvent" title="{{createRepeatInf}}" style="font-size: 12px;"
+        <button id="repeatEvent" title="{{createRepeatInf}}" style="font-size: 12px; {{calBarTheme()}}"
                 class="toolBarItem" ng-hide="createHide" ng-mousedown="createRepeatChange()">
             &#x21BB;<sup>{{createRepeat}}</sup>
         </button>
 
         <!--DEFCON of create button-->
-        <button id="defConEvent" title="Change level of importance"
+        <button id="defConEvent" title="Change level of importance" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="createHide" ng-mousedown="defConChange()">
             <i class="material-icons" style="font-size:16px">{{star}}</i>
         </button>
 
         <!--Confirm create event button-->
-        <button id="conCrtEvent" title="Confirm"
+        <button id="conCrtEvent" title="Confirm" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="createHide" ng-mousedown="confirmCreate()">
             <i class="material-icons" style="font-size:16px">done</i>
         </button>
 
         <!--Cancel create event button-->
-        <button id="canCrtEvent" title="Cancel"
+        <button id="canCrtEvent" title="Cancel" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="createHide" ng-mousedown="cancelCreate()">
             <i class="material-icons" style="font-size:16px">clear</i>
         </button>
 
         <!--Confirm delete event button-->
-        <button id="conDelEvent" title="Confirm"
+        <button id="conDelEvent" title="Confirm" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="deleteTHide" ng-mousedown="confirmDelete()">
             <i class="material-icons" style="font-size:16px">done</i>
         </button>
 
         <!--Cancel delete event button-->
-        <button id="canDelEvent" title="Cancel"
+        <button id="canDelEvent" title="Cancel" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="deleteTHide" ng-mousedown="cancelDelete()">
             <i class="material-icons" style="font-size:16px">clear</i>
         </button>
