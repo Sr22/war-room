@@ -5,4 +5,4 @@ angular.module('warRoom')
             controller: 'timeWidgetController',
             controllerAs: 'tw'
         };
-    })
+    });

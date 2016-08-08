@@ -58,13 +58,11 @@ angular
       dependencies: [
         'widgets/weather-widget/weather-api-service.js',
         'widgets/weather-widget/weather-widget-controller.js',
-        //'widgets/weather-widget/weather-widget-directive.js',
+        'widgets/weather-widget/weather-widget-directive.js',
         'widgets/weather-widget/weather-widget.html',
         'widgets/weather-widget/weather-widget.css'
       ],
-      directive: 'timeWidget',
-      initialize: 'timeWidgetService.initialize',
-      serialize:'timeWidgetService.serialize'
+      directive: 'weatherWidget'
     },
       {
           name: 'NotesWidget',
