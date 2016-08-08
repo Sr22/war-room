@@ -16,11 +16,11 @@ angular.module('warRoom')
 						$scope.find();  
 					}
 
-				}
+				};
 
 				$scope.find = function () {
-					console.log($scope)
-					console.log('ZIP', $scope.zip)
+					console.log($scope);
+					console.log('ZIP', $scope.zip);
 					weatherApiService.getWeather($scope.zip, function success(place, temperature, description, windspeed) {
 						$scope.temperature = temperature;
 						$scope.place = place;
@@ -48,4 +48,4 @@ angular.module('warRoom')
 						
 					});
 				}
-			}])
+			}]);

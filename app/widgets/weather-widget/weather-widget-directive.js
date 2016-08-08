@@ -5,5 +5,4 @@ angular.module('warRoom')
             controller: 'weatherWidgetController',
             bindToController: true
         }
-    })
-		
+    });

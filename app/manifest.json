@@ -16,6 +16,7 @@
     "https://maps.googleapis.com/",
     "http://api.timezonedb.com/",
     "https://www.reddit.com/r/",
+    "http://api.nytimes.com/",
     "https://api.wunderground.com/"
   ]
 }

@@ -64,22 +64,36 @@ angular
       ],
       directive: 'weatherWidget'
     },
-    {
-        name: 'NotesWidget',
-        displayName: 'Notes',
-        dependencies: [
-            'bower_components/showdown/dist/showdown.js',
-            'widgets/notes-widget/notes-widget-service.js',
-            'widgets/notes-widget/notes-widget-controller.js',
-            'widgets/notes-widget/notes-widget.js',
-            'widgets/notes-widget/notes-widget.css'
-        ],
-        directive: 'notesWidget',
-        initialize: 'notesWidgetService.initialize',
-        serialize: 'notesWidgetService.serialize'
-    }
+      {
+          name: 'NotesWidget',
+          displayName: 'Notes',
+          dependencies: [
+              'bower_components/showdown/dist/showdown.js',
+              'widgets/notes-widget/notes-widget-service.js',
+              'widgets/notes-widget/notes-widget-controller.js',
+              'widgets/notes-widget/notes-widget.js',
+              'widgets/notes-widget/notes-widget.css'
+          ],
+          directive: 'notesWidget',
+          initialize: 'notesWidgetService.initialize',
+          serialize: 'notesWidgetService.serialize'
+      },
+      {
+          name: 'NewsWidget' ,
+          displayName: 'News',
+          dependencies: [
+              'widgets/news-widget/nyt-service.js',
+              'widgets/news-widget/news-service.js',
+              'widgets/news-widget/espn-service.js',
+              'widgets/news-widget/news-controller.js',
+              'widgets/news-widget/news-directive.js',
+              'widgets/news-widget/news-style.css'
+              // 'widgets/new-widget/api-key.js'
+
+          ],
+          directive: 'newsWidget'
+      }
   ]);
 
 angular.module('warRoom')
     .constant('googlemapsApiKey', 'AIzaSyBErhwJQ6hNNAm2i_VOc2PXPPCgpF9jhd4');
-

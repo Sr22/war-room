@@ -26,7 +26,7 @@ angular.module('warRoom')
             }
         }
 
-    }])
+    }]);
 
 
 /*
