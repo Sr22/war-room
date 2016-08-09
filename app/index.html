@@ -88,14 +88,12 @@
       </div>
     </div>
   </div>
-  <div id="link-new" class="alert alert-success fade in" ng-show="displayLinkForm">
-    <center>
+  <div id="link-new" class="alert alert-success fade in" ng-show="displayLinkForm" style="text-align: center;">
       <form class="link-create-form" name="link-create-form" ng-submit="finishForm()">
         <input id="linkNameField" class="form-control" type="text" ng-model="bookmarkName" placeholder="Bookmark Label..." required>
         <input id="linkUrlField" class="form-control" type="text" ng-model="bookmarkUrl" placeholder="Bookmark URL..." required>
         <input id="linkSubmit" class="btn btn-primary" type="submit" value="Submit" ng-disabled="link-create-form.$invalid">
       </form>
-    </center>
   </div>
 </div>
 <!-- End Header Bar -->

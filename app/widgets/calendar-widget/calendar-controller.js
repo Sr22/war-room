@@ -63,11 +63,11 @@ angular.module('warRoom')
             $scope.calToTheme = function () {
                 return 'background:' + $scope.theme[6] + '; color:' + $scope.theme[7] + ';';};
             $scope.calDf0Theme = function () {
-                return 'background:' + $scope.theme[8] + ';';};
+                return 'background:' + $scope.theme[8] + '; color:' + $scope.theme[11] + ';';};
             $scope.calDf1Theme = function () {
-                return 'background:' + $scope.theme[9] + ';';};
+                return 'background:' + $scope.theme[9] + '; color:' + $scope.theme[11] + ';';};
             $scope.calDf2Theme = function () {
-                return 'background:' + $scope.theme[10] + ';';};
+                return 'background:' + $scope.theme[10] + '; color:' + $scope.theme[11] + ';';};
             $scope.calBckTheme = function () {
                 return 'background:' + $scope.theme[12] + '; color:' + $scope.theme[13]};
         }
@@ -94,10 +94,52 @@ angular.module('warRoom')
                     gen += calendarFinWeek(c.getFullYear(), c.getMonth());
                 }
                 gen += '</tr>';
+                for (a = 1; a < $scope.mtdNg()+1; a++) {
+                    var day = new Date($scope.yearA, $scope.monthA.val, a).getDay();
+                    if ($scope.events != null) {
+                        var sort = [];
+                        var b;
+                        for (b = 0; b < $scope.events.length; b++) {
+                            var check = '';
+                            var ev = $scope.events[b];
+                            var date = $scope.data[ev][2].split(' ');
+                            if (date[4] == 'X' && date[0] == $scope.yearA &&
+                                date[1] == $scope.monthA.val && date[2] == a) {sort.push(date[5]);}
+                            if (date[4] == 'D') {sort.push(date[5]);}
+                            if (date[4] == 'W' && date[3] == day) {sort.push(date[5]);}
+                            if (date[4] == 'M' && date[2] == a) {sort.push(date[5]);}
+                            if (date[4] == 'Y' && date[1] == $scope.monthA.val && date[2] == a) {sort.push(date[5]);}
+                            if (check != null) {
+                            }
+                        }
+                        sort.sort();
+                        if (sort.length > 0 && a != new Date().getDate()) {
+                            if (sort[sort.length-1] == '0') {
+                                gen = gen.replace(realDay(a), df0Day(a));
+                            }
+                            if (sort[sort.length-1] == '1') {
+                                gen = gen.replace(realDay(a), df1Day(a));
+                            }
+                            if (sort[sort.length-1] == '2') {
+                                gen = gen.replace(realDay(a), df2Day(a));
+                            }
+                        }
+                    }
+                }
                 if (new Date().getFullYear() == $scope.yearA && new Date().getMonth() == $scope.monthA.val) { //Highlights today
                     gen = gen.replace(realDay(new Date().getDate()), toDay(new Date().getDate()));
                 }
-                gen = gen.replace(inactiveCont($scope.dateA), activeCont($scope.dateA)); //Highlights active date
+                if (gen.indexOf(inactiveCont($scope.dateA)) > -1) {
+                    gen = gen.replace(inactiveCont($scope.dateA), activeCont($scope.dateA)); //Highlights active date
+                } else if (gen.indexOf(todayCont($scope.dateA)) > -1) {
+                    gen = gen.replace(todayCont($scope.dateA), activeCont($scope.dateA));
+                } else if (gen.indexOf(df0Cont($scope.dateA)) > -1) {
+                    gen = gen.replace(df0Cont($scope.dateA), activeCont($scope.dateA));
+                } else if (gen.indexOf(df1Cont($scope.dateA)) > -1) {
+                    gen = gen.replace(df1Cont($scope.dateA), activeCont($scope.dateA));
+                } else if (gen.indexOf(df2Cont($scope.dateA)) > -1) {
+                    gen = gen.replace(df2Cont($scope.dateA), activeCont($scope.dateA));
+                }
                 return gen;
             }
             else {

@@ -40,8 +40,29 @@ function realDay(dt){
 
 //Today box function
 function toDay(dt){
-    return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}"><button type="button" class="dateButton" ' +
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calBarTheme()}}"><button type="button" class="dateButton" ' +
         'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calBarTheme()}}">' + dt +
+        '</button></td>';
+}
+
+//Event df0 no highlight box function
+function df0Day(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf0Theme()}}"><button type="button" class="dateButton" ' +
+        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calDf0Theme()}}">' + dt +
+        '</button></td>';
+}
+
+//Event df1 no highlight box function
+function df1Day(dt){
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf1Theme()}}"><button type="button" class="dateButton" ' +
+        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calDf1Theme()}}">' + dt +
+        '</button></td>';
+}
+
+//Event df2 no highlight box function
+function df2Day(dt) {
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf2Theme()}}"><button type="button" class="dateButton" ' +
+        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calDf2Theme()}}">' + dt +
         '</button></td>';
 }
 
@@ -50,24 +71,20 @@ function inactiveCont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}">';
 }
 
-//Event df0 no highlight box function
-function df10Cont(dt){
+function todayCont(dt) {
+    return '<td  class="itemBox" id="dt' + dt + '" style="{{calBarTheme()}}">';
+}
+
+function df0Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf0Theme()}}">';
 }
 
-//Event df1 no highlight box function
-function df1Cont(dt){
+function df1Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf1Theme()}}">';
 }
 
-//Event df2 no highlight box function
-function df2Cont(dt){
+function df2Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf2Theme()}}">';
-}
-
-//Today no highlight box function
-function todayCont(dt){
-    return '<td  class="itemBox" id="dt' + dt + '" style="{{calBarTheme()}}">';
 }
 
 //Active highlight box function
