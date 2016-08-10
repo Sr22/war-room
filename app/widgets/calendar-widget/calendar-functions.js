@@ -1,4 +1,4 @@
-//FUNCTIONS USED IN CONTROLLER AND CALLED FUNCTION
+//FUNCTIONS USED BY $SCOPE.FUNCTIONS IN CALENDAR CONTROLLER
 
 //Check for errors in storing/retrieving
 function error() {
@@ -28,14 +28,15 @@ function mtd(y, m) {
 
 //foo day box function
 function fooDay() {
-    return '<td class="itemBox" style="background: #e6e6e6;"><button class="dateButton" id="foo" disabled="disabled"' +
-        ' style="background: #e6e6e6; color: #e6e6e6;">foo</button></td>';
+    return '<td class="itemBox" style="{{fooTheme()}}"><button class="dateButton" id="foo" disabled="disabled"' +
+        ' style="{{fooTheme()}}">foo</button></td>';
 }
 
 //Real day box function
 function realDay(dt){
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}"><button type="button" class="dateButton" ' +
-        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();">' + dt + '</button></td>';
+        'id="' + dt + '" ng-mousedown="activeHighlight(' + dt + '); calendarRead();" style="{{calCalTheme()}}">' +
+        dt + '</button></td>';
 }
 
 //Today box function
@@ -71,18 +72,22 @@ function inactiveCont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calCalTheme()}}">';
 }
 
+//Today no highlight box function
 function todayCont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calBarTheme()}}">';
 }
 
+//Defcon 0 no highlight box function
 function df0Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf0Theme()}}">';
 }
 
+//Defcon 1 no highlight box function
 function df1Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf1Theme()}}">';
 }
 
+//Defcon 2 no highlight box function
 function df2Cont(dt) {
     return '<td  class="itemBox" id="dt' + dt + '" style="{{calDf2Theme()}}">';
 }
@@ -203,6 +208,45 @@ function deleteContainer(title, defCon, time, id, num) {
         ' ng-mousedown="hitListUpdate(';
     gen += "'" + id + "'";
     gen += ', ' + num + ')">' + '<i class="material-icons" style="font-size:10px">{{deleteCheck[' + num + ']}}' +
+        '</i></button>' + at + title + '</div>';
+    return gen;
+}
+
+//Edit display function
+function editContainer(title, defCon, time, id) {
+    var at = '';
+    if (time != '....' && time) {
+        var hr = time.slice(0,2);
+        var mn = time.slice(2,4);
+        var apm;
+        if (Number(hr) > 12){
+            hr = Number(hr) - 12;
+            apm = 'pm';
+        } else if (Number(hr) < 12 && Number(hr) != 0) {
+            apm = 'am';
+        } else if (Number(hr) == 12){
+            apm = 'pm';
+        } else if (Number(hr) == 0){
+            hr = 12;
+            apm = 'am';
+        }
+        at = hr + ':' + mn + apm + ' - ';
+    } else if (time == '....' && time) {
+        at = 'All day - ';
+    }
+    var gen = '<div class="reminderBox"';
+    if (defCon == 0) {
+        gen += 'id="' + time + 'dfC" style="{{calDf0Theme()}}">';
+    }
+    if (defCon == 1) {
+        gen += 'id="' + time + 'dfB" style="{{calDf1Theme()}}">';
+    }
+    if (defCon == 2) {
+        gen += 'id="' + time + 'dfA" style="{{calDf2Theme()}}">';
+    }
+    gen += '<button class="deleteCheck" id="bt' + id + '" ng-mousedown="editTEvent(';
+    gen += "'" + id + "'";
+    gen += ')"><i class="material-icons" style="font-size:10px">settings' +
         '</i></button>' + at + title + '</div>';
     return gen;
 }
