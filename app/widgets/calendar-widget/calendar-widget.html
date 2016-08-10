@@ -1,10 +1,14 @@
-<!--CALENDAR WIDGET MAIN HTML FILE-->
+<!--CALENDAR HTML-->
 
-<div id="calendarNgWidget" style="height: 100%; font-family: 'Raleway', sans-serif; {{calBckTheme()}}">
+<div id="calendarNgWidget" style="height: 100%; font-family: {{themeFont()}}; {{calBckTheme()}}">
 
     <!--Google References-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href='https://fonts.googleapis.com/css?family=Raleway:600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind+Siliguri:500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lakki+Reddy" rel="stylesheet" type='text/css'>
 
     <!--Title Bar-->
     <p id="calendarTitle" style="{{calBarTheme()}}"><sub><strong>Calendar Widget</strong></sub></p>
@@ -14,28 +18,31 @@
 
         <!--Year select box-->
         <input title="Year" type="number" id="year" class="dateBarItem"
-               style="width: 60px; padding-left: 4px"
+               style="width: 60px; padding-left: 4px; {{calBoxTheme()}}"
                ng-model="yearA" ng-change="setToFirst()">
 
         <!--Month select box-->
         <select title="Month" id="month" class="dateBarItem"
-                style="padding-left: 4px"
+                style="padding-left: 4px; {{calBoxTheme()}}"
                 ng-model="monthA" ng-options="month.name for month in months" ng-change="setToFirst()">
         </select>
 
         <!--Date select box-->
         <input title="Date" type="number" id="date" class="dateBarItem"
-               style="width: 44px; padding-left: 4px"
+               style="width: 44px; padding-left: 4px; {{calBoxTheme()}}"
                ng-model="dateA" min="1" max="{{mtdNg()}}" ng-maxlength="2">
 
         <!--Reset select box-->
         <button id="reset" title="Snap back to current date" class="dateBarItem"
-                style="width: 30px; text-align: center;"
+                style="width: 30px; text-align: center; {{calBoxTheme()}}"
                 ng-mousedown="reset()">
             <strong>&#x21BB;</strong>
         </button>
 
     </span></form>
+
+    <!--Bad Input box-->
+    <div id="bad" ng-hide="badHide" style="{{boxGHeight()}}"></div>
 
     <!--Create and event form-->
     <div id="create" ng-hide="createHide" style="{{createHeight()}}">
@@ -57,7 +64,7 @@
     <div id="box" class="box" ng-hide="boxHide" style="{{boxHeight()}}" compile="calendarRead()"></div>
 
     <!--Delete confirmation delete box-->
-    <div id="delCBack" ng-hide="deleteConBoxHide" style="{{killsavHeight()}}"></div>
+    <div id="delCBack" ng-hide="deleteConBoxHide" style="{{boxGHeight()}}"></div>
     <div id="delConBox" ng-hide="deleteConBoxHide" style="{{calBarTheme()}}">
         <p style="text-align: center">Are you sure?</p>
         <span style="display: table; margin: 0 auto;">
@@ -71,12 +78,26 @@
     <!--Delete display box-->
     <div id="delete" class="box" ng-hide="deleteHide" style="{{deleteHeight()}}" compile="deleteRead()"></div>
 
+    <!--Edit display box-->
+    <div id="edit" class="box" ng-hide="editHide" style="{{boxHeight()}}" compile="editRead()"></div>
+
+    <!--Customize box-->
+    <div id="customBox" class="box" ng-hide="customHide" style="{{boxHeight()}}">
+        <form style="text-align: center"><br>Choose a theme:<br>
+            <select title="Theme" id="theme" class="dateBarItem"
+                    style="padding-left: 4px; border: none; {{calBckTheme()}}"
+                    ng-model="themeA" ng-options="theme.name for theme in themes" ng-change="changeTheme()">
+            </select><br><br>
+            <p style="text-align: center; font-size: 0.75em; opacity: 0.7;">Created by: Brian Truong, 2016 CE</p>
+        </form>
+    </div>
+
     <!--Tool bar-->
     <div id="toolbar" style="{{calBarTheme()}}"><span style="display: table; margin: 0 auto;">
 
         <!--Add event button-->
-        <button id="addEvent" title="Add an event" style="{{calBarTheme()}}"
-                class="toolBarItem" ng-hide="boxHide" ng-mousedown="startCreate()">
+        <button id="addEvent" title="Add or edit and events" style="{{calBarTheme()}}"
+                class="toolBarItem" ng-hide="boxHide" ng-mousedown="startEdit()">
             <i class="material-icons" style="font-size:16px">create</i>
         </button>
 
@@ -84,6 +105,12 @@
         <button id="delEvent" title="Remove events" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="boxHide" ng-mousedown="startDelete()">
             <i class="material-icons" style="font-size:16px">delete</i>
+        </button>
+
+        <!--Options event button-->
+        <button id="optEvent" title="Options" style="{{calBarTheme()}}"
+                class="toolBarItem" ng-hide="boxHide" ng-mousedown="startCustom()">
+            <i class="material-icons" style="font-size:16px">settings</i>
         </button>
 
         <!--Repeat of event button-->
@@ -101,7 +128,7 @@
         <!--Confirm create event button-->
         <button id="conCrtEvent" title="Confirm" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="createHide" ng-mousedown="confirmCreate()">
-            <i class="material-icons" style="font-size:16px">done</i>
+            <i class="material-icons" style="font-size:16px">save</i>
         </button>
 
         <!--Cancel create event button-->
@@ -119,7 +146,25 @@
         <!--Cancel delete event button-->
         <button id="canDelEvent" title="Cancel" style="{{calBarTheme()}}"
                 class="toolBarItem" ng-hide="deleteTHide" ng-mousedown="cancelDelete()">
+            <i class="material-icons" style="font-size:16px">clear</span></i>
+        </button>
+
+        <!--Confirm edit event button-->
+        <button id="conEditEvent" title="Add an event" style="{{calBarTheme()}}"
+                class="toolBarItem" ng-hide="editHide" ng-mousedown="startCreate()">
+            <i class="material-icons" style="font-size:16px">add</i>
+        </button>
+
+        <!--Cancel edit event button-->
+        <button id="canEditEvent" title="Cancel" style="{{calBarTheme()}}"
+                class="toolBarItem" ng-hide="editHide" ng-mousedown="cancelEdit()">
             <i class="material-icons" style="font-size:16px">clear</i>
+        </button>
+
+        <!--Confirm customize event button-->
+        <button id="conCustomize" title="Save" style="{{calBarTheme()}}"
+                class="toolBarItem" ng-hide="customHide" ng-mousedown="confirmCustom()">
+            <i class="material-icons" style="font-size:16px">save</i>
         </button>
 
     </span></div>
